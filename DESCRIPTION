@@ -1,13 +1,13 @@
-Package: ec.cmd.ukbiobank
-Title: What the Package Does (One Line, Title Case)
+Package: ecc.cmd.ukbiobank
+Title: Early Childhood Conditions And Cardmetabolic Disease in the UK Biobank.
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Luke",
+           family = "Johnston",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "lwjohnst@gmail.com")
+Description: Analysis and manuscript files for the project on early childhood and
+    cardiometabolic disease in the UK Biobank.
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

@@ -1,6 +1,5 @@
 
-<!-- TODO: Add more to the title of your project here -->
-# {{ ProjectName }}
+# Early childhood conditions and cardiometabolic disease in the UK Biobank
 
 <!-- TODO: Give a brief description of what your project is about -->
 
