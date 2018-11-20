@@ -8,7 +8,7 @@ output: odt_document
 
 The overarching goal for this project is to better characterise, quantify, and
 understand the impact that early life conditions have on adult metabolic
-capacity and for the risk for type 2 diabetes (T2DM) and cardiovascular disease
+capacity and for the risk for type 2 diabetes (T2D) and cardiovascular disease
 (CVD) in adulthood. To that aim we have two objectives:
 
 1. To determine the association of early childhood adversity (using adult leg
@@ -23,7 +23,7 @@ length as a biomarker) on various metabolic functions:
     - {{genetic risk prediction scores...? Need help with this one Daniel}}
 
 2. To determine the mediating pathways that adult metabolic capacity has between
-exposure to early childhood adversity and risk for T2DM and CVD.
+exposure to early childhood adversity and risk for T2D and CVD.
 
 > The majority of applications to UK Biobank are for data only. As such, the first two questions we ask are whether your application involves access to samples or re-contact as this will require some additional information and as is set out in the Access Procedures (our data are not depletable, but our samples and re-contact opportunities are depletable) recontact/sample applications are assessed to a different (more exacting) standard.
 
@@ -33,7 +33,29 @@ Does your project require UK Biobank to re-contact participants: **No**
 
 ### A3. The background and scientific rationale of the proposed research project in general (up to 5000 characters or 300 words): 
 
+Early life adversity is known to influence the risk for chronic cardiometabolic
+diseases such as type 2 diabetes (T2D) and cardiovascular disease (CVD) later in
+adult life. Early life, typically defined as from conception until early childhood (~6
+years), is a period characterised by substantial growth and development
+[@Hales2001;@Gluckman2007]. Exposure to various adverse conditions during this
+period, such as poverty, war, or malnutrition, as well as less extreme adverse
+conditions, such as neglect, loss of a parent, or childhood conflict
+[@Maniam2014a;@Thomas2008a;@Rich-Edwards2010a], set individuals on a higher
+disease risk trajectory lasting throughout all of adult life
+[@Hales2001;@Li2011a;@Clarkin2012;@McEniry2013;@Berens2017a].
 
+Preventing these adversities is of utmost importance. Equally important is
+identifying and managing the risk of disease in those already exposed.
+A crucial step to developing evidenced-based solutions to mitigate risk is
+in understanding which pathophysiological mechanisms does early life adversity
+affect and subsequently contribute to the development of cardiometabolic
+disease. Limited data exists that have investigated this area. A few studies
+suggest that lower early life socioeconomic position and other indirect
+indicators of early life conditions associates with a lower metabolic capacity
+[@Solis2016a;@Solis2015a;@Robertson2014a;@Kumari2012a;@Gruenewald2012a]. There
+is very limited knowledge on how early life adversity mediates its effect on
+later disease through adult metabolic capacity (such as through lipid
+metabolism, inflammatory processes, and/or glucose regulation) [@Berens2017a].
 
 ### A4. A brief description of the method(s) to be used (up to 5000 characters or 300 words): 
 
@@ -47,7 +69,40 @@ mediation analysis
 
 ### A5. The type and size of dataset required (e.g., case-control subset, men only, imaging data only, whole cohort, etc.) (up to 5000 characters or 100 words):
 
+Whole cohort, MRI imaging, biomarker data,
+
 ### A6. The expected value of the research (taking into account the public interest requirement) (up to 5000 characters or 100 words): 
+
+The rise of the digital era and of big data has presented a number of
+challenges and opportunities to modern epidemiology. Historically it was nearly
+impossible or at least extremely difficult to answer meaningful questions about
+the role of early life factors on later disease, but now there are many valuable
+datasets available to answer these questions. However, the analytical expertise
+and tools are still lacking. Complex data such as from -omics approaches are
+increasingly available in cohort and trial studies and can be combined with
+other databases such as with the Danish register databases. From the analytic
+perspective, current pathway techniques and statistical algorithms need either
+a high degree of knowledge and supervision as they need single pre-specified
+DAGs, which are not realistic at such level of complexity and dimensionality in
+the data. This is a major limitation to these techniques when used on high
+dimensional data or if the hypothesised direction of the pathway is
+misspecified. The innovative analytical tool from this project that I will
+bundle as an R software package, to then disseminate, will fully exploit complex
+datasets for etiological research and I will apply this novel tool to *explain*
+the links between adversity in early life and chronic disease incidence. My
+results will provide etiological insight into how exposure to adversity in early
+life modifies adult metabolic capacity, which may subsequently reveal a specific
+metabolic patterns (e.g. more circulating long-chain, saturated fatty acids) or
+more (or less) of specific metabolites (e.g. less n-3 fatty acids) that
+contributes to T2D. These changes in metabolism could be used as targets for
+individual level prevention or management in those exposed to adversity in early
+life, for instance by aggressively managing levels of specific circulating
+lipids.
+
+
+These forms of adversity are much more common in many
+EU countries, with nearly 30% of children in EU experiencing some form of mental
+or physical abuse [@Europe2014a].
 
 ### A7. Please provide up to 6 keywords which best summarise your proposed research project:
 
