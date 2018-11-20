@@ -6,21 +6,44 @@ output: odt_document
 
 ### A2. Research question(s) and aim(s) (up to 5000 characters or 200 words):
 
-- Early childhood using leg length as a biomarker and:
-    - Liver function (fat, inflammation, iron, and general image) using MRI images
-    - Distribution of fat using DXA and Impediance measures
-    - Markers of kidney function
-    - Genetic risk prediction scores
+The overarching goal for this project is to better characterise, quantify, and
+understand the impact that early life conditions have on adult metabolic
+capacity and for the risk for type 2 diabetes (T2DM) and cardiovascular disease
+(CVD) in adulthood. To that aim we have two objectives:
+
+1. To determine the association of early childhood adversity (using adult leg
+length as a biomarker) on various metabolic functions:
+    - Adult liver function (using markers of fat and inflammation from the MRI
+    images).
+    - Distribution of body fat, whether fat is stored primarily in the trunk or in
+    the peripheral tissues (using DXA and bioimpediance measures).
+    - Adult kidney function (using urinary markers).
+    - Adult blood biomarkers (fasting glucose, lipid measures) {{confirm with what
+    they have measured}}.
+    - {{genetic risk prediction scores...? Need help with this one Daniel}}
+
+2. To determine the mediating pathways that adult metabolic capacity has between
+exposure to early childhood adversity and risk for T2DM and CVD.
 
 > The majority of applications to UK Biobank are for data only. As such, the first two questions we ask are whether your application involves access to samples or re-contact as this will require some additional information and as is set out in the Access Procedures (our data are not depletable, but our samples and re-contact opportunities are depletable) recontact/sample applications are assessed to a different (more exacting) standard.
 
-Does your project require biological samples?
+Does your project require biological samples? **No**
 
-Does your project require UK Biobank to re-contact participants:
+Does your project require UK Biobank to re-contact participants: **No**
 
 ### A3. The background and scientific rationale of the proposed research project in general (up to 5000 characters or 300 words): 
 
+
+
 ### A4. A brief description of the method(s) to be used (up to 5000 characters or 300 words): 
+
+(including fat, inflammation, iron, and general image) using MRI images
+
+For objective one, we will run standard regression techniques for each of the
+sub-objectives.
+
+For objective two, we will using a form of causal structure learning and
+mediation analysis 
 
 ### A5. The type and size of dataset required (e.g., case-control subset, men only, imaging data only, whole cohort, etc.) (up to 5000 characters or 100 words):
 
@@ -29,6 +52,32 @@ Does your project require UK Biobank to re-contact participants:
 ### A7. Please provide up to 6 keywords which best summarise your proposed research project:
 
 ### A8. Please provide a lay summary of your research project in plain English, stating the aims, scientific rationale, project duration and public health impact (up to 5000 characters or 400 words):
+
+Adverse conditions during early life is known to influence the risk for
+metabolic diseases like type 2 diabetes (T2D) in adulthood. However, it is largely
+unknown which metabolic mechanisms mediate the link between early life adversity
+and adult T2D. Which interventions in adulthood are most likely to mitigate T2D
+risk in those exposed to adversity is dependent on this knowledge. Studying
+early life in sufficient detail is difficult as life course data with adequate
+metabolic data must be collected and the appropriate, though complex,
+statistical techniques, along with the expertise to use them, is needed for
+making valid inferences. Two recent advances now make it possible to research
+these topics. The ability to *link* cohort studies that have metabolic data with
+national register databases that have information from early to end of life
+provides the appropriately detailed life-course data. A recent analytical
+approach, called *causal structure learning*, provides the statistical process
+for working with this data. My **aims** are to determine how specific early life
+conditions affect T2D risk and how the metabolic pathways mediate early life adversity
+with higher risk for T2D, and to convert a recent integrative pathway *algorithm*
+(NetCoupler), capable of analysing high dimensional -omics data, into a reusable
+software package. I will link Denmark's unique national registries with multiple
+Danish cohorts, deploy and apply the NetCoupler-algorithm, and collaborate with
+national and international groups to achieve these aims. The project's software
+output will create a tool for researchers working on similar research topics
+while the findings will give insight into how adversity modifies metabolism that
+then affects T2D risk. With these insights, more effective public health
+strategies can be created for T2D prevention and more precise clinical decisions
+can be made for T2D management in those exposed to early life adversity.
 
 ### A9. Will the research project result in the generation of any new data fields derived from existing complex datasets, such as imaging, accelerometry, electrocardiographic, linked healthcare data, etc, which might be of significant utility to other researchers: 
 
