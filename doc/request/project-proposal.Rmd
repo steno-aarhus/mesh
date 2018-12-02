@@ -96,44 +96,26 @@ association, and to determine the direction of the pathway.
 
 ### A5. The type and size of dataset required (e.g., case-control subset, men only, imaging data only, whole cohort, etc.) (up to 5000 characters or 100 words):
 
-Whole cohort, MRI imaging, biomarker data,
+Whole cohort, MRI imaging, and the biomarker data.
 
 ### A6. The expected value of the research (taking into account the public interest requirement) (up to 5000 characters or 100 words): 
 
-The rise of the digital era and of big data has presented a number of
-challenges and opportunities to modern epidemiology. Historically it was nearly
-impossible or at least extremely difficult to answer meaningful questions about
-the role of early life factors on later disease, but now there are many valuable
-datasets available to answer these questions. However, the analytical expertise
-and tools are still lacking. Complex data such as from -omics approaches are
-increasingly available in cohort and trial studies and can be combined with
-other databases such as with the Danish register databases. From the analytic
-perspective, current pathway techniques and statistical algorithms need either
-a high degree of knowledge and supervision as they need single pre-specified
-DAGs, which are not realistic at such level of complexity and dimensionality in
-the data. This is a major limitation to these techniques when used on high
-dimensional data or if the hypothesised direction of the pathway is
-misspecified. The innovative analytical tool from this project that I will
-bundle as an R software package, to then disseminate, will fully exploit complex
-datasets for etiological research and I will apply this novel tool to *explain*
-the links between adversity in early life and chronic disease incidence. My
-results will provide etiological insight into how exposure to adversity in early
-life modifies adult metabolic capacity, which may subsequently reveal a specific
-metabolic patterns (e.g. more circulating long-chain, saturated fatty acids) or
-more (or less) of specific metabolites (e.g. less n-3 fatty acids) that
-contributes to T2D. These changes in metabolism could be used as targets for
-individual level prevention or management in those exposed to adversity in early
-life, for instance by aggressively managing levels of specific circulating
-lipids.
+Word count: 103 / 100
 
-
-These forms of adversity are much more common in many
-EU countries, with nearly 30% of children in EU experiencing some form of mental
-or physical abuse [@Europe2014a].
+We hope our results will provide etiological insight into how early life
+exposure to adversity modifies adult metabolic capacity, which may subsequently
+reveal specific metabolic patterns (e.g. more circulating lipids or greater
+storage of fat in liver) or a greater fat disposition in abdominal adipose
+tissue. These changes in metabolic capacity could be used as targets for
+individual level prevention or management in those exposed to adversity. We also
+intend to publish the analytic methods in a format easily usable by other
+researchers, e.g. as an R (statistical programming language) software package,
+which we hope will accelerate research in this area further.
 
 ### A7. Please provide up to 6 keywords which best summarise your proposed research project:
 
 ### A8. Please provide a lay summary of your research project in plain English, stating the aims, scientific rationale, project duration and public health impact (up to 5000 characters or 400 words):
+
 
 Adverse conditions during early life is known to influence the risk for
 metabolic diseases like type 2 diabetes (T2D) in adulthood. However, it is largely
