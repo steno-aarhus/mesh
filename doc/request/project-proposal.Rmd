@@ -116,32 +116,26 @@ which we hope will accelerate research in this area further.
 
 ### A8. Please provide a lay summary of your research project in plain English, stating the aims, scientific rationale, project duration and public health impact (up to 5000 characters or 400 words):
 
+Early life adversity is known to influence the risk for adult cardiometabolic
+diseases (CMD) such as cardiovascular disease and type 2 diabetes; however, how
+metabolic processes mediate this link is unknown. Historically a difficult area
+to research, two recent advances have removed some of these previous barriers to
+research (i.e. difficulty in collecting and analyzing the data). First is the
+ability to link cohort studies (with metabolic data) to national register
+databases (with demographic and medical data). Second is the causal structure
+learning technique that allows us to identify how early life adversity may
+contribute to adult metabolism and to CMD risk. My aims are to find 1) how
+specific early life conditions affect CMD risk, 2) how the metabolic pathways
+mediate early life adversity with CMD risk, and 3) to convert a recent causal
+pathway algorithm (NetCoupler) capable of analysing the detailed metabolic data
+into a reusable software package. To achieve these aims, I will a) use Denmark's
+unique national registers linked with multiple cohorts, b) deploy and apply
+NetCoupler, and c) collaborate with national and international groups. The
+software will provide a tool for researchers working in similar areas, while the
+results will give some insight into how more effective public health strategies
+could be created for CMD prevention and how more precise clinical decisions
+could be made for CMD management in those exposed to early life adversity.
 
-Adverse conditions during early life is known to influence the risk for
-metabolic diseases like type 2 diabetes (T2D) in adulthood. However, it is largely
-unknown which metabolic mechanisms mediate the link between early life adversity
-and adult T2D. Which interventions in adulthood are most likely to mitigate T2D
-risk in those exposed to adversity is dependent on this knowledge. Studying
-early life in sufficient detail is difficult as life course data with adequate
-metabolic data must be collected and the appropriate, though complex,
-statistical techniques, along with the expertise to use them, is needed for
-making valid inferences. Two recent advances now make it possible to research
-these topics. The ability to *link* cohort studies that have metabolic data with
-national register databases that have information from early to end of life
-provides the appropriately detailed life-course data. A recent analytical
-approach, called *causal structure learning*, provides the statistical process
-for working with this data. My **aims** are to determine how specific early life
-conditions affect T2D risk and how the metabolic pathways mediate early life adversity
-with higher risk for T2D, and to convert a recent integrative pathway *algorithm*
-(NetCoupler), capable of analysing high dimensional -omics data, into a reusable
-software package. I will link Denmark's unique national registries with multiple
-Danish cohorts, deploy and apply the NetCoupler-algorithm, and collaborate with
-national and international groups to achieve these aims. The project's software
-output will create a tool for researchers working on similar research topics
-while the findings will give insight into how adversity modifies metabolism that
-then affects T2D risk. With these insights, more effective public health
-strategies can be created for T2D prevention and more precise clinical decisions
-can be made for T2D management in those exposed to early life adversity.
 
 ### A9. Will the research project result in the generation of any new data fields derived from existing complex datasets, such as imaging, accelerometry, electrocardiographic, linked healthcare data, etc, which might be of significant utility to other researchers: 
 
@@ -169,3 +163,6 @@ These should be provided within six months of each publication or within 12 mont
 - Early life factors
 - Indices of Multiple Deprivation
 - Genotype/genes
+
+
+
