@@ -27,8 +27,9 @@ length as a biomarker) on various metabolic characteristics:
     - Adult blood biomarkers (fasting glucose, lipid measures) {{confirm with what
     they have measured}}.
 
-2. To determine the mediating pathways that adult metabolic capacity has between
-exposure to early childhood adversity and risk for T2D and CVD.
+2. To determine the mediating pathways that adult metabolic capacity (using all
+variables listed above) has between exposure to early childhood adversity and
+risk for T2D and CVD.
 
 > The majority of applications to UK Biobank are for data only. As such, the first two questions we ask are whether your application involves access to samples or re-contact as this will require some additional information and as is set out in the Access Procedures (our data are not depletable, but our samples and re-contact opportunities are depletable) recontact/sample applications are assessed to a different (more exacting) standard.
 
