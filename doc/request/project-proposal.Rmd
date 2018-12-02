@@ -70,15 +70,29 @@ from early life adversity and the resulting risk for cardiometabolic disease.
 
 ### A4. A brief description of the method(s) to be used (up to 5000 characters or 300 words): 
 
+Words: 223 / 300
 
+For objective 1, we will analyse the data in two stages. First, we will run
+individual regression models for each of the variables, adjusted for potential
+confounders, with each metabolic variable as the outcome and early life
+conditions as the predicters. The next step will be to run supervised
+dimensionality reduction and clustering techniques, with early life conditions
+as the supervising set. These techniques will, together, provide a broad view of
+how early life conditions associate with adult metabolic function.
 
-(including fat, inflammation, iron, and general image) using MRI images
-
-For objective one, we will run standard regression techniques for each of the
-sub-objectives.
-
-For objective two, we will using a form of causal structure learning and
-mediation analysis 
+For objective 2, we will use a causal structure learning algorithm to identify
+the contributions of individual metabolic variables (using multiple aspects of
+metabolic function from the various metabolic measurements) that may mediate the
+association between early life adversity and the development of cardiometabolic
+disease. The algorithm constructs causal pathways in an iterative approach,
+while also taking into account the inherent interdependence of the metabolic
+variables. The strengths of this causal structure learning method over others
+are a) the ability to make use of high dimensional metabolic data, b) to
+estimate the most probable directions of the pathways, and c) to identify the
+most likely causal structure between exposure (early life adversity), metabolic
+variables, and outcome (CVD or T2D). This approach is necessary as the method
+must consider interdependence between variables, to quantify the magnitude of
+association, and to determine the direction of the pathway.
 
 ### A5. The type and size of dataset required (e.g., case-control subset, men only, imaging data only, whole cohort, etc.) (up to 5000 characters or 100 words):
 
