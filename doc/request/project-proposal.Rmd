@@ -1,26 +1,31 @@
 ---
-output: odt_document
+output:
+    github_document:
+        pandoc_args: ["--wrap=none"]
+    odt_document: default
 ---
 
 ### A1. Project title (200 characters):
 
+The metabolic consequences of adverse early life conditions and subsequent risk
+for adult cardiovascular disease and type 2 diabetes
+
 ### A2. Research question(s) and aim(s) (up to 5000 characters or 200 words):
 
-The overarching goal for this project is to better characterise, quantify, and
+The overarching goal for this project is to better quantify and
 understand the impact that early life conditions have on adult metabolic
-capacity and for the risk for type 2 diabetes (T2D) and cardiovascular disease
+capacity and the risk for type 2 diabetes (T2D) and cardiovascular disease
 (CVD) in adulthood. To that aim we have two objectives:
 
 1. To determine the association of early childhood adversity (using adult leg
-length as a biomarker) on various metabolic functions:
-    - Adult liver function (using markers of fat and inflammation from the MRI
+length as a biomarker) on various metabolic characteristics:
+    - Adult liver function (using markers of fat and inflammation from MRI
     images).
     - Distribution of body fat, whether fat is stored primarily in the trunk or in
     the peripheral tissues (using DXA and bioimpediance measures).
     - Adult kidney function (using urinary markers).
     - Adult blood biomarkers (fasting glucose, lipid measures) {{confirm with what
     they have measured}}.
-    - {{genetic risk prediction scores...? Need help with this one Daniel}}
 
 2. To determine the mediating pathways that adult metabolic capacity has between
 exposure to early childhood adversity and risk for T2D and CVD.
