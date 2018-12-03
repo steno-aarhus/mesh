@@ -1,8 +1,8 @@
 ---
 output:
+    odt_document: default
     github_document:
         pandoc_args: ["--wrap=none"]
-    odt_document: default
 ---
 
 ### A1. Project title (200 characters):
@@ -139,9 +139,11 @@ exposed to early life adversity.
 
 ### A9. Will the research project result in the generation of any new data fields derived from existing complex datasets, such as imaging, accelerometry, electrocardiographic, linked healthcare data, etc, which might be of significant utility to other researchers:
 
+*No*
+
 ### A10. What is the estimated duration of your project, in months? If you consider (because for example the project is one involving the generation of hypotheses) that it would be difficult to set a fixed end point, we are prepared to consider a rolling 3-year period (during which annual updates are required):
 
-2 years..?
+*48 months*
 
 Please note that you are expected to publish (or to make publicly available) your results and return to UK Biobank:
 
@@ -163,6 +165,3 @@ These should be provided within six months of each publication or within 12 mont
 - Early life factors
 - Indices of Multiple Deprivation
 - Genotype/genes
-
-
-
