@@ -17,19 +17,21 @@ understand the impact that early life conditions have on adult metabolic
 capacity and the risk for type 2 diabetes (T2D) and cardiovascular disease
 (CVD) in adulthood. To that aim we have two objectives:
 
-1. To determine the association of early life adversity (using various early
-life biomarkers such as adult leg length) on various metabolic characteristics:
-    - Adult liver function (using markers of fat and inflammation from MRI
+1. To determine the association between early life adversity (using adult leg length, early {{add others here}}) and various metabolic characteristics:
+    - Adult liver function (using {{transaminases}}, other liver markers,
+    markers of fat and inflammation from MRI
     images).
-    - Distribution of body fat, whether fat is stored primarily in the trunk or in
-    the peripheral tissues (using DXA and bioimpediance measures).
-    - Adult kidney function (using urinary markers).
-    - Adult blood biomarkers (fasting glucose, lipid measures) {{confirm with what
-    they have measured}}.
+    - Distribution of body fat, as well as indicators of whether fat is stored
+    primarily in the trunk or in the peripheral tissues (using waist
+    circumference, DXA, bioimpediance, and MRI-based estimates of adiposity).
+    - Adult kidney function (using {{serum creatinine}} and urinary albumin
+    {{others?}}).
+    - Adult glycemic and metabolic biomarkers (including fasting glucose, HbA1c
+    {{list a few others}}).
 
-2. To determine the mediating pathways that adult metabolic capacity (using all
-variables listed above) has between exposure to early life adversity and risk
-for T2D and CVD.
+2. To quantify the direct and indirect (mediated) associations between exposure
+to early life adversity and risk for T2D and CVD, considering adult metabolic
+capacity (using all variables listed above).
 
 > The majority of applications to UK Biobank are for data only. As such, the first two questions we ask are whether your application involves access to samples or re-contact as this will require some additional information and as is set out in the Access Procedures (our data are not depletable, but our samples and re-contact opportunities are depletable) recontact/sample applications are assessed to a different (more exacting) standard.
 
@@ -56,17 +58,17 @@ obesity, a strong predictor of CVD and T2D, by up to 50%. These forms of
 adversity are much more common in many EU countries, with nearly 30% of EU
 children experiencing some form of mental or physical abuse.
 
-A crucial step to developing evidenced-based solutions to mitigate risk is
-in understanding the pathophysiological mechanisms underlying the association
+A crucial step to developing evidenced-based solutions to mitigate risk is in
+understanding the pathophysiological mechanisms underlying the association
 between early life adversity and the development of cardiometabolic disease.
-There are limited studies that have investigated this area. A few studies suggest that
-lower early life socioeconomic position and other indirect indicators of early
-life conditions associates with a lower metabolic capacity. There
-is very limited knowledge on how early life adversity mediates its effect on
-later disease through adult metabolic capacity (such as through lipid
-metabolism, inflammatory processes, and/or glucose regulation).
-This project's aim is to investigate potential metabolic changes that result
-from early life adversity and the resulting risk for cardiometabolic disease.
+There are limited studies that have investigated this area. A few studies
+suggest that lower early life socioeconomic position and other indirect
+indicators of early life conditions associates with a lower metabolic capacity.
+There is very limited knowledge on how early life adversity mediates its effect
+on later disease through adult metabolic capacity (such as through lipid
+metabolism, inflammatory processes, and/or glucose regulation). This project's
+aim is to investigate potential metabolic changes that result from early life
+adversity and the resulting risk for cardiometabolic disease.
 
 ### A4. A brief description of the method(s) to be used (up to 5000 characters or 300 words): 
 
@@ -75,65 +77,79 @@ Words: 223 / 300
 For objective 1, we will analyse the data in two stages. First, we will run
 individual regression models for each of the variables, adjusted for potential
 confounders, with each metabolic variable as the outcome and early life
-conditions (e.g. adult leg length) as the predicters. The next step will be to run supervised
-dimensionality reduction and clustering techniques, with early life conditions
-as the supervising set. These techniques will, together, provide a broad view of
-how early life conditions associate with adult metabolic function.
+conditions (e.g. adult leg length) as the determinants. The next step will be to
+run supervised dimensionality reduction and clustering techniques, with early
+life conditions as the supervising set. These techniques will, together, provide
+a broad view of how early life conditions associate with adult metabolic
+function.
 
 For objective 2, we will use a causal structure learning algorithm to identify
 the contributions of individual metabolic variables (using multiple aspects of
 metabolic function from the various metabolic measurements) that may mediate the
-association between early life adversity and the development of cardiometabolic
-disease. The algorithm constructs causal pathways in an iterative approach,
-while also taking into account the inherent interdependence of the metabolic
-variables. The strengths of this causal structure learning method over others
-are a) the ability to make use of high dimensional metabolic data, b) to
-estimate the most probable directions of the pathways, and c) to identify the
-most likely causal structure between exposure (early life adversity), metabolic
-variables, and outcome (CVD or T2D). This approach is necessary as the method
-must consider interdependence between variables, to quantify the magnitude of
-association, and to determine the direction of the pathway.
+association between early life adversity and the presence of cardiometabolic
+disease in adulthood. The algorithm constructs causal pathways in an iterative
+approach, while also taking into account the inherent interdependence of the
+metabolic variables. The strengths of this causal structure learning method over
+others are a) the ability to make use of high dimensional metabolic data, b) to
+estimate the most probable directions and relative strength of the pathways, and
+c) to identify the most likely causal structure linking exposure (early life
+adversity), metabolic variables, and outcome (CVD or T2D). This approach is
+necessary as any analytic approach to the question of mediation must consider
+interdependence between potential mediating pathways, in order to quantify the
+magnitude of association, and to determine the direction of the pathway.
 
 ### A5. The type and size of dataset required (e.g., case-control subset, men only, imaging data only, whole cohort, etc.) (up to 5000 characters or 100 words):
 
 Whole cohort, MRI imaging, and the biomarker data.
 
+We will require several subsets of the data based on the measures available. We
+will need the:
+
+- All participants with any available early life factors and sitting height and 
+the currently available biomarker data (kidney function, bioimpediance,
+anthropometrics, etc) as well as the disease outcome data.
+- All participants with available MRI and DXA data.
+- And once available, other biomarkers {{list name}}.
+
 ### A6. The expected value of the research (taking into account the public interest requirement) (up to 5000 characters or 100 words): 
 
-Word count: 103 / 100
+Word count: 100 / 100
 
 We expect our results to provide etiological insight into how early life
 exposure to adversity modifies adult metabolic capacity, which may subsequently
-reveal specific metabolic patterns (e.g. more circulating lipids or greater
-storage of fat in liver) or a greater fat disposition in abdominal adipose
-tissue. These changes in metabolic capacity could be used as targets for
-individual level prevention or management in those exposed to adversity. We also
-intend to publish the analytic methods in a format easily usable by other
-researchers, e.g. as an R (statistical programming language) software package,
-which we hope will accelerate research in this area further.
+reveal specific metabolic patterns (e.g. higher serum lipid levels or greater
+storage of fat in liver) or a greater fat deposition in abdominal adipose
+tissue. These insights could ultimately inform the development of more
+individually targeted prevention or management strategies for those exposed to
+early life adversity. We also intend to publish the analytic methods in a format
+easily usable by other researchers, e.g. as an R (statistical language) package,
+which we expect will accelerate further research.
 
 ### A7. Please provide up to 6 keywords which best summarise your proposed research project:
 
-early life conditions, etiology of type 2 diabetes, etiology of cardiovascular disease, metabolic capacity, causal structure learning analysis, multivariate analysis
+early life conditions, etiology of type 2 diabetes, etiology of cardiovascular
+disease, metabolic capacity, causal structure learning analysis, mediation
+analysis
 
 ### A8. Please provide a lay summary of your research project in plain English, stating the aims, scientific rationale, project duration and public health impact (up to 5000 characters or 400 words):
 
 Word count: 195 / 400
 
-We aim to study how early life adversity may influence adult metabolism and
-eventually lead to diseases such as cardiovascular disease and type 2 diabetes.
-While we know that early life adversity negatively affects health in later
-adulthood, the effect on metabolism is unknown. Historically, this area
-of research has been difficult to study due to the difficulties in obtaining and
-appropriately analyzing suitable data. With recent advances in machine learning
-and big data, better tools are becoming available that can begin answering how
-early life conditions influence later adult metabolic capacity. Over the course
-of 48 months, we not only will learn more about the "how" of early life
-adversity's role in disease, but also aim to create better tools for the analyses
-so other researchers can further accelerate their own work. In the end, we hope
-that this knowledge will help with creating more effective public health
-strategies for disease prevention and with making more precise clinical
-decisions for disease management in those exposed to early life adversity.
+We aim to study how early life adversity influences the risk of heart attacks,
+stroke, and diabetes in adulthood. While we know that early life adversity
+negatively affects health in later adulthood, we don't know much about the
+biological mechanisms responsible. Historically, this area of research has been
+difficult to study due to limited availability of suitable data and methods.
+Recent advances in analysis methods (machine learning) coupled with the recent
+availability of very large cohorts such as the UK Biobank, now allow us to begin
+answering how early life conditions influence later adult heart disease and
+diabetes risk. Over the course of 48 months, we not only will learn more about
+the "how" of early life adversity's role in disease, but also aim to create
+better tools for this new type of analyses so other researchers can further
+accelerate their own work. In the end, we hope that this knowledge will help
+with creating more effective public health strategies for disease prevention and
+with making more precise clinical decisions for disease management in those who
+experienced early life adversity.
 
 ### A9. Will the research project result in the generation of any new data fields derived from existing complex datasets, such as imaging, accelerometry, electrocardiographic, linked healthcare data, etc, which might be of significant utility to other researchers:
 
