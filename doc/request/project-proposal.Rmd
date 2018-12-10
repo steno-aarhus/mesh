@@ -37,6 +37,8 @@ Does your project require UK Biobank to re-contact participants: **No**
 
 ### A3. The background and scientific rationale of the proposed research project in general (up to 5000 characters or 300 words): 
 
+Words: 300 / 300
+
 Early life adversity is known to increase the risk for chronic cardiometabolic
 diseases such as cardiovascular disease (CVD) and type 2 diabetes (T2D) in later
 adulthood. Early life, typically defined from conception until early childhood
@@ -51,8 +53,8 @@ conflict-ridden Syria). Even less extreme adversity, such as neglect, loss of a
 parent, or childhood conflict, can increase the risk for cardiometabolic
 disease. For instance, neglect and emotional abuse can increase the risk of
 obesity, a strong predictor of CVD and T2D, by up to 50%. These forms of
-adversity are much more common in many EU countries, with nearly 30% of EU
-children experiencing some form of mental or physical abuse.
+adversity are more common in EU countries, with nearly 30% of EU children
+experiencing some form of mental or physical abuse.
 
 A crucial step to developing evidenced-based solutions to mitigate risk is in
 understanding the pathophysiological mechanisms underlying the association
