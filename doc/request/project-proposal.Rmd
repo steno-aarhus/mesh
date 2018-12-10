@@ -120,9 +120,8 @@ which we expect will accelerate further research.
 
 ### A7. Please provide up to 6 keywords which best summarise your proposed research project:
 
-early life conditions, etiology of type 2 diabetes, etiology of cardiovascular
-disease, metabolic capacity, causal structure learning analysis, mediation
-analysis
+early life, diabetes, cardiovascular disease, metabolism, causal structure
+learning, mediation
 
 ### A8. Please provide a lay summary of your research project in plain English, stating the aims, scientific rationale, project duration and public health impact (up to 5000 characters or 400 words):
 
