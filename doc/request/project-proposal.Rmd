@@ -162,6 +162,8 @@ These should be provided within six months of each publication or within 12 mont
 
 ### B. Selection of data-fields
 
+General categories. Precise data-fields will be included in the basket.
+
 - Blood counts
 - Urine assays
 - Body size measures
