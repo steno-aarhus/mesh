@@ -99,16 +99,10 @@ magnitude of association, and to determine the direction of the pathway.
 
 ### A5. The type and size of dataset required (e.g., case-control subset, men only, imaging data only, whole cohort, etc.) (up to 5000 characters or 100 words):
 
-Whole cohort, MRI imaging, and the biomarker data.
-
-We will require several subsets of the data based on the measures available. We
-will need the:
-
-- All participants with any available early life factors and sitting height and 
-the currently available biomarker data (kidney function, bioimpediance,
-anthropometrics, etc) as well as the disease outcome data.
-- All participants with available MRI and DXA data.
-- And once available, other biomarkers {{list name}}.
+For the most part we need the whole cohort, based on the availability of the
+variables requested. Once available, we would like to request the blood measures
+(e.g. LDL, HDL, glucose, ALT, AST, etc). We also will require the subset of
+participants with the MRI and DXA variables (as included in the basket).
 
 ### A6. The expected value of the research (taking into account the public interest requirement) (up to 5000 characters or 100 words): 
 
