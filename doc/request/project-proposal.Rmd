@@ -70,16 +70,17 @@ adversity and the resulting risk for cardiometabolic disease.
 
 ### A4. A brief description of the method(s) to be used (up to 5000 characters or 300 words): 
 
-Words: 223 / 300
+Words: 262 / 300
 
-For objective 1, we will analyse the data in two stages. First, we will run
-individual regression models for each of the variables, adjusted for potential
-confounders, with each metabolic variable as the outcome and early life
-conditions (e.g. adult leg length) as the determinants. The next step will be to
-run supervised dimensionality reduction and clustering techniques, with early
-life conditions as the supervising set. These techniques will, together, provide
-a broad view of how early life conditions associate with adult metabolic
-function.
+For objective 1, the outcome variables are the metabolic characteristic
+variables and the predictor variables are several markers of early life,
+including adult leg length (a biomarker of early childhood conditions). We will
+analyse the data in two stages. First, we will run individual regression models
+for each of the outcomes and early life factors, adjusted for potential
+confounders. The next step will be to run supervised dimensionality reduction
+and clustering techniques on the metabolic characteristics, with early life
+conditions as the supervising set. These techniques will, together, provide a
+broad view of how early life conditions associate with adult metabolic function.
 
 For objective 2, we will use a causal structure learning algorithm to identify
 the contributions of individual metabolic variables (using multiple aspects of
