@@ -17,17 +17,13 @@ understand the impact that early life conditions have on adult metabolic
 capacity and the risk for type 2 diabetes (T2D) and cardiovascular disease
 (CVD) in adulthood. To that aim we have two objectives:
 
-1. To determine the association between early life adversity (using adult leg length, early {{add others here}}) and various metabolic characteristics:
-    - Adult liver function (using {{transaminases}}, other liver markers,
-    markers of fat and inflammation from MRI
-    images).
-    - Distribution of body fat, as well as indicators of whether fat is stored
-    primarily in the trunk or in the peripheral tissues (using waist
-    circumference, DXA, bioimpediance, and MRI-based estimates of adiposity).
-    - Adult kidney function (using {{serum creatinine}} and urinary albumin
-    {{others?}}).
-    - Adult glycemic and metabolic biomarkers (including fasting glucose, HbA1c
-    {{list a few others}}).
+1. To determine the association between early life adversity (e.g. using adult
+leg length) and various metabolic characteristics:
+    - Estimation of adult liver function 
+    - Distribution and location of body fat
+    - Estimation of adult kidney function 
+    - Adult glycemic and metabolic biomarkers 
+    - Polygenic risk scores
 
 2. To quantify the direct and indirect (mediated) associations between exposure
 to early life adversity and risk for T2D and CVD, considering adult metabolic
