@@ -1,6 +1,5 @@
 ---
 output:
-    odt_document: default
     github_document:
         pandoc_args: ["--wrap=none"]
 ---
@@ -23,7 +22,6 @@ leg length) and various metabolic characteristics:
     - Distribution and location of body fat
     - Estimation of adult kidney function 
     - Adult glycemic and metabolic biomarkers 
-    - Polygenic risk scores
 
 2. To quantify the direct and indirect (mediated) associations between exposure
 to early life adversity and risk for T2D and CVD, considering adult metabolic
@@ -120,8 +118,7 @@ which we expect will accelerate further research.
 
 ### A7. Please provide up to 6 keywords which best summarise your proposed research project:
 
-early life, diabetes, cardiovascular disease, metabolism, causal structure
-learning, mediation
+cardiometabolic, diabetes, cardiovascular-disease, development, machine-learning, mediation
 
 ### A8. Please provide a lay summary of your research project in plain English, stating the aims, scientific rationale, project duration and public health impact (up to 5000 characters or 400 words):
 
