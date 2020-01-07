@@ -124,21 +124,23 @@ cardiometabolic, diabetes, cardiovascular-disease, development, machine-learning
 
 Word count: 195 / 400
 
-We aim to study how early life adversity influences the risk of heart attacks,
-stroke, and diabetes in adulthood. While we know that early life adversity
-negatively affects health in later adulthood, we don't know much about the
-biological mechanisms responsible. Historically, this area of research has been
-difficult to study due to limited availability of suitable data and methods.
-Recent advances in analysis methods (machine learning) coupled with the recent
-availability of very large cohorts such as the UK Biobank, now allow us to begin
-answering how early life conditions influence later adult heart disease and
-diabetes risk. Over the course of 48 months, we not only will learn more about
-the "how" of early life adversity's role in disease, but also aim to create
-better tools for this new type of analyses so other researchers can further
-accelerate their own work. In the end, we hope that this knowledge will help
-with creating more effective public health strategies for disease prevention and
-with making more precise clinical decisions for disease management in those who
-experienced early life adversity.
+We aim to study how early life adverse conditions, such as stress from parental
+divorce, chronic illness, or lower socioeconomic position, may influence adult
+metabolism and eventually lead to diseases such as cardiovascular disease and
+type 2 diabetes. While we know that early life adversity negatively affects
+health in later adulthood, we don't know how it may affect metabolism.
+Historically, this area of research has been difficult to study due to how hard
+it is to get valuable and suitable data, but also because analysing the data is
+incredibly complicated. With recent increases in computer and analysis
+capabilities that has been driven by advances in machine learning and big data,
+better tools are becoming available that can begin answering how early life
+conditions influence later adult metabolic capacity. Over the course of 48
+months, we hope to begin learning more about the "how" of early life adversity's
+role in disease and also aim to create better tools for the analyses so other
+researchers can further accelerate their own work. In the end, we hope that this
+knowledge will help with creating more effective public health strategies for
+disease prevention and with making more precise clinical decisions for disease
+management in those exposed to early life adversity.
 
 ### A9. Will the research project result in the generation of any new data fields derived from existing complex datasets, such as imaging, accelerometry, electrocardiographic, linked healthcare data, etc, which might be of significant utility to other researchers:
 
