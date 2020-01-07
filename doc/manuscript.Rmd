@@ -1,0 +1,59 @@
+---
+bibliography: 
+    - /path/to/bib
+csl:
+    - /path/to/csl # something like vancouver
+output: word_document
+---
+
+```{r knit_setup, include=FALSE}
+# root directory one down if using `prodigenr`
+knitr::opts_chunk$set(echo = FALSE)
+devtools::load_all()
+```
+
+# Title page
+
+Title:
+
+<!-- First, middle initial, last, highest academic degree -->
+Authors:
+
+<!-- During time of study. -->
+Affiliation:
+
+Corresponding author:
+
+- Name:
+- Current address:
+- Phone number:
+- Fax number:
+- Email:
+
+# Abstract
+
+Objective:
+
+Research Design and Methods:
+
+Results:
+
+Conclusions:
+
+# Introduction 
+
+# Research Design and Methods
+
+# Results
+
+# Conclusions
+
+# Acknowledgements
+
+# References
+
+# Tables
+
+# Figures
+
+# Supplemental Material
