@@ -9,8 +9,125 @@ output: word_document
 ```{r knit_setup, include=FALSE}
 # root directory one down if using `prodigenr`
 knitr::opts_chunk$set(echo = FALSE)
-devtools::load_all()
 ```
+
+```{r}
+devtools::load_all()
+library(dplyr)
+library(NetCoupler)
+project_data <- load_data() %>% 
+    rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>% 
+    select(
+        # More than 25% missing for these variables.
+        -mtb_microalbumin_in_urine,
+        -mtb_lipoprotein_a,
+        # Glucose should probably not be in models with HbA1c as outcome
+        -mtb_glucose,
+        # These aren't really "metabolic" variables.
+        -mtb_diastolic_blood_pressure,
+        -mtb_systolic_blood_pressure
+    ) %>% 
+    mutate(leg_height_ratio = leg_height_ratio * 100)
+
+project_data_nc <- project_data %>% 
+    select(-age_of_t2dm_diagnosis) %>% 
+    # I want to use .regressed_on = c("age", "sex", "body_mass_index")),
+    # but there is a problem with one of the variables having "NA/NaN/Inf" error,
+    # and I can't resolve it right now. Will do later point.
+    mutate(t2dm_status = if_else(is.na(t2dm_status), FALSE, t2dm_status)) %>% 
+    na.omit() %>% 
+    nc_standardize(.vars = vars(starts_with("mtb_")))
+
+metabolic_network <- project_data_nc %>% 
+    select(starts_with("mtb_")) %>% 
+    nc_create_network()
+
+w_adj_matrix <- NetCoupler:::adjacency_matrix(metabolic_network) * 
+    NetCoupler:::partial_corr_matrix(project_data_nc %>% select(starts_with("mtb_")))
+
+adj_graph <- igraph::graph.adjacency(w_adj_matrix, weighted = TRUE, mode = "undirected")
+cluster_walk <- igraph::cluster_walktrap(adj_graph, weights = igraph::E(adj_graph)$weight)
+igraph::membership(cluster_walk)
+plot(cluster_walk, adj_graph)
+
+library(ggraph)
+library(tidygraph)
+as_tbl_graph(adj_graph) %>% create_layout(layout = "stress")
+adj_graph %>% 
+    ggraph() +
+    geom_edge_link(aes(colour = weight, width = abs(weight))) +
+    scale_edge_colour_gradient2(mid = "gray80") +
+    scale_edge_width(range = c(0.75, 2)) +
+    geom_node_point() +
+    geom_node_label(aes(label = name))
+
+RCy3::createNetworkFromGraph(metabolic_network@graph)
+
+model_outcome_estimates <- project_data_nc %>%
+    nc_outcome_estimates(
+        metabolic_network,
+        .outcome = "hba1c",
+        .adjustment_vars = c("age", "sex", "body_mass_index"),
+        .model_function = lm
+    )
+
+usethis::use_data(model_outcome_estimates)
+
+tidy_model_outcome <- model_outcome_estimates %>% 
+    filter(index_node == term) %>% 
+    # select(outcome, index_node, estimate, conf.low, conf.high, p.value) %>% 
+    group_by(outcome, index_node) %>% 
+    summarize_at(vars(estimate, p.value), mean) %>% 
+    ungroup() %>% 
+    mutate(index_node = index_node %>% 
+               stringr::str_remove("mtb_") %>% 
+               stringr::str_replace_all("_", " ")) %>% 
+    arrange(index_node) %>% 
+    assertr::assert(assertr::is_uniq, index_node)
+
+model_nodes <-
+    data_frame(name = c(
+        unique(tidy_model_outcome$outcome),
+        tidy_model_outcome$index_node
+    ))
+model_edges <- tidy_model_outcome %>% 
+    mutate(to = as.numeric(as.factor(index_node)) + 1,
+           from = 1) %>% 
+    select(from, to, estimate, p.value)
+
+tbl_graph(nodes = model_nodes,
+          edges = model_edges) %>% 
+    ggraph("tree") +
+    geom_edge_link2(
+        aes(colour = estimate, width = abs(estimate))
+        # arrow = grid::arrow(ends = "first", length = unit(0.2, "cm"), type = "closed")
+    ) +
+    scale_edge_colour_gradient2(mid = "gray80") +
+    scale_edge_width(range = c(0.75, 2)) +
+    coord_cartesian(xlim = c(-1, ))
+    coord_flip() +
+    geom_node_point() +
+    geom_node_label(aes(label = name))
+
+model_exposure_estimates <- project_data_nc %>%
+    nc_outcome_estimates(
+        metabolic_network,
+        .outcome = "leg_height_ratio",
+        .adjustment_vars = c("age", "sex", "body_mass_index"),
+        .model_function = lm
+    )
+
+usethis::use_data(model_exposure_estimates)
+
+model_exposure_estimates %>% 
+    filter(index_node == term) %>% 
+    # select(outcome, index_node, estimate, conf.low, conf.high, p.value) %>% 
+    group_by(outcome, index_node) %>% 
+    summarize_at(vars(estimate, p.value), mean) %>% 
+    View()
+
+```
+
 
 # Title page
 
