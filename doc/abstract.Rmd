@@ -1,0 +1,28 @@
+---
+output: odt_document
+---
+
+```{r setup, include=FALSE}
+devtools::load_all()
+```
+
+
+Character count: / 3200 (including title and authors; title should be <= 150 characters)
+- 1 figure/table: -400 characters
+
+**The metabolic pathways between components of stature and HbA1c: A casual
+structure learning approach in the UK Biobank**
+
+Luke W Johnston, Clemens Wittenbecher, Helene V Tilma, Christine D Dahm, Daniel R Witte
+
+Department of Public Health, Aarhus University, Aarhus, Denmark
+Steno Diabetes Center Aarhus, Denmark
+Danish Diabetes Academy, Odense, Denmark
+
+**Background and aims**:
+
+**Materials and methods**:
+
+**Results**:
+
+**Conclusion**:
