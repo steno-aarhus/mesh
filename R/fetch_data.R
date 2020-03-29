@@ -82,6 +82,7 @@ load_data <- function() {
         ) %>%
         select(
             body_mass_index = body_mass_index_bmi_f21001_0_0,
+            waist_circumference_f48_0_0,
             sex_f31_0_0,
             standing_height_f50_0_0,
             sitting_height_f20015_0_0,
@@ -112,6 +113,7 @@ load_data <- function() {
         ) %>%
         rename_all(.tidy_up_column_names) %>%
         rename(
+            waist_circumference = mtb_waist_circumference,
             body_mass_index = mtb_body_mass_index,
             sex = mtb_sex,
             age = mtb_age,
