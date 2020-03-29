@@ -370,7 +370,7 @@ calc_t2dm_status <- function(.tbl) {
 #' wrangle_ukb_data(.save = TRUE)
 wrangle_ukb_data <- function(.save = FALSE) {
     # The below code gets the data, but better to run a local job (in RStudio)
-    # using the `scripts/loading-raw.R` file to load the dataset into the global
+    # using the `R/jobs/loading-raw.R` file to load the dataset into the global
     # environment, *before* running this function.
     # ukb_data_raw <- import_data_with_specific_columns()
 

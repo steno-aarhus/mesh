@@ -20,7 +20,9 @@ Imports:
     stringr,
     NetCoupler (>= 0.0.4.9000),
     tidyr,
-    assertr
+    assertr,
+    ggraph,
+    tidygraph
 RoxygenNote: 7.0.2
 Remotes: 
     NetCoupler/NetCoupler

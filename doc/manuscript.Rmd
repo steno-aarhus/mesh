@@ -2,19 +2,18 @@
 output: html_document
 ---
 
-```{r knit_setup, include=FALSE}
+```{r setup, include=FALSE}
 # root directory one down if using `prodigenr`
 knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
-```
-
-```{r setup}
 devtools::load_all()
 library(tidyverse)
 library(NetCoupler)
+# library(ggraph)
+# library(tidygraph)
 conflicted::conflict_prefer("filter", "dplyr")
 ```
 
-```{r}
+```{r load-data}
 # load_data_as_job()
 project_data <- load_data() %>% 
     rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>% 
@@ -33,10 +32,17 @@ project_data <- load_data() %>%
 project_data_nc <- project_data %>% 
     select(-age_of_t2dm_diagnosis) %>% 
     mutate(t2dm_status = if_else(is.na(t2dm_status), FALSE, t2dm_status))
+    # I want to use .regressed_on = c("age", "sex", "body_mass_index")),
+    # but there is a problem with one of the variables having "NA/NaN/Inf" error,
+    # and I can't resolve it right now. Will do later point.
+    mutate(t2dm_status = if_else(is.na(t2dm_status), FALSE, t2dm_status)) %>% 
+    na.omit() %>% 
+    nc_standardize(.vars = vars(starts_with("mtb_")))
 ```
 
 
-```{r}
+```{r make-network}
+# metabolic_network <- analyze_nc_network(project_data_nc)
 metabolic_data_only <- project_data_nc %>% 
     mutate(sex_number = as.numeric(as.factor(sex))) %>%
     nc_standardize(.vars = vars(starts_with("mtb_")),
@@ -61,14 +67,14 @@ usethis::use_data(network_plot, overwrite = TRUE)
 ggsave(here::here("doc/images/network-plot.svg"), network_plot)
 ```
 
-
 ```{r}
 project_data_nc_std <- project_data_nc %>% 
     nc_standardize(.vars = vars(starts_with("mtb_"))) %>% 
     sample_frac(0.15)
 ```
 
-```{r}
+```{r outcome-model-estimates}
+# model_outcome_estimates <- analyze_nc_outcome(project_data_nc, metabolic_network)
 # Might have to send this off as a job... takes a long time to run.
 model_outcome_estimates <- project_data_nc_std %>%
     nc_outcome_estimates(
@@ -79,13 +85,18 @@ model_outcome_estimates <- project_data_nc_std %>%
     )
 
 # usethis::use_data(model_outcome_estimates, overwrite = TRUE)
-
 model_outcome_estimates %>% 
     mutate(term = str_replace(term, "sexMale", "sex")) %>% 
     nc_classify_effects()
 ```
 
-```{r}
+
+```{r plot-outcome-estimates}
+model_nodes <-
+    data_frame(name = c(
+        unique(tidy_model_outcome$outcome),
+        tidy_model_outcome$index_node
+    ))
 model_edges <- tidy_model_outcome %>% 
     mutate(to = as.numeric(as.factor(index_node)) + 1,
            from = 1) %>% 
@@ -95,18 +106,18 @@ tbl_graph(nodes = model_nodes,
           edges = model_edges) %>% 
     ggraph("tree") +
     geom_edge_link2(
-        aes(colour = estimate, width = abs(estimate))
+        aes(colour = estimate, width = -log10(p.value))
         # arrow = grid::arrow(ends = "first", length = unit(0.2, "cm"), type = "closed")
     ) +
     scale_edge_colour_gradient2(mid = "gray80") +
     scale_edge_width(range = c(0.75, 2)) +
-    coord_cartesian(xlim = c(-1, ))
-    coord_flip() +
+    coord_cartesian(xlim = c(-10.1, 10.1)) +
     geom_node_point() +
     geom_node_label(aes(label = name))
 ```
 
-```{r}
+```{r exposure-model-estimates}
+# model_exposure_estimates <- analyze_nc_exposure(project_data_nc, metabolic_network)
 model_exposure_estimates <- project_data_nc_std %>%
     nc_exposure_estimates(
         metabolic_network,
@@ -148,6 +159,32 @@ model_exposure_estimates_ll <- project_data_nc_std %>%
 model_exposure_estimates_ll %>% 
     mutate(term = str_replace(term, "sexMale", "sex")) %>% 
     nc_classify_effects()
+```
+
+
+```{r plot-exposure-estimates}
+model_nodes <-
+    data_frame(name = c(
+        unique(tidy_model_exposure$exposure),
+        tidy_model_exposure$index_node
+    ))
+model_edges <- tidy_model_exposure %>% 
+    mutate(to = as.numeric(as.factor(index_node)) + 1,
+           from = 1) %>% 
+    select(from, to, estimate, p.value)
+
+tbl_graph(nodes = model_nodes,
+          edges = model_edges) %>% 
+    ggraph("tree") +
+    geom_edge_link2(
+        aes(colour = estimate, width = -log10(p.value))
+        # arrow = grid::arrow(ends = "first", length = unit(0.2, "cm"), type = "closed")
+    ) +
+    scale_edge_colour_gradient2(mid = "gray80") +
+    scale_edge_width(range = c(0.75, 2)) +
+    coord_cartesian(xlim = c(-10.1, 10.1)) +
+    geom_node_point() +
+    geom_node_label(aes(label = name))
 ```
 
 ```{r}
