@@ -40,7 +40,6 @@ project_data_nc <- project_data %>%
     nc_standardize(.vars = vars(starts_with("mtb_")))
 ```
 
-
 ```{r make-network}
 # metabolic_network <- analyze_nc_network(project_data_nc)
 metabolic_data_only <- project_data_nc %>% 
@@ -63,7 +62,6 @@ network_plot <- metabolic_data_only %>%
                         str_to_title())
 
 network_plot
-usethis::use_data(network_plot, overwrite = TRUE)
 ggsave(here::here("doc/images/network-plot.svg"), network_plot)
 ```
 
@@ -89,7 +87,6 @@ model_outcome_estimates %>%
     mutate(term = str_replace(term, "sexMale", "sex")) %>% 
     nc_classify_effects()
 ```
-
 
 ```{r plot-outcome-estimates}
 model_nodes <-
