@@ -1,5 +1,3 @@
-raw_data_filename <- "/run/user/1000/gvfs/smb-share:server=uni.au.dk,share=users/au597503/Documents/ukbiobank/ukb_data_cleaned.csv"
-project_data_filename <- "/run/user/1000/gvfs/smb-share:server=uni.au.dk,share=users/au597503/Documents/ukbiobank/ukb_data_netcoupler_project.csv"
 
 extract_raw_column_names <- function() {
     variable_names <- vroom_lines(raw_data_filename, n_max = 1)
