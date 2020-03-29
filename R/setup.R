@@ -12,8 +12,6 @@
 #' set_project_options()
 #'
 set_project_options <- function() {
-    # Set the options here for individual packages
-
     # For the document (knitr)
     knitr::opts_chunk$set(
         warning = FALSE, message = FALSE, collapse = TRUE
