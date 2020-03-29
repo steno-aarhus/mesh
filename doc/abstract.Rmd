@@ -7,7 +7,10 @@ devtools::load_all()
 ```
 
 
-Character count: / 3200 (including title and authors; title should be <= 150 characters)
+Character count: ~2600 / 2800 (3200-400)
+
+- Including title and authors
+- Title should be <= 150 characters
 - 1 figure/table: -400 characters
 
 **The metabolic pathways between components of stature and HbA1c: A casual
@@ -15,14 +18,54 @@ structure learning approach in the UK Biobank**
 
 Luke W Johnston, Clemens Wittenbecher, Helene V Tilma, Christine D Dahm, Daniel R Witte
 
-Department of Public Health, Aarhus University, Aarhus, Denmark
-Steno Diabetes Center Aarhus, Denmark
-Danish Diabetes Academy, Odense, Denmark
-
 **Background and aims**:
+Shorter relative adult leg length (LL), a marker of adverse growth conditions
+during early childhood, is associated with a higher risk for type 2 diabetes. 
+However, how this link is mediated metabolically is not well known in humans.
+Our aim was to identify how the components of stature influence the adult
+metabolic profile and consequently risk for type 2 diabetes through higher
+HbA1c.
 
 **Materials and methods**:
+We used 367,838 participants (176,420 men, 191,418 women) from UK Biobank,
+excluding prevalent diabetes cases.
+We applied a causal structure learning algorithm (NetCoupler)
+to identify the most likely causal path between an exposure, 
+a metabolic network, and an outcome.
+For this study, we used height, LL, and leg-to-height ratio (LHR) as the
+exposure and HbA1c as the outcome.
+The metabolic variables chosen to form part of the network were:
+gamma-glutamyltransferase (GGT), alanine aminotransferase (ALT),
+aspartate aminotransferase (AST), TAG, LDL, HDL, total cholesterol,
+creatinine, creatinine enzyme in urine, C-reative protein (CRP),
+apolipoprotein A and B (ApoA, ApoB), and albumin.
 
 **Results**:
+There were several strong links identified by the metabolic network 
+generated from NetCoupler (Figure).
+In particular, it identified the expected grouping between HDL-LDL-Cholesterol-TAG 
+(serum lipid profile) and GGT-ALT-AST (liver function). 
+Between the network variables and HbA1c, 
+there were: positive relationships between ALT, GGT, and CRP;
+and, a negative relationship with creatinine.
+For the stature components, there were negative relationships between:
+LHR, LL, and height on TAG; LHR, LL on CRP and ALT; and, LL and height on GGT.
+There were positive relationships between:
+LL and height on creatinine; LL on HDL; and, height on creatinine (in urine).
+Based on the NetCoupler algorithm, we found that LHR, LL, and Height were
+causally linked with HbA1c through GGT, ALT, creatinine, and CRP.
 
 **Conclusion**:
+Our findings suggest that overall childhood growth conditions
+that result in relatively longer legs and to taller stature may confer some
+protection against type 2 diabetes (from higher HbA1c) potentially through:
+a better functioning liver (through GGT and ALT);
+through generally lower inflammation (via CRP). 
+Our finding of the connection between stature 
+and its components with higher creatinine (i.e. lower kidney function) and its
+link with lower HbA1c is puzzling and may be due to...?
+
+```{r}
+knitr::include_graphics(here::here("doc/images/netcoupler-plot.png"))
+```
+
