@@ -1,20 +1,21 @@
 ---
-bibliography: 
-    - /path/to/bib
-csl:
-    - /path/to/csl # something like vancouver
-output: word_document
+output: html_document
 ---
 
 ```{r knit_setup, include=FALSE}
 # root directory one down if using `prodigenr`
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
+```
+
+```{r setup}
+devtools::load_all()
+library(tidyverse)
+library(NetCoupler)
+conflicted::conflict_prefer("filter", "dplyr")
 ```
 
 ```{r}
-devtools::load_all()
-library(dplyr)
-library(NetCoupler)
+# load_data_as_job()
 project_data <- load_data() %>% 
     rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>% 
     select(
@@ -31,65 +32,60 @@ project_data <- load_data() %>%
 
 project_data_nc <- project_data %>% 
     select(-age_of_t2dm_diagnosis) %>% 
-    # I want to use .regressed_on = c("age", "sex", "body_mass_index")),
-    # but there is a problem with one of the variables having "NA/NaN/Inf" error,
-    # and I can't resolve it right now. Will do later point.
-    mutate(t2dm_status = if_else(is.na(t2dm_status), FALSE, t2dm_status)) %>% 
-    na.omit() %>% 
-    nc_standardize(.vars = vars(starts_with("mtb_")))
+    mutate(t2dm_status = if_else(is.na(t2dm_status), FALSE, t2dm_status))
+```
 
-metabolic_network <- project_data_nc %>% 
-    select(starts_with("mtb_")) %>% 
+
+```{r}
+metabolic_data_only <- project_data_nc %>% 
+    mutate(sex_number = as.numeric(as.factor(sex))) %>%
+    nc_standardize(.vars = vars(starts_with("mtb_")),
+                   # TODO: Compare with BMI
+                   .regressed_on = c("age", "sex_number", "waist_circumference")) %>% 
+    select(starts_with("mtb_"))
+
+metabolic_network <- metabolic_data_only %>% 
     nc_create_network()
+# usethis::use_data(metabolic_network, overwrite = TRUE)
 
-w_adj_matrix <- NetCoupler:::adjacency_matrix(metabolic_network) * 
-    NetCoupler:::partial_corr_matrix(project_data_nc %>% select(starts_with("mtb_")))
+network_plot <- metabolic_data_only %>% 
+    na.omit() %>% 
+    nc_plot_network(metabolic_network,
+                    .node_rename_fun = function(x) x %>% 
+                        str_remove("mtb_") %>% 
+                        str_replace_all("_", " ") %>% 
+                        str_to_title())
 
-adj_graph <- igraph::graph.adjacency(w_adj_matrix, weighted = TRUE, mode = "undirected")
-cluster_walk <- igraph::cluster_walktrap(adj_graph, weights = igraph::E(adj_graph)$weight)
-igraph::membership(cluster_walk)
-plot(cluster_walk, adj_graph)
+network_plot
+usethis::use_data(network_plot, overwrite = TRUE)
+ggsave(here::here("doc/images/network-plot.svg"), network_plot)
+```
 
-library(ggraph)
-library(tidygraph)
-as_tbl_graph(adj_graph) %>% create_layout(layout = "stress")
-adj_graph %>% 
-    ggraph() +
-    geom_edge_link(aes(colour = weight, width = abs(weight))) +
-    scale_edge_colour_gradient2(mid = "gray80") +
-    scale_edge_width(range = c(0.75, 2)) +
-    geom_node_point() +
-    geom_node_label(aes(label = name))
 
-RCy3::createNetworkFromGraph(metabolic_network@graph)
+```{r}
+project_data_nc_std <- project_data_nc %>% 
+    nc_standardize(.vars = vars(starts_with("mtb_"))) %>% 
+    sample_frac(0.15)
+```
 
-model_outcome_estimates <- project_data_nc %>%
+```{r}
+# Might have to send this off as a job... takes a long time to run.
+model_outcome_estimates <- project_data_nc_std %>%
     nc_outcome_estimates(
         metabolic_network,
         .outcome = "hba1c",
-        .adjustment_vars = c("age", "sex", "body_mass_index"),
+        .adjustment_vars = c("age", "sex", "waist_circumference"),
         .model_function = lm
     )
 
-usethis::use_data(model_outcome_estimates)
+# usethis::use_data(model_outcome_estimates, overwrite = TRUE)
 
-tidy_model_outcome <- model_outcome_estimates %>% 
-    filter(index_node == term) %>% 
-    # select(outcome, index_node, estimate, conf.low, conf.high, p.value) %>% 
-    group_by(outcome, index_node) %>% 
-    summarize_at(vars(estimate, p.value), mean) %>% 
-    ungroup() %>% 
-    mutate(index_node = index_node %>% 
-               stringr::str_remove("mtb_") %>% 
-               stringr::str_replace_all("_", " ")) %>% 
-    arrange(index_node) %>% 
-    assertr::assert(assertr::is_uniq, index_node)
+model_outcome_estimates %>% 
+    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
+    nc_classify_effects()
+```
 
-model_nodes <-
-    data_frame(name = c(
-        unique(tidy_model_outcome$outcome),
-        tidy_model_outcome$index_node
-    ))
+```{r}
 model_edges <- tidy_model_outcome %>% 
     mutate(to = as.numeric(as.factor(index_node)) + 1,
            from = 1) %>% 
@@ -108,24 +104,89 @@ tbl_graph(nodes = model_nodes,
     coord_flip() +
     geom_node_point() +
     geom_node_label(aes(label = name))
+```
 
-model_exposure_estimates <- project_data_nc %>%
-    nc_outcome_estimates(
+```{r}
+model_exposure_estimates <- project_data_nc_std %>%
+    nc_exposure_estimates(
         metabolic_network,
-        .outcome = "leg_height_ratio",
-        .adjustment_vars = c("age", "sex", "body_mass_index"),
+        .exposure = "leg_height_ratio",
+        .adjustment_vars = c("age", "sex", "waist_circumference"),
         .model_function = lm
     )
 
-usethis::use_data(model_exposure_estimates)
+# usethis::use_data(model_exposure_estimates, overwrite = TRUE)
 
 model_exposure_estimates %>% 
-    filter(index_node == term) %>% 
-    # select(outcome, index_node, estimate, conf.low, conf.high, p.value) %>% 
-    group_by(outcome, index_node) %>% 
-    summarize_at(vars(estimate, p.value), mean) %>% 
-    View()
+    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
+    nc_classify_effects()
 
+model_exposure_estimates_hgt <- project_data_nc_std %>%
+    nc_exposure_estimates(
+        metabolic_network,
+        .exposure = "standing_height",
+        .adjustment_vars = c("age", "sex", "waist_circumference"),
+        .model_function = lm
+    )
+
+# usethis::use_data(model_exposure_estimates_hgt, overwrite = TRUE)
+
+model_exposure_estimates_hgt %>% 
+    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
+    nc_classify_effects()
+
+model_exposure_estimates_ll <- project_data_nc_std %>%
+    nc_exposure_estimates(
+        metabolic_network,
+        .exposure = "leg_length",
+        .adjustment_vars = c("age", "sex", "waist_circumference"),
+        .model_function = lm
+    )
+
+# usethis::use_data(model_exposure_estimates_ll, overwrite = TRUE)
+
+model_exposure_estimates_ll %>% 
+    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
+    nc_classify_effects()
+```
+
+```{r}
+outcome_results <- model_outcome_estimates %>% 
+    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
+    nc_classify_effects() %>% 
+    mutate(
+        direction = case_when(estimate > 0 ~ "(+)",
+                              estimate < 0 ~ "(-)",
+                              TRUE ~ ""),
+        effect = as.character(glue::glue("{direct_effect} {direction}"))
+    ) %>%
+    select(outcome, index_node, effect) %>% 
+    arrange(desc(effect), index_node)
+View(outcome_results)
+usethis::use_data(outcome_results, overwrite = TRUE)
+
+exposure_results <- bind_rows(
+    model_exposure_estimates %>%
+        mutate(term = str_replace(term, "sexMale", "sex")) %>%
+        nc_classify_effects(),
+    model_exposure_estimates_hgt %>%
+        mutate(term = str_replace(term, "sexMale", "sex")) %>%
+        nc_classify_effects(),
+    model_exposure_estimates_ll %>%
+        mutate(term = str_replace(term, "sexMale", "sex")) %>%
+        nc_classify_effects()
+    ) %>%
+    mutate(
+        direction = case_when(estimate > 0 ~ "(+)",
+                              estimate < 0 ~ "(-)",
+                              TRUE ~ ""),
+        effect = as.character(glue::glue("{direct_effect} {direction}"))
+    ) %>%
+    select(exposure, index_node, effect) %>%
+    arrange(exposure, desc(effect), index_node) %>%
+    pivot_wider(names_from = exposure, values_from = effect)
+View(exposure_results)
+usethis::use_data(exposure_results, overwrite = TRUE)
 ```
 
 
