@@ -35,6 +35,4 @@ outcome_estimate_results <- map2(
 )
 
 message("Ended analysis.")
-plan(sequential)
-
 usethis::use_data(outcome_estimate_results, overwrite = TRUE)
