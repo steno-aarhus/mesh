@@ -17,3 +17,12 @@ tidy_metabolic_names <- function(x) {
         stringr::str_replace_all("_", " ")
 
 }
+
+tidy_network_node_names <- function(x) {
+    x %>%
+        stringr::str_remove("mtb_") %>%
+        stringr::str_replace("direct", "cholesterol") %>%
+        stringr::str_replace_all("_", " ") %>%
+        stringr::str_to_title() %>%
+        stringr::str_replace("^([LH])dl", "\\1DL")
+}
