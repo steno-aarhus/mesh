@@ -27,7 +27,7 @@ Imports:
     svglite,
     rsample,
     furrr,
-    progressr
+    progress
 RoxygenNote: 7.1.1
 Remotes: 
     NetCoupler/NetCoupler
