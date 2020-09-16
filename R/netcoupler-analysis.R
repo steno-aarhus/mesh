@@ -14,25 +14,22 @@ analyze_nc_network <- function(.tbl) {
         NetCoupler::nc_estimate_network(NetCoupler::starts_with("mtb_"))
 }
 
-analyze_nc_outcome <- function(.tbl, .network, .parallel = FALSE) {
+analyze_nc_outcome <- function(.tbl, .network) {
     .tbl %>%
         NetCoupler::nc_outcome_estimates(
             NetCoupler::as_edge_tbl(.network),
             .outcome = "hba1c",
             .adjustment_vars = c("age", "sex", "waist_circumference"),
-            .model_function = lm,
-            .parallel = .parallel
+            .model_function = lm
         )
 }
 
-analyze_nc_exposure <- function(.tbl, .network, .parallel) {
+analyze_nc_exposure <- function(.tbl, .network, .stature_var) {
     .tbl %>%
-        NetCoupler::nc_outcome_estimates(
+        NetCoupler::nc_exposure_estimates(
             NetCoupler::as_edge_tbl(.network),
-            .outcome = "leg_height_ratio",
+            .exposure = .stature_var,
             .adjustment_vars = c("age", "sex", "waist_circumference"),
-            .model_function = lm,
-            .parallel = .parallel
-        ) %>%
-        rename(exposure = outcome)
+            .model_function = lm
+        )
 }
