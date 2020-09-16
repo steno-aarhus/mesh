@@ -32,3 +32,10 @@ run_job_network_results <- function() {
         "Generating the network results of the CV splits"
     )
 }
+
+run_job_outcome_estimate_results <- function() {
+    run_generic_job(
+        "generate-outcome-estimate-results.R",
+        "Generating the network results of the CV splits"
+    )
+}
