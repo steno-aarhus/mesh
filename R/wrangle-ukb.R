@@ -372,6 +372,7 @@ wrangle_ukb_data <- function(.save = FALSE) {
     # The below code gets the data, but better to run a local job (in RStudio)
     # using the `R/jobs/loading-raw.R` file to load the dataset into the global
     # environment, *before* running this function.
+    # Use run_job_loading_raw() function to start this job.
     # ukb_data_raw <- import_data_with_specific_columns()
 
     # Wrangle loaded ukb_data_raw.
