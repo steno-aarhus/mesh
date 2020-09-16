@@ -5,12 +5,16 @@ prepare_data_for_netcoupler_analysis <- function() {
     project_data <- load_data() %>%
         rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
         select(
-            # More than 25% missing for these variables.-mtb_microalbumin_in_urine,
+            # More than 25% missing for these variables.
+            -mtb_microalbumin_in_urine,
             -mtb_lipoprotein_a,
-            # Glucose should probably not be in models with HbA1c as outcome-mtb_glucose,
-            # These aren't really "metabolic" variables.-mtb_diastolic_blood_pressure,
+            # Glucose should probably not be in models with HbA1c as outcom
+            -mtb_glucose,
+            # These aren't really "metabolic" variables
+            -mtb_diastolic_blood_pressure,
             -mtb_systolic_blood_pressure,
-            # Since these associate with muscle mass (which is associated with height)-mtb_creatinine,
+            # Since these associate with muscle mass (which is associated with height)
+            -mtb_creatinine,
             -mtb_creatinine_enzymatic_in_urine
         ) %>%
         mutate(leg_height_ratio = leg_height_ratio * 100)
