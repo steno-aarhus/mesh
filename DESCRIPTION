@@ -18,11 +18,18 @@ Imports:
     dplyr,
     vroom,
     stringr,
-    NetCoupler (>= 0.0.4.9000),
+    NetCoupler (>= 0.0.4),
     tidyr,
     assertr,
     ggraph,
-    tidygraph
-RoxygenNote: 7.0.2
+    tidygraph,
+    rstudioapi,
+    svglite,
+    rsample,
+    furrr
+RoxygenNote: 7.1.1
 Remotes: 
     NetCoupler/NetCoupler
+Depends: 
+    R (>= 2.10),
+    tidyverse
