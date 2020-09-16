@@ -26,7 +26,8 @@ Imports:
     rstudioapi,
     svglite,
     rsample,
-    furrr
+    furrr,
+    progressr
 RoxygenNote: 7.1.1
 Remotes: 
     NetCoupler/NetCoupler
