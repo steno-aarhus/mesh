@@ -10,8 +10,8 @@ extract_raw_column_names <- function() {
 # Run this to get a variable list to use in `col_types` argument of vroom.
 initial_import_for_var_list_specs <- function() {
     ukb_data <- vroom::vroom(raw_data_filename,
-                             # Obtained by using `vroom::spec()` on a smaller subset of the data
-                             # To read faster.
+                             # Obtained by using `vroom::spec()` on a smaller
+                             # subset of the data to read faster.
                              n_max = 25000)
     spec(ukb_data)
 }
