@@ -28,5 +28,5 @@ prepare_data_for_netcoupler_analysis <- function() {
 
 create_cv_splits <- function(.training_data) {
     .training_data %>%
-        rsample::mc_cv(prop = 0.10, times = 150)
+        rsample::mc_cv(prop = 0.10, times = 100)
 }
