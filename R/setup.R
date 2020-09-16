@@ -7,6 +7,7 @@
 
 #' Set options for all Rmd documents and (very rarely) scripts.
 #'
+#' @import dplyr vroom
 #' @examples
 #' # Include this function in the top of an Rmd file.
 #' set_project_options()
