@@ -1,18 +1,8 @@
-devtools::load_all(quiet = TRUE)
-library(furrr)
+devtools::load_all()
+library(pcalg)
 library(NetCoupler)
 library(rsample)
-library(progressr)
-
-plan(multisession, workers = availableCores() - 1)
-
-handlers(
-    handler_progress(
-        format = "[:bar] :percent",
-        width = 60,
-        enable = TRUE
-    )
-)
+library(progress)
 
 set.seed(4125612)
 
@@ -24,10 +14,10 @@ proj_data_cv <- proj_data %>%
     create_cv_splits()
 
 process_and_analyze <- function(.tbl, .network) {
-    p()
+    pb$tick()
     std_data <- .tbl %>%
         as.data.frame() %>%
-        nc_standardize(starts_with("mtb_"))
+        NetCoupler::nc_standardize(NetCoupler::starts_with("mtb_"))
 
     analyze_nc_outcome(
         .tbl = std_data,
@@ -36,15 +26,13 @@ process_and_analyze <- function(.tbl, .network) {
 }
 
 message("Starting analysis.")
+pb <- progress_bar$new(total = length(proj_data_cv$splits))
 # Need to run generate-network-results.R first to get network_results
-with_progress({
-    p <- progressor(along = 1:length(proj_data_cv$splits))
-    outcome_estimate_results <- future_map2(
-        proj_data_cv$splits,
-        network_results,
-        process_and_analyze
-    )
-}, enable = TRUE)
+outcome_estimate_results <- map2(
+    proj_data_cv$splits,
+    network_results,
+    process_and_analyze
+)
 
 message("Ended analysis.")
 plan(sequential)

@@ -1,18 +1,10 @@
-devtools::load_all(quiet = TRUE)
+devtools::load_all()
+library(pcalg)
 library(furrr)
 library(NetCoupler)
 library(rsample)
-library(progressr)
 
 plan(multiprocess, workers = availableCores() - 1)
-
-handlers(
-    handler_progress(
-        format = "[:bar] :percent",
-        width = 60,
-        enable = TRUE
-    )
-)
 
 set.seed(4125612)
 
@@ -24,7 +16,6 @@ proj_data_cv <- proj_data %>%
     create_cv_splits()
 
 process_and_analyze <- function(.tbl) {
-    p()
     .tbl %>%
         as.data.frame() %>%
         analyze_nc_standardize_mtb_vars() %>%
@@ -32,11 +23,8 @@ process_and_analyze <- function(.tbl) {
 }
 
 message("Starting analysis.")
-with_progress({
-    p <- progressor(along = 1:length(proj_data_cv$splits))
-    network_results <- proj_data_cv$splits %>%
-        future_map(process_and_analyze)
-}, enable = TRUE)
+network_results <- proj_data_cv$splits %>%
+    future_map(process_and_analyze)
 
 message("Ended analysis.")
 plan(sequential)
