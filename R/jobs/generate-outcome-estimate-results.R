@@ -15,6 +15,7 @@ proj_data_cv <- proj_data %>%
 
 process_and_analyze <- function(.tbl, .network) {
     pb$tick()
+    # TODO: Test parallel again but move this code out.
     std_data <- .tbl %>%
         as.data.frame() %>%
         NetCoupler::nc_standardize(NetCoupler::starts_with("mtb_"))
@@ -28,10 +29,11 @@ process_and_analyze <- function(.tbl, .network) {
 message("Starting analysis.")
 pb <- progress_bar$new(total = length(proj_data_cv$splits))
 # Need to run generate-network-results.R first to get network_results
-outcome_estimate_results <- map2(
+outcome_estimate_results <- map2_dfr(
     proj_data_cv$splits,
     network_results,
-    process_and_analyze
+    process_and_analyze,
+    .id = "model_run_number"
 )
 
 message("Ended analysis.")

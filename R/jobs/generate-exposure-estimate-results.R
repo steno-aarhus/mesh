@@ -15,6 +15,7 @@ proj_data_cv <- proj_data %>%
 
 process_and_analyze <- function(.tbl, .network, .stature_var) {
     pb$tick()
+    # TODO: Test parallel again but move this code out.
     std_data <- .tbl %>%
         as.data.frame() %>%
         NetCoupler::nc_standardize(NetCoupler::starts_with("mtb_"))
@@ -39,7 +40,9 @@ exposure_estimate_results <- map(
            process_and_analyze,
            .stature_var = .x)
 ) %>%
-    flatten()
+    flatten() %>%
+    bind_rows(.id = "model_run_number")
+
 
 message("Ended analysis.")
 usethis::use_data(exposure_estimate_results, overwrite = TRUE)
