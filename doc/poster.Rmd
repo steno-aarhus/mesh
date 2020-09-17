@@ -1,0 +1,164 @@
+---
+title: "DDA Winter School, 2019"
+params:
+  output_media: online # or print
+output:
+  flexdashboard::flex_dashboard:
+    standalone: false
+    orientation: columns
+    vertical_layout: scroll
+    theme: cosmo
+    navbar:
+      - title: "PDF"
+        href: "https://posters.lwjohnst.com/2019/winter-school/poster.pdf"
+        align: right
+    css: style.css
+  postr::flex_dashboard_poster:
+    render_print: false
+    theme: cosmo
+    orientation: columns
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+library(qrencoder)
+library(fontawesome)
+
+poster_title <- stringr::str_to_title(
+    "The metabolic consequences of adverse early life conditions and subsequent risk for adult type 2 diabetes"
+)
+
+# Set some options and text by output
+image_dpi <- 96
+if (params$output_media == "print") {
+    image_dpi <- 300
+}
+
+col_width <- function(px) {
+    paste0("{data-width=", px, "}")
+}
+
+row_height <- function(px, small = TRUE) {
+    is_small <- ""
+    if (small & params$output_media == "print") {
+        is_small <- " .small"
+    }
+    paste0("{data-height=", px, is_small, "}")
+}
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  dev = "svg",
+  dpi = image_dpi,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+Column `r col_width(275)`
+-----------------------------------------------------------------------
+
+### `r row_height(230)`
+
+#### **`r poster_title`**
+
+| Luke W. Johnston
+| *Department of Public Health, Aarhus University and Steno Diabetes Center Aarhus*
+
+### `r row_height(780)`
+
+- *Background*: Early life adversity is known to influence the risk for type 2
+diabetes (T2D), but how metabolic processes mediate this link is unknown.
+Two recent advances eliminate some historical barriers in this area
+(i.e. difficulty in collecting and analyzing the data). First, can link cohort 
+studies (with metabolic data) to national register databases (with demographic
+and medical data). Second, emergence of mediation analysis and causal structure
+learning techniques to help identify pathways between early life adversity,
+adult metabolism, and T2D risk.
+- *Aims*: Overarching aim is to better quantify and understand the impact that
+early life conditions have on adult metabolic capacity and the risk for incident
+T2D in adulthood. There are three primary objectives:
+    1. Investigate how specific early life conditions affect risk of T2D at 
+    national level.
+    2. Identify mediating pathways of adult metabolic capacity between early
+    life adversity and T2D. Requires objective 3.
+    3. Extend and generalise NetCoupler algorithm (developed
+    [github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)). It
+    estimates direct and mediating pathways in high dimensional metabolic data.
+- *Data sources*: Danish register databases and Danish cohorts.
+- *Methods*: Develop and apply a "causal structure learning" algorithm to identify
+potential pathways between early life conditions, metabolic variables, and diagnosis
+of T2D.
+
+Column `r col_width(475)`
+-----------------------------------------------------------------------
+
+### Overview of analysis process `r row_height(500, FALSE)`
+
+```{r img-methods}
+knitr::include_graphics("methods.svg")
+```
+
+### NetCoupler algorithm ([github.com/NetCoupler](https://github.com/NetCoupler)) `r row_height(500, FALSE)`
+
+```{r img-netcoupler}
+knitr::include_graphics("netcoupler-process.svg")
+```
+
+Column `r col_width(250)`
+-----------------------------------------------------------------------
+
+### General timeline `r row_height(550, FALSE)`
+
+```{r img-timeline}
+knitr::include_graphics("timeline.svg")
+```
+
+### `r row_height(450)`
+
+**Contact**:  
+Luke W. Johnston, MSc, PhD  
+Email: lwjohnst@ph.au.dk  
+<a href="https://orcid.org/0000-0003-4169-2616" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon">0000-0003-4169-2616</a>
+
+<table style="width:100%">
+<tr><td width="45%" align="center">
+
+Poster  
+```{r qrcode-poster, out.extra='style="width:75px"', dev="png"}
+par(mar = c(0, 0, 0, 0))
+image(
+  qrencode_raster("https://posters.lwjohnst.com/2019/winter-school/"),
+  asp = 1,
+  col = c("white", "black"),
+  axes = FALSE,
+  xlab = "",
+  ylab = ""
+)
+```
+
+</td><td width="45%" align="center">
+
+Proposal  
+```{r qrcode-proposal, out.extra='style="width:75px"', dev="png"}
+par(mar = c(0, 0, 0, 0))
+image(
+  qrencode_raster("https://lwjohnst.gitlab.io/dda-pdf/"),
+  asp = 1,
+  col = c("white", "black"),
+  axes = FALSE,
+  xlab = "",
+  ylab = ""
+)
+```
+
+</td></tr>
+</table>
+
+[posters.lwjohnst.com/2019/winter-school](https://posters.lwjohnst.com/2019/winter-school/)  
+[lwjohnst.gitlab.io/dda-pdf](https://lwjohnst.gitlab.io/dda-pdf/)  
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>  
+![AU Logo](../common/au-logo.png){width=90px}
+![DDA Logo](../common/dda-logo.png){width=90px}
+![SDCA Logo](../common/sdca-logo.png){width=70px}
