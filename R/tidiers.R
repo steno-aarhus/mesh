@@ -26,3 +26,28 @@ tidy_network_node_names <- function(x) {
         stringr::str_to_title() %>%
         stringr::str_replace("^([LH])dl", "\\1DL")
 }
+
+tidy_node_names <- function(x) {
+    x %>%
+        tidy_network_node_names() %>%
+        str_replace("Leg Height Ratio", "LHR") %>%
+        str_replace("Leg Length", "LL") %>%
+        str_replace("Standing Height", "Height") %>%
+        str_replace("Hba1c", "HbA1c") %>%
+        str_replace("Alanine Aminotransferase", "ALT") %>%
+        str_replace("Apolipoprotein A", "ApoA") %>%
+        str_replace("Apolipoprotein B", "ApoB") %>%
+        str_replace("Aspartate Aminotransferase", "AST") %>%
+        str_replace("Creactive Protein", "CRP") %>%
+        str_replace("Gamma Glutamyltransferase", "GGT")  %>%
+        str_replace("HDL Cholesterol", "HDL")  %>%
+        str_replace("LDL Cholesterol", "LDL") %>%
+        str_replace("Triglycerides", "TAG")
+}
+
+tidy_node_names_column <- function(.tbl) {
+    .tbl %>%
+        activate("nodes") %>%
+        mutate(name = tidy_node_names(name))
+}
+
