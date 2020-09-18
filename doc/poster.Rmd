@@ -1,5 +1,5 @@
 ---
-title: "EASD, 2020, #333"
+title: "EASD 2020: #333"
 params:
   output_media: online # or print
 output:
@@ -25,8 +25,7 @@ library(qrencoder)
 library(fontawesome)
 
 poster_title <- stringr::str_to_title(
-    "The metabolic pathways between components of stature and HbA1c: A causal
-structure learning approach in the UK Biobank"
+    "The metabolic pathways between components of stature and HbA1c: A causal structure learning approach in the UK Biobank"
 )
 
 # Set some options and text by output
@@ -54,19 +53,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-Column `r col_width(275)`
+Column `r col_width(400)`
 -----------------------------------------------------------------------
 
-### `r row_height(230)`
+### `r row_height(900)`
 
 #### **`r poster_title`**
 
 | Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C Dahm, Daniel R Witte
 | 1. *Steno Diabetes Center Aarhus*, 2. *Aarhus University*, 3. *Harvard University*
 
-### `r row_height(780)`
-
-*Background*: 
+### Background
 
 - Short adult leg length (LL): marker of early childhood conditions and 
 associated with higher risk for type 2 diabetes. 
@@ -74,70 +71,65 @@ associated with higher risk for type 2 diabetes.
 - *Aim*: Identify how components of stature influence metabolic profile
 and consequent risk for diabetes through HbA1c.
 
-*Materials and methods*:
+### Materials and methods
 
 - Cross-sectional analysis of UK Biobank: n=367,838 (176,420 men, 191,418 women),
 excluding prevalent diabetes cases. 
-- Used a causal structure learning algorithm (NetCoupler, 
-[github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler))
-to identify most likely paths between exposure (LL),
+- Applied causal structure learning algorithm NetCoupler
+([github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)):
+identifies most likely paths between exposure (LL),
 metabolic network, and outcome (HbA1c). 
-- Exposures: height, LL, and leg-to-height ratio
+- Exposures: height, LL, and leg-to-height ratio (LHR)
 - Outcome: HbA1c
 - Metabolic profile: gamma-glutamyltransferase (GGT), alanine aminotransferase
 (ALT), aspartate aminotransferase (AST), TG, LDL, HDL, total cholesterol,
 C-reactive protein (CRP), creatinine (serum and urine), apolipoprotein A and B,
 and albumin
 - Confounders: Age, sex, and waist circumference 
+- Tested on 100 resamples of 10% of UK Biobank sample
 
 *Results*:
 
 - Metabolic network links: HDL-LDL-Cholesterol-TG (serum lipid profile)
-and GGT-ALT-AST (liver function). A
-darker blue link indicates a positive relationship, while darker orange
-indicates a negative relationship. Between the metabolic network variables and
-HbA1c there were positive relationships between ALT, GGT, and CRP. For the
-stature components, there were negative relationships between: LHR, LL, and
-height on TG; LHR, LL on CRP and ALT; and, LL and height on GGT. There were
-positive relationships between: LL on HDL. Based on the NetCoupler algorithm, we
-found that LHR, LL, and height were likely causally linked with HbA1c through
-GGT, ALT, and CRP.
+and GGT-ALT-AST (liver function)
+- Network to HbA1c: Positive links with ALT, GGT, and CRP
+- Stature to network: Negative links between: 
+    - LL and height on TG
+    - LHR, LL on CRP and ALT
+    - LL and height on GGT
+- NetCoupler algorithm identified GGT, ALT, and CRP as metabolic link between
+stature components and HbA1c
 
 *Conclusion*:
 
-- 
-Our findings suggest that overall childhood growth conditions that result in
-relatively longer legs and a taller stature may confer some protection against
-dysregulation of glucose metabolism and possibly type 2 diabetes (from higher
-HbA1c) potentially through preserved liver function (through GGT and ALT) and
-through generally lower inflammation (via CRP).
+- Findings suggest more adverse childhood growth conditions (resulting in
+relatively shorter legs and shorter stature) may contribute to higher HbA1c (and
+higher risk for diabetes) through lower liver function (GGT and ALT) and
+higher inflammation (CRP).
 
-Column `r col_width(475)`
+Column `r col_width(600)`
 -----------------------------------------------------------------------
 
-### NetCoupler algorithm ([github.com/NetCoupler](https://github.com/NetCoupler)) `r row_height(500, FALSE)`
+
+### NetCoupler algorithm ([github.com/NetCoupler](https://github.com/NetCoupler)) `r row_height(250, FALSE)`
 
 ```{r img-netcoupler}
-knitr::include_graphics("netcoupler-process.svg")
+knitr::include_graphics("images/netcoupler-process.svg")
 ```
 
-### Pathways between network and HbA1c `r row_height(250, FALSE)`
+### Pathways between stature, network, and HbA1c `r row_height(400, FALSE)`
+
+```{r}
+fig_caption <- "A
+darker blue link indicates a positive relationship, while darker orange
+indicates a negative relationship."
+```
 
 ```{r img-outcome-side}
-# knitr::include_graphics("images/results-outcome-estimates.svg")
+knitr::include_graphics("images/netcoupler-results.png")
 ```
 
-
-Column `r col_width(250)`
------------------------------------------------------------------------
-
-### Pathways between network and HbA1c `r row_height(500, FALSE)`
-
-```{r img-outcome-side}
-# knitr::include_graphics("images/results-exposure-estimates.svg")
-```
-
-### `r row_height(450)`
+### `r row_height(350)`
 
 **Contact**:  
 Luke W. Johnston, MSc, PhD  
@@ -166,6 +158,6 @@ image(
 [posters.lwjohnst.com/2020/easd](https://posters.lwjohnst.com/2020/easd/)  
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>  
 
-![AU Logo](../common/au-logo.png){width=90px}
-![DDA Logo](../common/dda-logo.png){width=90px}
-![SDCA Logo](../common/sdca-logo.png){width=70px}
+![AU Logo](images/au-logo.png){width=90px}
+![DDA Logo](images/dda-logo.png){width=90px}
+![SDCA Logo](images/sdca-logo.png){width=70px}
