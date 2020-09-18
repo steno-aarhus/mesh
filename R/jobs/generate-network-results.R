@@ -1,10 +1,8 @@
 devtools::load_all()
 library(pcalg)
-library(furrr)
 library(NetCoupler)
 library(rsample)
-
-plan(multiprocess, workers = availableCores() - 1)
+library(progress)
 
 set.seed(4125612)
 
@@ -16,6 +14,7 @@ proj_data_cv <- proj_data %>%
     create_cv_splits()
 
 process_and_analyze <- function(.tbl) {
+    pb$tick()
     .tbl %>%
         as.data.frame() %>%
         analyze_nc_standardize_mtb_vars() %>%
@@ -23,10 +22,9 @@ process_and_analyze <- function(.tbl) {
 }
 
 message("Starting analysis.")
+pb <- progress_bar$new(total = length(proj_data_cv$splits))
 network_results <- proj_data_cv$splits %>%
-    future_map(process_and_analyze)
+    map(process_and_analyze)
 
 message("Ended analysis.")
-plan(sequential)
-
 usethis::use_data(network_results, overwrite = TRUE)
