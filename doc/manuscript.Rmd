@@ -8,7 +8,6 @@ knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 devtools::load_all()
 library(NetCoupler)
 library(rsample)
-conflicted::conflict_prefer("filter", "dplyr")
 set.seed(4125612)
 ```
 
@@ -21,97 +20,88 @@ proj_data_cv <- proj_data %>%
 
 ```{r make-network}
 # network_results[[1]]
+calc_network_weights <- function(.tbl, .graph) {
+    .tbl %>%
+        as.data.frame() %>%
+        analyze_nc_standardize_mtb_vars() %>%
+        na.omit() %>% 
+        NetCoupler:::nc_tbl_adjacency_graph(.graph)
+}
 
-# network_plot <- proj_data_cv %>% 
-#     map(~ as.data.frame(.x) %>% nc_standardize(starts_with("mtb"))) %>% 
-#     nc_plot_network(metabolic_network,
-#                     .fn_node_rename = tidy_network_node_names)
+network_weights <- map2(
+    proj_data_cv$splits, 
+    network_results, 
+    calc_network_weights
+)
+usethis::use_data(network_weights, overwrite = TRUE)
+```
+
+
+```{r make-network-2}
+library(tidygraph)
+
+network_results_combined <- network_weights %>% 
+    reduce(graph_join, by = "name")
+
+network_mean_weights <- tbl_graph(
+    nodes = network_results_combined %>%
+        activate("nodes") %>%
+        as_tibble(),
+    edges = network_results_combined %>%
+        activate("edges") %>%
+        as_tibble() %>%
+        group_by(from, to) %>%
+        summarise(
+            weight = mean(weight),
+            weight_lower = quantile(weight, probs = 0.05),
+            weight_upper = quantile(weight, probs = 0.95),
+            .groups = "drop"
+        ) 
+) 
+
+network_mean_weights %>%
+    tidy_node_names_column() %>% 
+    plot_network_graph()
 
 # network_plot
 # ggsave(here::here("doc/images/network-plot2.svg"), network_plot)
 ```
 
-```{r exposure-model-estimates}
-# model_exposure_estimates <- analyze_nc_exposure(project_data_nc, metabolic_network)
-model_exposure_estimates <- project_data_nc_std %>%
-    nc_exposure_estimates(
-        metabolic_network,
-        .exposure = "leg_height_ratio",
-        .adjustment_vars = c("age", "sex", "waist_circumference"),
-        .model_function = lm
-    )
+```{r}
+# exposure_estimate_results %>% 
+#     count(exposure, index_node, effect)
 
-# usethis::use_data(model_exposure_estimates, overwrite = TRUE)
+estimation_results <- bind_rows(
+    outcome_estimate_results %>%
+        rename(external_variable = outcome) %>%
+        summarise_estimate_means(),
+    exposure_estimate_results %>%
+        rename(external_variable = exposure) %>%
+        summarise_estimate_means() %>%
+        filter(external_variable != "sitting_height")
+)
 
-model_exposure_estimates %>% 
-    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
-    nc_classify_effects() %>% 
-    filter(direct_effect == "direct") 
+tbl_graph_data <- network_and_estimates_as_tbl_graph(
+    estimation_results,
+    network_mean_weights
+)
 
-model_exposure_estimates_hgt <- project_data_nc_std %>%
-    nc_exposure_estimates(
-        metabolic_network,
-        .exposure = "standing_height",
-        .adjustment_vars = c("age", "sex", "waist_circumference"),
-        .model_function = lm
-    )
+estimation_plot <- tbl_graph_data %>% 
+    tidy_node_names_column() %>% 
+    plot_estimation_with_network(c("LHR", "LL", "Height"),
+                                 "HbA1c")
 
-# usethis::use_data(model_exposure_estimates_hgt, overwrite = TRUE)
-
-model_exposure_estimates_hgt %>% 
-    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
-    nc_classify_effects()
-
-model_exposure_estimates_ll <- project_data_nc_std %>%
-    nc_exposure_estimates(
-        metabolic_network,
-        .exposure = "leg_length",
-        .adjustment_vars = c("age", "sex", "waist_circumference"),
-        .model_function = lm
-    )
-
+ggsave(here::here("doc/images/netcoupler-results.svg"), estimation_plot,
+       width = 9, height = 6)
 ```
-
 
 ```{r}
-outcome_results <- model_outcome_estimates %>% 
-    mutate(term = str_replace(term, "sexMale", "sex")) %>% 
-    nc_classify_effects() %>% 
-    mutate(
-        direction = case_when(estimate > 0 ~ "(+)",
-                              estimate < 0 ~ "(-)",
-                              TRUE ~ ""),
-        effect = as.character(glue::glue("{direct_effect} {direction}"))
-    ) %>%
-    select(outcome, index_node, effect) %>% 
-    arrange(desc(effect), index_node)
-View(outcome_results)
-usethis::use_data(outcome_results, overwrite = TRUE)
-
-exposure_results <- bind_rows(
-    model_exposure_estimates %>%
-        mutate(term = str_replace(term, "sexMale", "sex")) %>%
-        nc_classify_effects(),
-    model_exposure_estimates_hgt %>%
-        mutate(term = str_replace(term, "sexMale", "sex")) %>%
-        nc_classify_effects(),
-    model_exposure_estimates_ll %>%
-        mutate(term = str_replace(term, "sexMale", "sex")) %>%
-        nc_classify_effects()
-    ) %>%
-    mutate(
-        direction = case_when(estimate > 0 ~ "(+)",
-                              estimate < 0 ~ "(-)",
-                              TRUE ~ ""),
-        effect = as.character(glue::glue("{direct_effect} {direction}"))
-    ) %>%
-    select(exposure, index_node, effect) %>%
-    arrange(exposure, desc(effect), index_node) %>%
-    pivot_wider(names_from = exposure, values_from = effect)
-View(exposure_results)
-usethis::use_data(exposure_results, overwrite = TRUE)
+# exposure_estimates_prep %>%
+#     filter(effect == "direct") %>% 
+#     select(exposure, index_node, estimate) %>% 
+#     mutate(estimate = round(estimate, 2) * 10) %>% 
+#     mutate(across(c(exposure, index_node), tidy_node_names))
 ```
-
 
 # Title page
 
