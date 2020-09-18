@@ -12,11 +12,11 @@ prepare_data_for_netcoupler_analysis <- function() {
             -mtb_glucose,
             # These aren't really "metabolic" variables
             -mtb_diastolic_blood_pressure,
-            -mtb_systolic_blood_pressure
+            -mtb_systolic_blood_pressure,
             # Since these associate with muscle mass (which is associated with height)
             # Actually, keep them in for verification against height
-            # -mtb_creatinine,
-            # -mtb_creatinine_enzymatic_in_urine
+            -mtb_creatinine,
+            -mtb_creatinine_enzymatic_in_urine
         ) %>%
         mutate(leg_height_ratio = leg_height_ratio * 100)
 
