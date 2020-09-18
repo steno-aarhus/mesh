@@ -7,7 +7,8 @@ library(furrr)
 
 set.seed(4125612)
 
-plan(multiprocess, workers = availableCores() - 1)
+# This doesn't work, since I think it does too much processing to work
+# plan(multiprocess, workers = availableCores() - 2, gc = TRUE)
 
 message("Preparing dataset for analysis.")
 proj_data <- prepare_data_for_netcoupler_analysis()
@@ -36,9 +37,10 @@ pb <- progress_bar$new(total = length(proj_data_cv$splits))
 # Need to run generate-network-results.R first to get network_results
 outcome_estimate_results <- proj_data_cv$splits %>%
     map(process_data) %>%
-    future_map2_dfr(network_results,
-                    process_and_analyze,
+    map2_dfr(network_results,
+                    analyze_data,
                     .id = "model_run_number")
 
 message("Ended analysis.")
 usethis::use_data(outcome_estimate_results, overwrite = TRUE)
+# plan(sequential)
