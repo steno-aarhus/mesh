@@ -27,10 +27,13 @@ Imports:
     svglite,
     rsample,
     furrr,
-    progress
+    progress,
+    postr (>= 0.0.1.9000),
+    qrencoder
 RoxygenNote: 7.1.1
 Remotes: 
-    NetCoupler/NetCoupler
+    NetCoupler/NetCoupler,
+    lwjohnst86/postr
 Depends: 
     R (>= 2.10),
     tidyverse

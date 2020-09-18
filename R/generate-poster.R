@@ -1,4 +1,5 @@
-library(magrittr)
+
+generate_poster <- function() {
 
 generate_poster_pdf <- function(input_file, output_file, deps = NULL) {
     temp_poster_html <- tempfile(fileext = ".html")
@@ -49,3 +50,5 @@ generate_poster_html(
     here::here("poster/poster.Rmd"),
     here::here("poster/poster.html")
 )
+
+}
