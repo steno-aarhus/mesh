@@ -1,6 +1,4 @@
 
-generate_poster <- function() {
-
 generate_poster_pdf <- function(input_file, output_file, deps = NULL) {
     temp_poster_html <- tempfile(fileext = ".html")
     rmarkdown::render(
@@ -40,15 +38,4 @@ generate_poster_html <- function(input_file, output_file, deps = NULL) {
         quiet = TRUE
     )
     return(invisible(NULL))
-}
-
-generate_poster_pdf(
-    here::here("poster/poster.Rmd"),
-    here::here("poster/poster.pdf")
-)
-generate_poster_html(
-    here::here("poster/poster.Rmd"),
-    here::here("poster/poster.html")
-)
-
 }
