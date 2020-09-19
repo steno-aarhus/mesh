@@ -1,5 +1,5 @@
 ---
-title: "EASD 2020: #333"
+title: "EASD 2020: Poster #333"
 params:
   output_media: online # or print
 output:
@@ -21,12 +21,8 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library(qrencoder)
-library(fontawesome)
-
-poster_title <- stringr::str_to_title(
-    "The metabolic pathways between components of stature and HbA1c: A causal structure learning approach in the UK Biobank"
-)
+poster_title <- 
+    "The Metabolic Pathways Between Components of Stature and HbA1c: A Causal Structure Learning Approach in the UK Biobank"
 
 # Set some options and text by output
 image_dpi <- 200
@@ -35,12 +31,8 @@ col_width <- function(px) {
     paste0("{data-width=", px, "}")
 }
 
-row_height <- function(px, small = TRUE) {
-    is_small <- ""
-    if (small & params$output_media == "print") {
-        is_small <- " .small"
-    }
-    paste0("{data-height=", px, is_small, "}")
+row_height <- function(px) {
+    paste0("{data-height=", px, "}")
 }
 
 knitr::opts_chunk$set(
@@ -53,111 +45,160 @@ knitr::opts_chunk$set(
 )
 ```
 
-Column `r col_width(400)`
+Column `r col_width('30%')`
 -----------------------------------------------------------------------
 
-### `r row_height(900)`
+### `r row_height('20%')`
 
 #### **`r poster_title`**
 
-| Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C Dahm, Daniel R Witte
-| 1. *Steno Diabetes Center Aarhus*, 2. *Aarhus University*, 3. *Harvard University*
+| Luke W Johnston^1^, Clemens Wittenbecher^3^, Helene T Vistisen^2^, Christina C Dahm^2^, Daniel R Witte^1,2^
+| 1. *Steno Diabetes Center Aarhus, Denmark*, 2. *Aarhus University, Denmark*, 3. *Harvard University, USA*
 
-### Background
+**No relevant disclosures**.
 
-- Short adult leg length (LL): marker of early childhood conditions and 
-associated with higher risk for type 2 diabetes. 
-- Not known how association is metabolically mediated.
+<hr>
+
+<table style="width:100%">
+<tr><td width="45%" align="left">
+**Contact**:  
+Luke W. Johnston, MSc, PhD  
+Email: luke.johnston@rm.dk  
+`r lwj::orcid_icon_html()`  
+[posters.lwjohnst.com/2020/easd](https://posters.lwjohnst.com/2020/easd/)  
+`r lwj::ccby_icon_html()`  
+</td>
+<td width="45%" align="center">
+![AU Logo](images/au-logo.png){width=75px}
+![DDA Logo](images/dda-logo.png){width=75px}
+<br>
+<br>
+![SDCA Logo](images/sdca-logo.png){width=60px}
+</td></tr>
+</table>
+
+<hr>
+
+<table style="width:100%">
+<tr><td width="45%">
+
+**Background**:
+
+- Short adult leg length (LL) is a marker of early childhood conditions and 
+is associated with higher risk for type 2 diabetes, but is not known how
+association is metabolically mediated.
 - *Aim*: Identify how components of stature influence metabolic profile
 and consequent risk for diabetes through HbA1c.
 
-### Materials and methods
+**Methods**:
 
-- Cross-sectional analysis of UK Biobank: n=367,838 (176,420 men, 191,418 women),
-excluding prevalent diabetes cases. 
+- Cross-sectional analysis of UK Biobank: n=367,838,
+not prevalent diabetes cases.
 - Applied causal structure learning algorithm NetCoupler
-([github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)):
-identifies most likely paths between exposure (LL),
-metabolic network, and outcome (HbA1c). 
-- Exposures: height, LL, and leg-to-height ratio (LHR)
-- Outcome: HbA1c
+(R package at [github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)),
+tested on 100 resamples of 10% of dataset.
+- Exposures: LL, leg-height ratio (LHR), and height; Outcome: HbA1c.
 - Metabolic profile: gamma-glutamyltransferase (GGT), alanine aminotransferase
-(ALT), aspartate aminotransferase (AST), TG, LDL, HDL, total cholesterol,
-C-reactive protein (CRP), creatinine (serum and urine), apolipoprotein A and B,
-and albumin
-- Confounders: Age, sex, and waist circumference 
-- Tested on 100 resamples of 10% of UK Biobank sample
+(ALT), aspartate aminotransferase (AST), TAG, LDL, HDL, total cholesterol,
+C-reactive protein (CRP), apolipoprotein A and B, and albumin.
+- Confounders: Age, sex, and waist circumference.
 
-*Results*:
+</td>
+<td width="45%">
 
-- Metabolic network links: HDL-LDL-Cholesterol-TG (serum lipid profile)
-and GGT-ALT-AST (liver function)
-- Network to HbA1c: Positive links with ALT, GGT, and CRP
+**Results**:
+
+- Metabolic network links: e.g. HDL-LDL-Cholesterol-TAG (serum lipid profile)
+and GGT-ALT-AST (liver function).
+- Network to HbA1c: Positive links with ALT, GGT, and CRP.
 - Stature to network: Negative links between: 
-    - LL and height on TG
-    - LHR, LL on CRP and ALT
-    - LL and height on GGT
-- NetCoupler algorithm identified GGT, ALT, and CRP as metabolic link between
-stature components and HbA1c
+    - LL and height on CRP, GGT, and TAG.
+    - LHR, LL on CRP and ALT.
+- NetCoupler algorithm identified GGT, ALT, and CRP as likely metabolic link
+between stature components and HbA1c.
 
-*Conclusion*:
+**Conclusion**:
 
-- Findings suggest more adverse childhood growth conditions (resulting in
-relatively shorter legs and shorter stature) may contribute to higher HbA1c (and
-higher risk for diabetes) through lower liver function (GGT and ALT) and
-higher inflammation (CRP).
+- Suggest more adverse early childhood growth conditions (leading to shorter
+legs and shorter stature) may contribute to higher HbA1c (and higher risk for
+diabetes) through higher liver dysfunction (GGT and ALT) and higher inflammation
+(CRP).
 
-Column `r col_width(600)`
+</td></tr>
+</table>
+
+Column `r col_width('70%')`
 -----------------------------------------------------------------------
 
-
-### NetCoupler algorithm ([github.com/NetCoupler](https://github.com/NetCoupler)) `r row_height(250, FALSE)`
+### Figure 1: NetCoupler algorithm (R package at [github.com/NetCoupler](https://github.com/NetCoupler)) process, identifies potential pathways between exposure (E), metabolic network (N), and outcome (O) `r row_height(400)`
 
 ```{r img-netcoupler}
 knitr::include_graphics("images/netcoupler-process.svg")
 ```
 
-### Pathways between stature, network, and HbA1c `r row_height(400, FALSE)`
+### Figure 2: Pathways between stature, network, and HbA1c `r row_height(600)`
 
 ```{r}
-fig_caption <- "A
-darker blue link indicates a positive relationship, while darker orange
-indicates a negative relationship."
+fig_caption <- "Potential pathways identified from the NetCoupler algorithm. A darker blue link indicates a positive relationship, while a darker red one indicates a negative relationship. Numbers between metabolic variables indicate the weights for the links (a larger number suggests a stronger link). Links shown with the stature or HbA1c variables and the network variables were classified as direct effect links; all other linked had been classified as ambiguous."
 ```
 
-```{r img-outcome-side}
+```{r img-outcome-side, fig.cap=fig_caption}
 knitr::include_graphics("images/netcoupler-results.png")
 ```
 
-### `r row_height(350)`
+<!--
+Script:
 
-**Contact**:  
-Luke W. Johnston, MSc, PhD  
-Email: luke.johnston@rm.dk
-<a href="https://orcid.org/0000-0003-4169-2616" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon">0000-0003-4169-2616</a>
+~ 125 words/minute * 3 minutes = 375 words
+~ 150 words/minute * 4 minutes = 600 words
 
-<table style="width:100%">
-<tr><td width="45%" align="center">
+Hi everyone, thanks for listening in. I'll be presenting some results of using a
+causal structure learning algorithm to investigate potential metabolic pathways
+between the components of stature and HbA1c.
 
-Poster  
-```{r qrcode-poster, out.extra='style="width:75px"', dev="png"}
-par(mar = c(0, 0, 0, 0))
-image(
-  qrencode_raster("https://posters.lwjohnst.com/2020/easd/"),
-  asp = 1,
-  col = c("white", "black"),
-  axes = FALSE,
-  xlab = "",
-  ylab = ""
-)
-```
+So, there is strong evidence of a relationship between adverse early life
+conditions and risk for type 2 diabetes, but it isn't well-studied in humans how
+this association may be mediated metabolically. So, using the UK Biobank
+Cohort, we studied how adult leg length, used as a marker of early childhood
+conditions, may influence type 2 diabetes risk with HbA1c through a standard
+metabolic variables.
 
-</td></tr>
-</table>
+For this aim, my colleague Clemens developed a statistical method called
+NetCoupler that could identify pathways in a metabolic network and analyze how
+an exposure may influence this network and how this network may then influence
+an outcome. Both myself and Clemens are developing NetCoupler as an R package
+for wider use and more details about it are in the link shown on the poster.
 
-[posters.lwjohnst.com/2020/easd](https://posters.lwjohnst.com/2020/easd/)  
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>  
+So, briefly, NetCoupler works in four phases, as shown in Figure 1: First, it
+estimates connections between metabolic variables, called nodes, and constructs a
+network. Two, it extracts each node iteratively along with its linked
+neighbouring nodes. Three, it calculates all possible combinations of these
+neighbouring nodes with the index node and sets each as a model. So with
+3 neighbours, that is 8 models. It then runs each model with the exposure or
+outcome on the index node, adjusting for confounders like age, sex, and waist
+circumference. Finally, based on the model results, it classifies using some
+criteria whether the link is direct, ambiguous, or non-existent.
 
-![AU Logo](images/au-logo.png){width=90px}
-![DDA Logo](images/dda-logo.png){width=90px}
-![SDCA Logo](images/sdca-logo.png){width=70px}
+The nice thing about NetCoupler is that the results can be very nicely represented
+visually, as shown in figure 2. Each dot is a variable, the darker blue lines
+indicate a positive link between nodes, a darker red is a negative link, and the
+numbers are the weights between the network variables.
+
+There's a lot going on, so I'll highlight the top portion, where the variables
+HDL, LDL, cholesterol, and TAG which is in the middle are all strongly linked
+together, which is as we would expect. Likewise, liver function variables,
+at the bottom and middle left, like ALT, AST, and GGT are all linked.
+
+On the left side are the stature components, including leg to height ratio,
+where we identified direct negative links with ALT, GGT, TAG, and CRP. On the
+right side with HbA1c, we found direct positive links with ALT, CRP, and GGT. So
+from these results, we can infer that lower stature components, including lower
+relative leg length, may contribute to higher HbA1c through higher ALT, CRP, and
+GGT.
+
+To conclude, these results suggest that adverse early childhood conditions may
+contribute to risk for type 2 diabetes through higher liver dysfunction and
+through higher systemic inflammation. Thank you for listening and I look forward
+to any questions.
+
+-->
