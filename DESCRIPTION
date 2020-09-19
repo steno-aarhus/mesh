@@ -1,6 +1,6 @@
 Package: ecc.cmd.ukbiobank
 Title: Early Childhood Conditions And Cardmetabolic Disease in the UK Biobank.
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Luke",
            family = "Johnston",
