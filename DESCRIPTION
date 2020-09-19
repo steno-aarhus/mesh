@@ -29,7 +29,8 @@ Imports:
     furrr,
     progress,
     postr (>= 0.0.1.9000),
-    qrencoder
+    qrencoder,
+    lwj (>= 0.0.0.9000)
 RoxygenNote: 7.1.1
 Remotes: 
     NetCoupler/NetCoupler,
