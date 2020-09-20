@@ -84,22 +84,22 @@ Email: luke.johnston@rm.dk
 
 **Background**:
 
-- Short adult leg length (LL) is a marker of early childhood conditions and 
-is associated with higher risk for type 2 diabetes, but is not known how
-association is metabolically mediated.
+- Short adult leg length (LL) is a marker of adverse early childhood conditions
+and is associated with higher risk for type 2 diabetes, but it's not known how
+this association is metabolically mediated.
 - *Aim*: Identify how components of stature influence metabolic profile
-and consequent risk for diabetes through HbA1c.
+and HbA1c.
 
 **Methods**:
 
 - Cross-sectional analysis of UK Biobank: n=367,838,
-not prevalent diabetes cases.
+without prevalent diabetes cases.
 - Applied causal structure learning algorithm NetCoupler
 (R package at [github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)),
 tested on 100 resamples of 10% of dataset.
 - Exposures: LL, leg-height ratio (LHR), and height; Outcome: HbA1c.
 - Metabolic profile: gamma-glutamyltransferase (GGT), alanine aminotransferase
-(ALT), aspartate aminotransferase (AST), TAG, LDL, HDL, total cholesterol,
+(ALT), aspartate aminotransferase (AST), TAG, LDL-C, HDL-C, total cholesterol,
 C-reactive protein (CRP), apolipoprotein A and B, and albumin.
 - Confounders: Age, sex, and waist circumference.
 
@@ -108,7 +108,7 @@ C-reactive protein (CRP), apolipoprotein A and B, and albumin.
 
 **Results**:
 
-- Metabolic network links: e.g. HDL-LDL-Cholesterol-TAG (serum lipid profile)
+- Metabolic network links: e.g. HDL-C-LDL-C-Cholesterol-TAG (serum lipid profile)
 and GGT-ALT-AST (liver function).
 - Network to HbA1c: Positive links with ALT, GGT, and CRP.
 - Stature to network: Negative links between: 
@@ -119,9 +119,8 @@ between stature components and HbA1c.
 
 **Conclusion**:
 
-- Suggest more adverse early childhood growth conditions (leading to shorter
-legs and shorter stature) may contribute to higher HbA1c (and higher risk for
-diabetes) through higher liver dysfunction (GGT and ALT) and higher inflammation
+- Adverse early childhood growth conditions (leading to shorter
+legs and shorter stature) may contribute to higher HbA1c through higher liver dysfunction (GGT and ALT) and higher inflammation
 (CRP).
 
 </td></tr>
@@ -130,16 +129,16 @@ diabetes) through higher liver dysfunction (GGT and ALT) and higher inflammation
 Column `r col_width('70%')`
 -----------------------------------------------------------------------
 
-### Figure 1: NetCoupler algorithm (R package at [github.com/NetCoupler](https://github.com/NetCoupler)) process, identifies potential pathways between exposure (E), metabolic network (N), and outcome (O) `r row_height(400)`
+### Figure 1: NetCoupler algorithm (R package at [github.com/NetCoupler](https://github.com/NetCoupler)) process, identifies potential pathways between exposure (E), metabolic network (N), and outcome (O) `r row_height(375)`
 
 ```{r img-netcoupler}
 knitr::include_graphics("images/netcoupler-process.svg")
 ```
 
-### Figure 2: Pathways between stature, network, and HbA1c `r row_height(600)`
+### Figure 2: Pathways between stature, network, and HbA1c `r row_height(625)`
 
 ```{r}
-fig_caption <- "Potential pathways identified from the NetCoupler algorithm. A darker blue link indicates a positive relationship, while a darker red one indicates a negative relationship. Numbers between metabolic variables indicate the weights for the links (a larger number suggests a stronger link). Links shown with the stature or HbA1c variables and the network variables were classified as direct effect links; all other linked had been classified as ambiguous."
+fig_caption <- "Potential pathways identified from the NetCoupler algorithm. A darker blue link indicates a positive relationship, while a darker red one indicates a negative relationship. Grey lines between metabolic variables are the derived neighbours, but with weaker connections. Numbers between metabolic variables indicate the weights for the strong links (a larger number suggests a stronger link). Links shown with the stature or HbA1c variables and the network variables were classified as direct effect links; while all other connections with metabolic variables had been classified as ambiguous, they were removed for better visual presentation."
 ```
 
 ```{r img-outcome-side, fig.cap=fig_caption}

@@ -10,9 +10,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
-   width="1226.3029"
+   width="1446.349"
    height="551.01294"
-   viewBox="0 0 1226.3029 551.01294"
+   viewBox="0 0 1446.3491 551.01294"
    sodipodi:docname="netcoupler-process.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
@@ -338,9 +338,9 @@
      inkscape:window-height="1138"
      id="namedview4"
      showgrid="true"
-     inkscape:zoom="0.77339804"
-     inkscape:cx="428.46638"
-     inkscape:cy="361.55646"
+     inkscape:zoom="1.5467961"
+     inkscape:cx="946.75466"
+     inkscape:cy="372.97999"
      inkscape:window-x="45"
      inkscape:window-y="34"
      inkscape:window-maximized="1"
@@ -350,7 +350,7 @@
     <inkscape:grid
        type="xygrid"
        id="grid2285"
-       originx="-39.669878"
+       originx="-39.669881"
        originy="-37.937058" />
   </sodipodi:namedview>
   <image
@@ -781,7 +781,7 @@
          y="21.720089"
          x="3.4729843"
          id="tspan2287"
-         sodipodi:role="line">1) Estimate metabolic network</tspan></text>
+         sodipodi:role="line">1) Derive metabolic network</tspan></text>
     <text
        id="text2293"
        y="281.6058"
@@ -816,20 +816,20 @@
          id="tspan2459">neighbour nodes, each as a model</tspan></text>
     <text
        id="text2305"
-       y="96.177231"
-       x="886.78729"
+       y="94.177231"
+       x="976.78729"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-         y="96.177231"
-         x="886.78729"
-         id="tspan2303"
-         sodipodi:role="line">4) Classify direct </tspan><tspan
-         id="tspan5767"
+         y="94.177231"
+         x="976.78729"
+         sodipodi:role="line"
+         id="tspan1651">4) Classify direct effect for </tspan><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-         y="126.17723"
-         x="886.78729"
-         sodipodi:role="line">effect for each model</tspan></text>
+         y="124.17723"
+         x="976.78729"
+         sodipodi:role="line"
+         id="tspan1679">each model for both E and O</tspan></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -843,209 +843,84 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <g
-       id="g1789">
-      <g
-         id="g2457">
-        <g
-           id="g2415">
-          <g
-             id="g5932"
-             transform="matrix(0.82158549,0,0,0.82158549,189.44951,-58.34661)">
-            <g
-               id="g2384">
-              <g
-                 transform="translate(-10.057143,-5.4857143)"
-                 id="g5782">
-                <ellipse
-                   ry="31.048193"
-                   rx="38.381695"
-                   cy="339.19836"
-                   cx="940.29108"
-                   id="ellipse5584"
-                   style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.65729;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-                <text
-                   id="text5588"
-                   y="354.06277"
-                   x="920.50757"
-                   style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-                   xml:space="preserve"><tspan
-                     id="tspan5586"
-                     y="354.06277"
-                     x="920.50757"
-                     sodipodi:role="line">Ni</tspan></text>
-              </g>
-              <ellipse
-                 style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.13078;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                 id="ellipse5592"
-                 cx="1116.7483"
-                 cy="333.71262"
-                 rx="53.687809"
-                 ry="30.811449" />
-              <text
-                 xml:space="preserve"
-                 style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-                 x="1080.9994"
-                 y="347.59042"
-                 id="text5596"><tspan
-                   sodipodi:role="line"
-                   x="1080.9994"
-                   y="347.59042"
-                   id="tspan5594">E/O</tspan></text>
-              <text
-                 xml:space="preserve"
-                 style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-                 x="1080.9994"
-                 y="347.59042"
-                 id="text2179"><tspan
-                   sodipodi:role="line"
-                   x="1080.9994"
-                   y="347.59042"
-                   id="tspan2177">E/O</tspan></text>
-              <path
-                 inkscape:connector-curvature="0"
-                 id="path5784"
-                 d="m 970,334 h 90"
-                 style="fill:none;stroke:#818181;stroke-width:3.65147637;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-            </g>
-          </g>
-          <text
-             xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-             x="928.38727"
-             y="173.19653"
-             id="text6137"><tspan
-               sodipodi:role="line"
-               id="tspan6135"
-               x="928.38727"
-               y="173.19653">Direct effect</tspan></text>
-        </g>
-        <g
-           id="g2368">
-          <text
-             xml:space="preserve"
-             style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-             x="1083.0203"
-             y="500.35626"
-             id="text2189"
-             transform="matrix(0.82158549,0,0,0.82158549,189.44951,-58.34661)"><tspan
-               sodipodi:role="line"
-               x="1083.0203"
-               y="500.35626"
-               id="tspan2187">E/O</tspan></text>
-          <g
-             id="g6101"
-             transform="matrix(0.82158549,0,0,0.82158549,173.01779,-27.650526)">
-            <g
-               id="g5942"
-               transform="translate(9.942857,110.51429)">
-              <ellipse
-                 style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.65729;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                 id="ellipse5934"
-                 cx="940.29108"
-                 cy="339.19836"
-                 rx="38.381695"
-                 ry="31.048193" />
-              <text
-                 xml:space="preserve"
-                 style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-                 x="920.50757"
-                 y="354.06277"
-                 id="text5940"><tspan
-                   sodipodi:role="line"
-                   x="920.50757"
-                   y="354.06277"
-                   id="tspan5938">Ni</tspan></text>
-            </g>
-            <g
-               id="g5950"
-               transform="translate(21.828571,108.68571)">
-              <ellipse
-                 ry="30.811449"
-                 rx="53.687809"
-                 cy="341.02692"
-                 cx="1114.9197"
-                 id="ellipse5944"
-                 style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.13078;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-            </g>
-            <path
-               style="fill:none;stroke:#818181;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:9, 3;stroke-dashoffset:0;stroke-opacity:1"
-               d="m 990,450 h 90"
-               id="path5952"
-               inkscape:connector-curvature="0" />
-          </g>
-          <text
-             xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-             x="930.15869"
-             y="302.28223"
-             id="text6141"><tspan
-               sodipodi:role="line"
-               id="tspan6139"
-               x="930.15869"
-               y="302.28223">Ambiguous</tspan></text>
-        </g>
-        <g
-           id="g2399">
-          <text
-             xml:space="preserve"
-             style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-             x="1080.631"
-             y="658.35052"
-             id="text2193"
-             transform="matrix(0.82158549,0,0,0.82158549,189.44951,-58.34661)"><tspan
-               sodipodi:role="line"
-               x="1080.631"
-               y="658.35052"
-               id="tspan2191">E/O</tspan></text>
-          <g
-             id="g6156"
-             transform="matrix(0.81644733,0,0,0.81644733,193.7881,-10.04587)">
-            <g
-               transform="translate(-10.057143,250.51429)"
-               id="g6111">
-              <ellipse
-                 ry="31.048193"
-                 rx="38.381695"
-                 cy="339.19836"
-                 cx="940.29108"
-                 id="ellipse6103"
-                 style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.65729;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-              <text
-                 id="text6109"
-                 y="354.06277"
-                 x="920.50757"
-                 style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-                 xml:space="preserve"><tspan
-                   id="tspan6107"
-                   y="354.06277"
-                   x="920.50757"
-                   sodipodi:role="line">Ni</tspan></text>
-            </g>
-            <g
-               transform="translate(1.828571,248.68571)"
-               id="g6119">
-              <ellipse
-                 style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.13078;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                 id="ellipse6113"
-                 cx="1114.9197"
-                 cy="341.02692"
-                 rx="53.687809"
-                 ry="30.811449" />
-            </g>
-          </g>
-          <text
-             xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-             x="929.24445"
-             y="432.28226"
-             id="text6145"><tspan
-               sodipodi:role="line"
-               id="tspan6143"
-               x="929.24445"
-               y="432.28226">No effect</tspan></text>
-        </g>
-      </g>
+       id="g1742"
+       transform="translate(168.39836,1.3068921)">
+      <ellipse
+         ry="25.508745"
+         rx="31.533844"
+         cy="215.82686"
+         cx="953.71619"
+         id="ellipse5584"
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.18319;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text5588"
+         y="228.03925"
+         x="937.46234"
+         style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+         xml:space="preserve"><tspan
+           id="tspan5586"
+           y="228.03925"
+           x="937.46234"
+           sodipodi:role="line"
+           style="stroke-width:0.821585">Ni</tspan></text>
     </g>
+    <g
+       id="g1747"
+       transform="translate(-136.51719,0.18710938)">
+      <ellipse
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.5722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse5592"
+         cx="1106.9537"
+         cy="215.82683"
+         rx="44.109123"
+         ry="25.31424" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+         x="1094.931"
+         y="226.79861"
+         id="text2179"><tspan
+           sodipodi:role="line"
+           x="1094.931"
+           y="226.79861"
+           id="tspan2177"
+           style="stroke-width:0.821585">E</tspan></text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path5784"
+       d="m 1015.3301,217.06294 h 73.9426"
+       style="fill:none;stroke:#818181;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="928.38727"
+       y="173.19653"
+       id="text6137"><tspan
+         sodipodi:role="line"
+         id="tspan6135"
+         x="928.38727"
+         y="173.19653">Direct effect</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="930.15869"
+       y="302.28223"
+       id="text6141"><tspan
+         sodipodi:role="line"
+         id="tspan6139"
+         x="930.15869"
+         y="302.28223">Ambiguous</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="929.24445"
+       y="432.28226"
+       id="text6145"><tspan
+         sodipodi:role="line"
+         id="tspan6143"
+         x="929.24445"
+         y="432.28226">No effect</tspan></text>
     <g
        id="g3853"
        transform="matrix(0.6151839,0,0,0.6151839,535.72276,-437.67613)">
@@ -1914,6 +1789,260 @@
            style="fill:none;stroke:#868686;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            sodipodi:nodetypes="cc" />
       </g>
+    </g>
+    <g
+       id="g1389"
+       transform="translate(286)">
+      <g
+         id="g1387">
+        <g
+           id="g1605">
+          <g
+             id="g1335">
+            <ellipse
+               ry="25.508745"
+               rx="31.533844"
+               cy="215.82686"
+               cx="953.71619"
+               id="ellipse1307"
+               style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.18319;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+            <text
+               id="text1311"
+               y="228.03925"
+               x="937.46234"
+               style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+               xml:space="preserve"><tspan
+                 id="tspan1309"
+                 y="228.03925"
+                 x="937.46234"
+                 sodipodi:role="line"
+                 style="stroke-width:0.821585">Ni</tspan></text>
+            <ellipse
+               style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.5722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               id="ellipse1315"
+               cx="1106.9537"
+               cy="215.82683"
+               rx="44.109123"
+               ry="25.31424" />
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+               x="1091.9257"
+               y="227.43098"
+               id="text1319"><tspan
+                 sodipodi:role="line"
+                 x="1091.9257"
+                 y="227.43098"
+                 id="tspan1317"
+                 style="stroke-width:0.821585">O</tspan></text>
+            <path
+               inkscape:connector-curvature="0"
+               id="path1325"
+               d="m 986.38744,216.06294 h 73.94266"
+               style="fill:none;stroke:#818181;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+               x="928.38727"
+               y="173.19653"
+               id="text1333"><tspan
+                 sodipodi:role="line"
+                 id="tspan1331"
+                 x="928.38727"
+                 y="173.19653">Direct effect</tspan></text>
+          </g>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+             x="1091.4143"
+             y="353.37949"
+             id="text1339"><tspan
+               sodipodi:role="line"
+               x="1091.4143"
+               y="353.37949"
+               id="tspan1337"
+               style="stroke-width:0.821585">O</tspan></text>
+          <ellipse
+             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.18319;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="ellipse1341"
+             cx="953.71619"
+             cy="341.82687"
+             rx="31.533844"
+             ry="25.508745" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+             x="937.46234"
+             y="354.03925"
+             id="text1345"><tspan
+               sodipodi:role="line"
+               x="937.46234"
+               y="354.03925"
+               id="tspan1343"
+               style="stroke-width:0.821585">Ni</tspan></text>
+          <ellipse
+             ry="25.31424"
+             rx="44.109123"
+             cy="341.82684"
+             cx="1106.9536"
+             id="ellipse1349"
+             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.5722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             style="fill:none;stroke:#818181;stroke-width:2.46476;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:7.39427, 2.46476;stroke-dashoffset:0;stroke-opacity:1"
+             d="m 986.38743,342.06294 h 73.94267"
+             id="path1353"
+             inkscape:connector-curvature="0" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+             x="930.15869"
+             y="302.28223"
+             id="text1359"><tspan
+               sodipodi:role="line"
+               id="tspan1357"
+               x="930.15869"
+               y="302.28223">Ambiguous</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+             x="1091.2803"
+             y="482.54462"
+             id="text1365"><tspan
+               sodipodi:role="line"
+               x="1091.2803"
+               y="482.54462"
+               id="tspan1363"
+               style="stroke-width:0.821585">O</tspan></text>
+          <ellipse
+             ry="25.349215"
+             rx="31.336632"
+             cy="471.42346"
+             cx="953.27509"
+             id="ellipse1367"
+             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.16954;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <text
+             id="text1371"
+             y="483.55945"
+             x="937.12292"
+             style="font-style:normal;font-weight:normal;font-size:32.6579px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.816447"
+             xml:space="preserve"><tspan
+               id="tspan1369"
+               y="483.55945"
+               x="937.12292"
+               sodipodi:role="line"
+               style="stroke-width:0.816447">Ni</tspan></text>
+          <ellipse
+             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.55612;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="ellipse1375"
+             cx="1105.5542"
+             cy="471.42343"
+             rx="43.833267"
+             ry="25.155926" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+             x="929.24445"
+             y="432.28226"
+             id="text1383"><tspan
+               sodipodi:role="line"
+               id="tspan1381"
+               x="929.24445"
+               y="432.28226">No effect</tspan></text>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1755"
+       transform="translate(169.4558,126.3069)">
+      <ellipse
+         ry="25.508745"
+         rx="31.533844"
+         cy="215.82686"
+         cx="953.71619"
+         id="ellipse1749"
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.18319;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text1753"
+         y="228.03925"
+         x="937.46234"
+         style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+         xml:space="preserve"><tspan
+           id="tspan1751"
+           y="228.03925"
+           x="937.46234"
+           sodipodi:role="line"
+           style="stroke-width:0.821585">Ni</tspan></text>
+    </g>
+    <g
+       id="g1763"
+       transform="translate(-135.45975,125.18711)">
+      <ellipse
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.5722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse1757"
+         cx="1106.9537"
+         cy="215.82683"
+         rx="44.109123"
+         ry="25.31424" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+         x="1094.931"
+         y="226.79861"
+         id="text1761"><tspan
+           sodipodi:role="line"
+           x="1094.931"
+           y="226.79861"
+           id="tspan1759"
+           style="stroke-width:0.821585">E</tspan></text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path1765"
+       d="m 1016.3875,342.06294 h 73.9426"
+       style="fill:none;stroke:#818181;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6,3;stroke-opacity:1;stroke-dashoffset:0" />
+    <g
+       id="g1773"
+       transform="translate(169.45584,256.3069)">
+      <ellipse
+         ry="25.508745"
+         rx="31.533844"
+         cy="215.82686"
+         cx="953.71619"
+         id="ellipse1767"
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.18319;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text1771"
+         y="228.03925"
+         x="937.46234"
+         style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+         xml:space="preserve"><tspan
+           id="tspan1769"
+           y="228.03925"
+           x="937.46234"
+           sodipodi:role="line"
+           style="stroke-width:0.821585">Ni</tspan></text>
+    </g>
+    <g
+       id="g1781"
+       transform="translate(-135.45971,255.18711)">
+      <ellipse
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.5722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse1775"
+         cx="1106.9537"
+         cy="215.82683"
+         rx="44.109123"
+         ry="25.31424" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:32.8634px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.821585"
+         x="1094.931"
+         y="226.79861"
+         id="text1779"><tspan
+           sodipodi:role="line"
+           x="1094.931"
+           y="226.79861"
+           id="tspan1777"
+           style="stroke-width:0.821585">E</tspan></text>
     </g>
   </g>
 </svg>
