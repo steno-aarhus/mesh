@@ -92,7 +92,7 @@ and HbA1c.
 
 **Methods**:
 
-- Cross-sectional analysis of UK Biobank: n=367,838,
+- Cross-sectional analysis of UK Biobank (Application ID 47673): n=367,838,
 without prevalent diabetes cases.
 - Applied causal structure learning algorithm NetCoupler
 (R package at [github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)),
