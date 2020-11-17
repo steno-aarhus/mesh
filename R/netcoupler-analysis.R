@@ -24,11 +24,11 @@ analyze_nc_outcome <- function(.tbl, .network) {
         )
 }
 
-analyze_nc_exposure <- function(.tbl, .network, .stature_var) {
+analyze_nc_exposure <- function(.tbl, .network, .exp_var) {
     .tbl %>%
         NetCoupler::nc_exposure_estimates(
             NetCoupler::as_edge_tbl(.network),
-            .exposure = .stature_var,
+            .exposure = .exp_var,
             .adjustment_vars = c("age", "sex", "waist_circumference"),
             .model_function = lm
         )

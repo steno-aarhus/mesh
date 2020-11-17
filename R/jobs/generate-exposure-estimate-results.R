@@ -30,12 +30,12 @@ process_data <- function(.tbl) {
         NetCoupler::nc_standardize(NetCoupler::starts_with("mtb_"))
 }
 
-analyze_data <- function(.tbl, .network, .stature_var) {
+analyze_data <- function(.tbl, .network, .exp_var) {
     # pb$tick()
     analyze_nc_exposure(
         .tbl = .tbl,
         .network = .network,
-        .stature_var = .stature_var
+        .exp_var = .exp_var
     )
 }
 
@@ -53,7 +53,7 @@ for (var in c("standing_height",
               "leg_length",
               "leg_height_ratio")) {
     exposure_estimate_results[var] <-
-        future_map2_dfr(split_data, network_results, analyze_data, .stature_var = var,
+        future_map2_dfr(split_data, network_results, analyze_data, .exp_var = var,
                         .id = "model_run_number")
 }
 
