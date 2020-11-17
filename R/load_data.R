@@ -20,10 +20,20 @@
 #' names(checking)
 load_data <- function() {
     ukb_project_data <- vroom(project_data_filename,
-          col_types = cols(
+          col_types = cols_only(
               eid = col_double(),
               sex_f31_0_0 = col_character(),
+              breastfed_as_a_baby_f1677_0_0 = col_character(),
+              maternal_smoking_around_birth_f1787_0_0 = col_character(),
               year_of_birth_f34_0_0 = col_double(),
+              birth_weight_f20022_0_0 = col_double(),
+              felt_hated_by_family_member_as_a_child_f20487_0_0 = col_character(),
+              physically_abused_by_family_as_a_child_f20488_0_0 = col_character(),
+              felt_loved_as_a_child_f20489_0_0 = col_character(),
+              sexually_molested_as_a_child_f20490_0_0 = col_character(),
+              someone_to_take_to_doctor_when_needed_as_a_child_f20491_0_0 = col_character(),
+              ethnic_background_f21000_0_0 = col_character(),
+              basal_metabolic_rate_f23105_0_0 = col_double(),
               waist_circumference_f48_0_0 = col_double(),
               hip_circumference_f49_0_0 = col_double(),
               standing_height_f50_0_0 = col_double(),
@@ -61,7 +71,7 @@ load_data <- function() {
           )
     )
 
-    ukb_project_data %>%
+    ukb_project_data <- ukb_project_data %>%
         mutate(
             diastolic_blood_pressure = rowMeans(
                 select(
@@ -109,19 +119,46 @@ load_data <- function() {
             lipoprotein_a_f30790_0_0,
             triglycerides_f30870_0_0,
             t2dm_status_0_0,
-            age_of_t2dm_diagnosis_0_0
+            age_of_t2dm_diagnosis_0_0,
+            breastfed_as_a_baby_f1677_0_0,
+            maternal_smoking_around_birth_f1787_0_0,
+            year_of_birth_f34_0_0,
+            birth_weight_f20022_0_0,
+            felt_hated_by_family_member_as_a_child_f20487_0_0,
+            physically_abused_by_family_as_a_child_f20488_0_0,
+            felt_loved_as_a_child_f20489_0_0,
+            sexually_molested_as_a_child_f20490_0_0,
+            someone_to_take_to_doctor_when_needed_as_a_child_f20491_0_0,
+            ethnic_background_f21000_0_0,
+            basal_metabolic_rate_f23105_0_0,
         ) %>%
-        rename_all(.tidy_up_column_names) %>%
-        rename(
-            waist_circumference = mtb_waist_circumference,
-            body_mass_index = mtb_body_mass_index,
-            sex = mtb_sex,
-            age = mtb_age,
-            t2dm_status = mtb_t2dm_status,
-            age_of_t2dm_diagnosis = mtb_age_of_t2dm_diagnosis
-        ) %>%
-        rename_at(vars(contains("length"), contains("height")),
-                  ~ stringr::str_remove(., "^mtb_"))
+        rename_with(.tidy_up_column_names) %>%
+        rename_with(
+            ~ str_remove(.x, "^mtb_"),
+            c(
+                mtb_breastfed_as_a_baby,
+                mtb_maternal_smoking_around_birth,
+                mtb_year_of_birth,
+                mtb_birth_weight,
+                mtb_felt_hated_by_family_member_as_a_child,
+                mtb_physically_abused_by_family_as_a_child,
+                mtb_felt_loved_as_a_child,
+                mtb_sexually_molested_as_a_child,
+                mtb_someone_to_take_to_doctor_when_needed_as_a_child,
+                mtb_ethnic_background,
+                mtb_basal_metabolic_rate,
+                mtb_waist_circumference,
+                mtb_body_mass_index,
+                mtb_sex,
+                mtb_age,
+                mtb_t2dm_status,
+                mtb_age_of_t2dm_diagnosis,
+                contains("length"), contains("height")
+            )
+        )
+
+    if (interactive()) beepr::beep(4)
+    return(ukb_project_data)
 }
 
 .tidy_up_column_names <- function(x) {
