@@ -1,9 +1,0 @@
-devtools::load_all()
-generate_poster_pdf(
-    here::here("doc/poster.Rmd"),
-    here::here("doc/poster.pdf")
-)
-generate_poster_html(
-    here::here("doc/poster.Rmd"),
-    here::here("doc/poster.html")
-)
