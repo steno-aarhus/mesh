@@ -1,6 +1,7 @@
 
 # Run this to get a variable list to use in `col_types` argument of vroom.
 initial_import_for_var_list_specs <- function() {
+    # TODO: Check that raw_data_filename object/file exists, otherwise use sim data
     ukb_data <- vroom::vroom(raw_data_filename,
                              # Obtained by using `vroom::spec()` on a smaller
                              # subset of the data to read faster.
@@ -12,6 +13,7 @@ initial_import_for_var_list_specs <- function() {
 }
 
 import_data_with_specific_columns <- function() {
+    # TODO: Check that raw_data_filename object/file exists, otherwise use sim data
     ukbiobank_df <- vroom(
         raw_data_filename,
         # Obtained by using `initial_import_for_var_list_specs()` and types are edited.
