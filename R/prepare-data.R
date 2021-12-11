@@ -1,10 +1,8 @@
 
-prepare_data_for_netcoupler_analysis <- function() {
-    # TODO: Update this comment below.
-    # load_data_as_job() for load_data() if necessary.
-    project_data <- load_data() %>%
-        rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
-        select(
+prepare_data_for_netcoupler_analysis <- function(file_path) {
+    project_data <- load_data(file_path) %>%
+        dplyr::rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
+        dplyr::select(
             # More than 25% missing for these variables.
             -mtb_microalbumin_in_urine,
             -mtb_lipoprotein_a,
@@ -18,11 +16,11 @@ prepare_data_for_netcoupler_analysis <- function() {
             -mtb_creatinine,
             -mtb_creatinine_enzymatic_in_urine
         ) %>%
-        mutate(leg_height_ratio = leg_height_ratio * 100)
+        dplyr::mutate(leg_height_ratio = leg_height_ratio * 100)
 
     project_data_nc <- project_data %>%
-        select(-age_of_t2dm_diagnosis) %>%
-        mutate(t2dm_status = if_else(is.na(t2dm_status), FALSE, t2dm_status))
+        dplyr::select(-age_of_t2dm_diagnosis) %>%
+        dplyr::mutate(t2dm_status = dplyr::if_else(is.na(t2dm_status), FALSE, t2dm_status))
 
     rsample::initial_split(project_data_nc)
 }
