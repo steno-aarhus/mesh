@@ -3,9 +3,9 @@ analyze_nc_standardize_mtb_vars <- function(.tbl) {
     .tbl %>%
         dplyr::mutate(sex_number = as.numeric(as.factor(sex))) %>%
         NetCoupler::nc_standardize(
-            .vars = NetCoupler::starts_with("mtb_"),
+            cols = NetCoupler::starts_with("mtb_"),
             # TODO: Compare with BMI
-            .regressed_on = c("age", "sex_number", "waist_circumference")
+            regressed_on = c("age", "sex_number", "waist_circumference")
         )
 }
 
@@ -16,7 +16,7 @@ analyze_nc_network <- function(.tbl) {
 
 analyze_nc_outcome <- function(.tbl, .network) {
     .tbl %>%
-        NetCoupler::nc_outcome_estimates(
+        NetCoupler::nc_estimate_outcome_links(
             NetCoupler::as_edge_tbl(.network),
             .outcome = "hba1c",
             .adjustment_vars = c("age", "sex", "waist_circumference"),
