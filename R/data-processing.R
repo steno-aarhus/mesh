@@ -658,7 +658,7 @@ calc_t2dm_status <- function(.tbl) {
                age_of_t2dm_diagnosis_0_0 = interpolated_age_of_participant_when_noncancer_illness_first_diagnosed) %>%
         # Convert illness variables to either with or without type 2 diabetes
         # (code for t2dm = 1223)
-        mutate(t2dm_status_0_0 = if_else(illness_code == 1223, TRUE, FALSE)) %>%
+        mutate(t2dm_status_0_0 = illness_code == 1223) %>%
         dplyr::filter(t2dm_status_0_0) %>%
         # To confirm no duplicate eid
         assertr::assert(assertr::is_uniq, eid) %>%
