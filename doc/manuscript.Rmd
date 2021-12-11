@@ -11,13 +11,6 @@ library(rsample)
 set.seed(4125612)
 ```
 
-```{r load-data}
-proj_data <- prepare_data_for_netcoupler_analysis()
-proj_data_cv <- proj_data %>%
-    training() %>%
-    create_cv_splits()
-```
-
 ```{r make-network}
 # network_results[[1]]
 calc_network_weights <- function(.tbl, .graph) {

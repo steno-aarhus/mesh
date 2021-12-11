@@ -1,0 +1,173 @@
+---
+title: "Target Markdown"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+Target Markdown is a powerful R Markdown interface for reproducible analysis
+pipelines, and the chapter at https://books.ropensci.org/targets/markdown.html
+walks through it in detail. 
+
+# Packages
+
+The example requires several R packages that can be installed using the remotes package:
+
+```{r install-dependencies, eval=FALSE}
+install.packages("remotes")
+remotes::install_deps()
+```
+
+# Setup
+
+If you are using old versions of `targets` (<= 0.7.0) and/or `knitr` (<= 1.33),
+you will need to load the `targets` package in the R Markdown document in order
+for Target Markdown code chunks to work.
+
+Near the top of the document, you may also wish to remove the `_targets_r`
+directory previously written by non-interactive runs of the report. Otherwise,
+your pipeline may contain superfluous targets.
+
+```{r}
+library(targets)
+tar_unscript()
+
+# Use this function to delete target's entire cache. Is a hard reset.
+# tar_destroy()
+```
+
+# Globals
+
+We first define some global options/functions common to all targets.
+
+```{targets example-globals, tar_globals = TRUE}
+options(tidyverse.quiet = TRUE)
+library(tidyverse)
+pkgs_to_load <- desc::desc_get_deps() %>% 
+    filter(type == "Imports") %>% 
+    pull(package)
+# Get and set packages that pipeline depends on.
+tar_option_set(packages = pkgs_to_load)
+here::here("R") %>% 
+    fs::dir_ls(glob = "*.R") %>% 
+    walk(source)
+```
+
+# Targets
+
+Initial processing of the UK Biobank to get into the necessary state needed for
+this project. The end goal is to save the dataset at the storage location.
+
+```{r, eval=FALSE}
+# Use for wrangling and pre-preparing the UK Biobank dataset:
+# column_specs <- initial_import_for_var_list_specs()
+
+# Run this to pre-preparing the datasets:
+# ukb_data_raw <- import_data_with_specific_columns()
+
+# But better to run as a job first:
+# run_job_loading_raw()
+
+# Then run the wrangling function:
+# check_only <- wrangle_ukb_data()
+
+# But really, this function is used to save the dataset to its location:
+# wrangle_ukb_data(.save = TRUE)
+```
+
+Next we need to process the dataset for exact use in this project and load it into
+the environment. We don't want to save this dataset, since it is already in its
+remote location.
+
+```{targets data_file_path}
+tar_target(
+    name = data_file_path,
+    command = check_if_data_exists(),
+    format = "file"
+)
+```
+
+```{targets project-data}
+tar_target(
+    name = project_data, 
+    command = prepare_data_for_netcoupler_analysis(data_file_path)
+)
+```
+
+We also want to create some cross-validation splits to eventually check the
+results against.
+
+```{targets project-data-cv}
+tar_target(
+    name = project_data_cv, 
+    command = project_data %>% 
+        rsample::training() %>% 
+        create_cv_splits()
+)
+```
+
+Next is to set up the 
+
+TODO:
+
+- Create CONSORT diagram (https://tgerke.github.io/ggconsort/)
+- Descriptive statistics, by sex/gender (including sample size) (skimr?)
+- Update confounders based on Christina's paper
+    - Smoking? Physical activity? Ethnic background, education, income, anthropometrics?
+    - Make DAG.
+- Plot of all metabolic variables
+- Network results by sex/gender
+- (In manuscript Rmd instead of targets?) Plot of network results by sex/gender
+as well as total.
+- Exposure and outcome link results by sex/gender
+- (In manuscript Rmd instead of targets?) Plot of linkage results by sex/gender
+as well as total.
+- List of variables and their meta data (from UK Biobank)
+
+```{targets network-results}
+tar_targets(
+    name = network_results,
+    # Generate network results as rda file in data/
+    command = generate_network_results(project_data_cv$splits),
+    format = "file"
+)
+```
+
+And eventually make the manuscript:
+
+```{r}
+# tar_render(report, "report.Rmd")
+```
+
+# Pipeline
+
+If you ran all the `{targets}` chunks in non-interactive mode, then your R scripts are set up to run the pipeline.
+
+```{r}
+tar_make()
+# Don't need or want the project data in the target cache.
+tar_delete(starts_with("project_data"))
+```
+
+# Output
+
+You can retrieve results from the `_targets/` data store using `tar_read()` or `tar_load()`.
+
+```{r, message = FALSE}
+library(biglm)
+tar_read(fit)
+```
+
+```{r}
+tar_read(hist)
+```
+
+The `targets` dependency graph helps your readers understand the steps of your pipeline at a high level.
+
+```{r}
+tar_visnetwork()
+```
+
+At this point, you can go back and run `{targets}` chunks in interactive mode without interfering with the code or data of the non-interactive pipeline.
