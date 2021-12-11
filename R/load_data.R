@@ -18,8 +18,8 @@
 #'
 #' # Trim down variable list even more.
 #' names(checking)
-load_data <- function() {
-    ukb_project_data <- vroom(project_data_filename,
+load_data <- function(file_path) {
+    ukb_project_data <- vroom(file_path,
           col_types = cols_only(
               eid = col_double(),
               sex_f31_0_0 = col_character(),
