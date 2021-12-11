@@ -24,19 +24,20 @@ Imports:
     ggraph,
     tidygraph,
     rstudioapi,
-    svglite,
     rsample,
     furrr,
     progress,
-    postr (>= 0.0.1.9000),
-    qrencoder,
-    lwj (>= 0.0.0.9000),
     clipr,
-    beepr
+    beepr,
+    desc,
+    here,
+    fs,
+    purrr,
+    targets,
+    usethis
 RoxygenNote: 7.1.1
 Remotes: 
-    NetCoupler/NetCoupler,
-    lwjohnst86/postr
+    NetCoupler/NetCoupler
 Depends: 
     R (>= 2.10),
     tidyverse
