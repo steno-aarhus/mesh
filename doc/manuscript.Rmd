@@ -106,9 +106,12 @@ ggsave(here::here("doc/images/netcoupler-results.svg"), estimation_plot,
 # Title page
 
 Title:
+The metabolic pathways between components of stature and HbA1c in the UK Biobank
 
 <!-- First, middle initial, last, highest academic degree -->
 Authors:
+
+Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C Dahm, Daniel R Witte
 
 <!-- During time of study. -->
 Affiliation:
@@ -122,10 +125,6 @@ Corresponding author:
 - Email:
 
 # Abstract
-**The metabolic pathways between components of stature and HbA1c: A causal
-structure learning approach in the UK Biobank**
-
-Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C Dahm, Daniel R Witte
 
 **Background and aims**:
 Shorter relative adult leg length (LL), a marker of adverse growth conditions
@@ -168,14 +167,6 @@ relatively longer legs and a taller stature may confer some protection against
 dysregulation of glucose metabolism and possibly type 2 diabetes (from higher
 HbA1c) potentially through preserved liver function (through GGT and ALT) and
 through generally lower inflammation (via CRP).
-
-Objective:
-
-Research Design and Methods:
-
-Results:
-
-Conclusions:
 
 # Introduction 
 
