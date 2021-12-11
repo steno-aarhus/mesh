@@ -168,3 +168,11 @@ load_data <- function(file_path) {
         # Add mtb prefix to make it easier to select metabolic variables
         stringr::str_replace("^", "mtb_")
 }
+
+check_if_data_exists <- function() {
+    if (exists("project_data_filename")) {
+        return(project_data_filename)
+    } else {
+        rlang::abort("Data is not accessible. Are you connected to/on the server?")
+    }
+}
