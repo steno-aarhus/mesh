@@ -61,20 +61,21 @@ Initial processing of the UK Biobank to get into the necessary state needed for
 this project. The end goal is to save the dataset at the storage location.
 
 ```{r, eval=FALSE}
-# Use for wrangling and pre-preparing the UK Biobank dataset:
-# column_specs <- initial_import_for_var_list_specs()
+# Use to copy variable list for the function to wrangle and pre-prepare the UK
+# Biobank dataset.:
+# column_specs <- initial_import_to_copy_variable_specs()
 
-# Run this to pre-preparing the datasets:
-# ukb_data_raw <- import_data_with_specific_columns()
+# Run this to pre-prepare the datasets:
+# ukb_data_raw <- ukb_import_with_specific_columns()
 
 # But better to run as a job first:
-# run_job_loading_raw()
+# run_job_importing_raw()
 
 # Then run the wrangling function:
-# check_only <- wrangle_ukb_data()
+# wrangled_data <- ukb_wrangle_and_save(ukb_data_raw)
 
 # But really, this function is used to save the dataset to its location:
-# wrangle_ukb_data(.save = TRUE)
+# ukb_wrangle_and_save(ukb_data_raw, .save = TRUE)
 ```
 
 Next we need to process the dataset for exact use in this project and load it into
@@ -89,11 +90,44 @@ tar_target(
 )
 ```
 
+Let's import the data from the storage location, without removing exclusions.
+
+```{targets project-data-pre-exclusions}
+tar_target(
+    name = project_data_pre_exclusions, 
+    command = ukb_import_project_data(data_file_path)
+)
+```
+
+Since we want to create a CONSORT diagram of who we removed from the original
+UK Biobank dataset, we send the consort data into the plot function.
+
+```{targets consort-diagram}
+tar_target(
+    name = consort_diagram,
+    command = project_data_pre_exclusions %>%
+        ukb_remove_exclusions(for_consort_diagram = TRUE) %>%
+        plot_consort_diagram(save_plot = TRUE),
+    format = "file"
+)
+```
+
+Now we can remove participants based on the exclusion criteria and other removals
+that we found during exploration.
+
 ```{targets project-data}
 tar_target(
-    name = project_data, 
-    command = prepare_data_for_netcoupler_analysis(data_file_path)
+    name = project_data,
+    command = ukb_remove_exclusions(project_data_pre_exclusions)
 )
+```
+
+
+```{r}
+library(tidyverse)
+library(skimr)
+
+# project_data <- prepare_data_for_netcoupler_analysis(check_if_data_exists())
 ```
 
 We also want to create some cross-validation splits to eventually check the
@@ -112,7 +146,6 @@ Next is to set up the
 
 TODO:
 
-- Create CONSORT diagram (https://tgerke.github.io/ggconsort/)
 - Descriptive statistics, by sex/gender (including sample size) (skimr?)
 - Update confounders based on Christina's paper
     - Smoking? Physical activity? Ethnic background, education, income, anthropometrics?
