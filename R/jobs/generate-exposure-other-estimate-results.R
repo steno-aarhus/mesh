@@ -11,8 +11,8 @@ set.seed(4125612)
 
 message("Preparing dataset for analysis.")
 
-# load_data_as_job() for load_data() if necessary.
-project_data <- load_data() %>%
+# run_job_import_project_data() for ukb_import_project_data() if necessary.
+project_data <- ukb_import_project_data() %>%
     rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
     select(
         # More than 25% missing for these variables.-mtb_microalbumin_in_urine,

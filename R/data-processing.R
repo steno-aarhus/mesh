@@ -1,8 +1,18 @@
 
+# Checking if connection to data exists -----------------------------------
+
+check_if_data_exists <- function() {
+    if (exists("project_data_filename")) {
+        return(project_data_filename)
+    } else {
+        rlang::abort("Data is not accessible. Are you connected to/on the server?")
+    }
+}
+
 # Initial importing of the UK Biobank dataset -----------------------------
 
 # Run this to get a variable list to use in `col_types` argument of vroom.
-initial_import_for_var_list_specs <- function() {
+initial_import_to_copy_variable_specs <- function() {
     # TODO: Check that raw_data_filename object/file exists, otherwise use sim data
     ukb_data <- vroom::vroom(raw_data_filename,
                              # Obtained by using `vroom::spec()` on a smaller
@@ -15,11 +25,12 @@ initial_import_for_var_list_specs <- function() {
     return(invisible(specs))
 }
 
-import_data_with_specific_columns <- function() {
+# Run this to get the dataset with the specific columns from UK Biobank.
+ukb_import_with_specific_columns <- function() {
     # TODO: Check that raw_data_filename object/file exists, otherwise use sim data
     ukbiobank_df <- vroom(
         raw_data_filename,
-        # Obtained by using `initial_import_for_var_list_specs()` and types are edited.
+        # Obtained by using `initial_import_to_copy_variable_specs()` and types are edited.
         col_types = cols_only(
             eid = col_double(),
             sex_f31_0_0 = col_character(),
@@ -619,54 +630,6 @@ import_data_with_specific_columns <- function() {
     return(ukbiobank_df)
 }
 
-drop_empty_or_only_false_cols <- function(x) {
-    if (is.character(x) | inherits(x, "Date")) {
-        TRUE
-    } else {
-        sum(x, na.rm = TRUE) != 0
-    }
-}
-
-calc_leg_measures <- function(.tbl) {
-    .tbl %>%
-        mutate(
-            leg_length_0_0 = standing_height_f50_0_0 - sitting_height_f20015_0_0,
-            leg_height_ratio_0_0 = leg_length_0_0 / standing_height_f50_0_0
-        ) %>%
-        # Drop too large or too small values
-        # TODO: Confirm this in EDA Rmd file or something.
-        dplyr::filter(leg_length_0_0 < 120, leg_length_0_0 > 60)
-}
-
-calc_t2dm_status <- function(.tbl) {
-    # Convert to long form to extract age of diagnosis and t2dm illness.
-    longer_data <- .tbl %>%
-        select(eid,
-               matches("^(noncancer_illness|interpolated_age).*_0_[0-9]+$")) %>%
-        tidyr::pivot_longer(
-            cols = -eid,
-            names_to = c("Variables", "Items"),
-            names_pattern = "(^.*)_f[0-9]+_([0-9]_[0-9]+$)",
-            values_to = "Values"
-        ) %>%
-        dplyr::filter(!is.na(Values))
-
-    # Convert to wide form so age and illness match up.
-    wider_data <- longer_data %>%
-        tidyr::pivot_wider(names_from = Variables, values_from = Values) %>%
-        rename(illness_code = noncancer_illness_code_selfreported,
-               age_of_t2dm_diagnosis_0_0 = interpolated_age_of_participant_when_noncancer_illness_first_diagnosed) %>%
-        # Convert illness variables to either with or without type 2 diabetes
-        # (code for t2dm = 1223)
-        mutate(t2dm_status_0_0 = illness_code == 1223) %>%
-        dplyr::filter(t2dm_status_0_0) %>%
-        # To confirm no duplicate eid
-        assertr::assert(assertr::is_uniq, eid) %>%
-        select(eid, t2dm_status_0_0, age_of_t2dm_diagnosis_0_0)
-
-    left_join(.tbl, wider_data, by = "eid")
-}
-
 #' Wrangle and prepare the loaded UK Biobank dataset.
 #'
 #' @param .save Optional. Save wrangled and trimmed down dataset to server.
@@ -675,39 +638,22 @@ calc_t2dm_status <- function(.tbl) {
 #'
 #' @examples
 #'
-#' ukb_prep <- wrangle_ukb_data()
-#' ukb_prep %>%
-#' count(t2dm_status_0_0)
-#' ukb_prep %>%
-#' View()
-#' skimr::skim(ukb_prep) %>%
-#' View()
-#' wrangle_ukb_data(.save = TRUE)
-wrangle_ukb_data <- function(.save = FALSE) {
+#' # Use run_job_loading_raw() function to start this job.
+#' # ukb_data_raw <- ukb_import_with_specific_columns()
+#' ukb_data_raw %>%
+#' ukb_wrangle_and_save(.save = TRUE)
+ukb_wrangle_and_save <- function(ukb_data_raw, .save = FALSE) {
     # The below code gets the data, but better to run a local job (in RStudio)
     # using the `R/jobs/loading-raw.R` file to load the dataset into the global
     # environment, *before* running this function.
-    # Use run_job_loading_raw() function to start this job.
-    # ukb_data_raw <- import_data_with_specific_columns()
 
     # Wrangle loaded ukb_data_raw.
     ukb_data_smaller <- ukb_data_raw %>%
-        # Filter out type 1 diabetes (code for t1dm = 1222)
-        filter_at(vars(matches("^noncancer_illness_")),
-                  all_vars(. != 1222 |
-                               is.na(.))) %>%
-        # Drop missing sitting heights
-        dplyr::filter(!is.na(sitting_height_f20015_0_0)) %>%
-        # Drop too big or too small values
-        dplyr::filter(
-            standing_height_f50_0_0 > 148,
-            hip_circumference_f49_0_0 > 20,
-            body_mass_index_bmi_f21001_0_0 > 18.5
-        ) %>%
         calc_leg_measures() %>%
         calc_t2dm_status()
 
     ukb_data_smallest <- ukb_data_smaller %>%
+        # TODO: Replace with select(where(drop_empty_or_only_false_cols))?
         select_if(drop_empty_or_only_false_cols) %>%
         # Keep only first visit variables
         select(
@@ -718,15 +664,16 @@ wrangle_ukb_data <- function(.save = FALSE) {
         )
 
     if (.save) {
-        vroom_write(ukb_data_smallest, project_data_filename, delim = ",")
+        if (!exists("project_data_filename"))
+            stop("Can't find the variable that contains the location to the data.")
+        vroom::vroom_write(ukb_data_smallest, project_data_filename, delim = ",")
     }
     ukb_data_smallest
 }
 
+# Importing project data --------------------------------------------------
 
-# Load data ---------------------------------------------------------------
-
-#' Loads the data from the original source.
+#' Imports the project data from the original source.
 #'
 #' This function loads the main dataset from the server. Note, this data is not
 #' stored outside of the server (i.e. not saved in this repository) and is only
@@ -737,7 +684,7 @@ wrangle_ukb_data <- function(.save = FALSE) {
 #' @examples
 #'
 #' # To run basic checks on the data.
-#' checking <- load_data()
+#' checking <- ukb_import_project_data()
 #'
 #' # Check summary of dataset
 #' skimr::skim(checking)
@@ -746,7 +693,7 @@ wrangle_ukb_data <- function(.save = FALSE) {
 #'
 #' # Trim down variable list even more.
 #' names(checking)
-load_data <- function(file_path) {
+ukb_import_project_data <- function(file_path) {
     ukb_project_data <- vroom(file_path,
           col_types = cols_only(
               eid = col_double(),
@@ -801,25 +748,16 @@ load_data <- function(file_path) {
 
     ukb_project_data <- ukb_project_data %>%
         mutate(
-            diastolic_blood_pressure = rowMeans(
-                select(
-                    .,
-                    diastolic_blood_pressure_automated_reading_f4079_0_0,
-                    diastolic_blood_pressure_automated_reading_f4079_0_1
-                ),
-                na.rm = TRUE
-            ),
-            systolic_blood_pressure = rowMeans(
-                select(
-                    .,
-                    systolic_blood_pressure_automated_reading_f4080_0_0,
-                    systolic_blood_pressure_automated_reading_f4080_0_1
-                ),
-                na.rm = TRUE
-            )
+            diastolic_blood_pressure = rowMeans(across(matches(
+                "^diastolic.*_0_[01]$"
+            )), na.rm = TRUE),
+            systolic_blood_pressure = rowMeans(across(matches(
+                "^systolic.*_0_[01]$"
+            )), na.rm = TRUE)
         ) %>%
         select(
             body_mass_index = body_mass_index_bmi_f21001_0_0,
+            hip_circumference_f49_0_0,
             waist_circumference_f48_0_0,
             sex_f31_0_0,
             standing_height_f50_0_0,
@@ -860,7 +798,7 @@ load_data <- function(file_path) {
             ethnic_background_f21000_0_0,
             basal_metabolic_rate_f23105_0_0,
         ) %>%
-        rename_with(.tidy_up_column_names) %>%
+        rename_with(tidy_up_column_names) %>%
         rename_with(
             ~ str_remove(.x, "^mtb_"),
             c(
@@ -877,6 +815,7 @@ load_data <- function(file_path) {
                 mtb_basal_metabolic_rate,
                 mtb_waist_circumference,
                 mtb_body_mass_index,
+                mtb_hip_circumference,
                 mtb_sex,
                 mtb_age,
                 mtb_t2dm_status,
@@ -889,38 +828,90 @@ load_data <- function(file_path) {
     return(ukb_project_data)
 }
 
-.tidy_up_column_names <- function(x) {
-    x %>%
-        stringr::str_remove("_0_0$") %>%
-        stringr::str_remove("_f[0-9]+$") %>%
-        # Add mtb prefix to make it easier to select metabolic variables
-        stringr::str_replace("^", "mtb_")
-}
 
-check_if_data_exists <- function() {
-    if (exists("project_data_filename")) {
-        return(project_data_filename)
+# Wrangling and filtering (also for CONSORT) ------------------------------
+
+#' Remove rows that fit exclusion criteria or for other reasons determined while
+#' exploring the data.
+#'
+#' @param data The UK Biobank data from `ukb_import_project_data()`.
+#' @param for_consort_diagram Logical, whether to output the data for ggconsort
+#'   or as a data frame.
+#'
+#' @return Outputs a dataframe or the ggconsort object.
+#'
+ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
+    exclusions <- data %>%
+        ggconsort::cohort_start("UK Biobank") %>%
+        ggconsort::cohort_define(
+            # Drop too big or too small values
+            # This is really tiny and could be children or some other health condition
+            too_small_height = dplyr::filter(.full, standing_height > 148),
+            # Too small hip circumference, could be health condition
+            too_small_hip = dplyr::filter(too_small_height, hip_circumference > 20),
+            # Don't want underweight people in population, could be health condition
+            too_small_bmi = dplyr::filter(too_small_hip, body_mass_index > 18.5),
+            # These are too large or too small to be realistic
+            too_large_or_small_legs = dplyr::filter(too_small_bmi,
+                                                    leg_length < 120,
+                                                    leg_length > 60),
+            # Nothing to drop.
+            # Drop missing sitting heights
+            # no_missing_sitting_height = dplyr::filter(
+            #     too_large_or_small_legs,
+            #     !is.na(sitting_height)
+            # ),
+            # # Filter out type 1 diabetes (code for t1dm = 1222)
+            # # I think this isn't necessary since we code for t2dm anyway, can't have both.
+            # remove_t1dm = no_missing_sitting_height %>%
+            #     filter(if_all(matches("^noncancer_illness_"),
+            #                   ~ .x != 1222 | is.na(.x)))
+
+            final_sample = too_large_or_small_legs,
+
+            # To include in CONSORT diagram
+            excluded = dplyr::anti_join(.full, final_sample, by = character()),
+            excluded_height = dplyr::anti_join(.full, too_small_height, by = character()),
+            excluded_hip = dplyr::anti_join(too_small_height, too_small_hip, by = character()),
+            excluded_bmi = dplyr::anti_join(too_small_hip, too_small_bmi, by = character()),
+            excluded_legs = dplyr::anti_join(too_small_bmi, too_large_or_small_legs, by = character()),
+            # excluded_sitting_height = anti_join(too_large_or_small_legs, no_missing_sitting_height)
+
+        ) %>%
+        ggconsort::cohort_label(
+            excluded = "Excluded from analysis",
+            excluded_height = "Height < 148 cm",
+            excluded_hip = "Hips < 20 cm",
+            excluded_bmi = "BMI < 18.5",
+            excluded_legs = "Legs > 120 cm or < 60 cm",
+            # excluded_sitting_height = "Missing sitting height",
+            final_sample = "Project analysis sample"
+        )
+
+    if (for_consort_diagram) {
+        return(exclusions)
     } else {
-        rlang::abort("Data is not accessible. Are you connected to/on the server?")
+        return(ggconsort::cohort_pull(exclusions, final_sample))
     }
 }
+
 
 # Prepare code for use in NetCoupler --------------------------------------
 
 prepare_data_for_netcoupler_analysis <- function(file_path) {
-    project_data <- load_data(file_path) %>%
+    project_data <- ukb_import_project_data(file_path) %>%
         dplyr::rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
         dplyr::select(
             # More than 25% missing for these variables.
             -mtb_microalbumin_in_urine,
             -mtb_lipoprotein_a,
-            # Glucose should probably not be in models with HbA1c as outcom
+            # Glucose should probably not be in models with HbA1c as outcome
             -mtb_glucose,
             # These aren't really "metabolic" variables
             -mtb_diastolic_blood_pressure,
             -mtb_systolic_blood_pressure,
             # Since these associate with muscle mass (which is associated with height)
-            # Actually, keep them in for verification against height
+            # Actually, keep them in for verification against height?
             -mtb_creatinine,
             -mtb_creatinine_enzymatic_in_urine
         ) %>%
@@ -933,8 +924,62 @@ prepare_data_for_netcoupler_analysis <- function(file_path) {
     rsample::initial_split(project_data_nc)
 }
 
+# Processing utilities ----------------------------------------------------
+
 create_cv_splits <- function(.training_data) {
     .training_data %>%
         rsample::mc_cv(prop = 0.10, times = 100)
 }
 
+drop_empty_or_only_false_cols <- function(x) {
+    if (is.character(x) | inherits(x, "Date")) {
+        TRUE
+    } else {
+        sum(x, na.rm = TRUE) != 0
+    }
+}
+
+calc_leg_measures <- function(.tbl) {
+    .tbl %>%
+        mutate(
+            leg_length_0_0 = standing_height_f50_0_0 - sitting_height_f20015_0_0,
+            leg_height_ratio_0_0 = leg_length_0_0 / standing_height_f50_0_0
+        )
+}
+
+calc_t2dm_status <- function(.tbl) {
+    # Convert to long form to extract age of diagnosis and t2dm illness.
+    longer_data <- .tbl %>%
+        select(eid,
+               matches("^(noncancer_illness|interpolated_age).*_0_[0-9]+$")) %>%
+        tidyr::pivot_longer(
+            cols = -eid,
+            names_to = c("Variables", "Items"),
+            names_pattern = "(^.*)_f[0-9]+_([0-9]_[0-9]+$)",
+            values_to = "Values"
+        ) %>%
+        dplyr::filter(!is.na(Values))
+
+    # Convert to wide form so age and illness match up.
+    wider_data <- longer_data %>%
+        tidyr::pivot_wider(names_from = Variables, values_from = Values) %>%
+        rename(illness_code = noncancer_illness_code_selfreported,
+               age_of_t2dm_diagnosis_0_0 = interpolated_age_of_participant_when_noncancer_illness_first_diagnosed) %>%
+        # Convert illness variables to either with or without type 2 diabetes
+        # (code for t2dm = 1223)
+        mutate(t2dm_status_0_0 = illness_code == 1223) %>%
+        dplyr::filter(t2dm_status_0_0) %>%
+        # To confirm no duplicate eid
+        assertr::assert(assertr::is_uniq, eid) %>%
+        select(eid, t2dm_status_0_0, age_of_t2dm_diagnosis_0_0)
+
+    left_join(.tbl, wider_data, by = "eid")
+}
+
+tidy_up_column_names <- function(x) {
+    x %>%
+        stringr::str_remove("_0_0$") %>%
+        stringr::str_remove("_f[0-9]+$") %>%
+        # Add mtb prefix to make it easier to select metabolic variables
+        stringr::str_replace("^", "mtb_")
+}

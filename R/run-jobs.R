@@ -9,19 +9,19 @@ run_generic_job <- function(.job_filename, .job_title, .export = "") {
 }
 
 # This is only necessary for slower computers.
-# On my computer `load_data()` on its own runs pretty fast.
-run_job_load_data <- function() {
+# On my computer `ukb_import_project_data()` on its own runs pretty fast.
+run_job_import_project_data <- function() {
     run_generic_job(
-        "loading-project-data.R",
-        "Load UK Biobank Project Data",
+        "importing-project-data.R",
+        "Import UK Biobank Project Data",
         "R_GlobalEnv"
     )
 }
 
-run_job_loading_raw <- function() {
+run_job_importing_raw <- function() {
     run_generic_job(
-        "loading-raw.R",
-        "Loading original raw UK Biobank data",
+        "importing-raw.R",
+        "Importing original raw UK Biobank data",
         "R_GlobalEnv"
     )
 }
