@@ -42,14 +42,14 @@ tar_unscript()
 
 We first define some global options/functions common to all targets.
 
-```{targets example-globals, tar_globals = TRUE}
+```{targets target-globals, tar_globals = TRUE}
 options(tidyverse.quiet = TRUE)
 library(tidyverse)
 pkgs_to_load <- desc::desc_get_deps() %>% 
     filter(type == "Imports") %>% 
     pull(package)
 # Get and set packages that pipeline depends on.
-tar_option_set(packages = pkgs_to_load)
+targets::tar_option_set(packages = pkgs_to_load)
 here::here("R") %>% 
     fs::dir_ls(glob = "*.R") %>% 
     walk(source)

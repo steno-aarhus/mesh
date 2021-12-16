@@ -756,6 +756,7 @@ ukb_import_project_data <- function(file_path) {
             )), na.rm = TRUE)
         ) %>%
         select(
+            eid,
             body_mass_index = body_mass_index_bmi_f21001_0_0,
             hip_circumference_f49_0_0,
             waist_circumference_f48_0_0,
@@ -802,6 +803,7 @@ ukb_import_project_data <- function(file_path) {
         rename_with(
             ~ str_remove(.x, "^mtb_"),
             c(
+                mtb_eid,
                 mtb_breastfed_as_a_baby,
                 mtb_maternal_smoking_around_birth,
                 mtb_year_of_birth,
@@ -870,11 +872,11 @@ ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
             final_sample = too_large_or_small_legs,
 
             # To include in CONSORT diagram
-            excluded = dplyr::anti_join(.full, final_sample, by = character()),
-            excluded_height = dplyr::anti_join(.full, too_small_height, by = character()),
-            excluded_hip = dplyr::anti_join(too_small_height, too_small_hip, by = character()),
-            excluded_bmi = dplyr::anti_join(too_small_hip, too_small_bmi, by = character()),
-            excluded_legs = dplyr::anti_join(too_small_bmi, too_large_or_small_legs, by = character()),
+            excluded = dplyr::anti_join(.full, final_sample, by = "eid"),
+            excluded_height = dplyr::anti_join(.full, too_small_height, by = "eid"),
+            excluded_hip = dplyr::anti_join(too_small_height, too_small_hip, by = "eid"),
+            excluded_bmi = dplyr::anti_join(too_small_hip, too_small_bmi, by = "eid"),
+            excluded_legs = dplyr::anti_join(too_small_bmi, too_large_or_small_legs, by = "eid"),
             # excluded_sitting_height = anti_join(too_large_or_small_legs, no_missing_sitting_height)
 
         ) %>%

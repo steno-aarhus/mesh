@@ -12,21 +12,21 @@
 plot_consort_diagram <- function(consort_object, save_plot = FALSE) {
     consort_diagram <- consort_object %>%
         ggconsort::consort_box_add("full", 0, 2,
-                                   ggconsort::cohort_count_adorn(exclusion_for_consort, .full)) %>%
+                                   ggconsort::cohort_count_adorn(consort_object, .full)) %>%
         ggconsort::consort_box_add(
             "exclusions",
             0.25,
             1,
             glue::glue(
-                '{ggconsort::cohort_count_adorn(exclusion_for_consort, excluded)}<br>
-                   • {ggconsort::cohort_count_adorn(exclusion_for_consort, excluded_height)}<br>
-                   • {ggconsort::cohort_count_adorn(exclusion_for_consort, excluded_hip)}<br>
-                   • {ggconsort::cohort_count_adorn(exclusion_for_consort, excluded_bmi)}<br>
-                   • {ggconsort::cohort_count_adorn(exclusion_for_consort, excluded_legs)}'
+                '{ggconsort::cohort_count_adorn(consort_object, excluded)}<br>
+                   • {ggconsort::cohort_count_adorn(consort_object, excluded_height)}<br>
+                   • {ggconsort::cohort_count_adorn(consort_object, excluded_hip)}<br>
+                   • {ggconsort::cohort_count_adorn(consort_object, excluded_bmi)}<br>
+                   • {ggconsort::cohort_count_adorn(consort_object, excluded_legs)}'
             )
         ) %>%
         ggconsort::consort_box_add("final", 0, 0,
-                        ggconsort::cohort_count_adorn(exclusion_for_consort, too_large_or_small_legs)) %>%
+                        ggconsort::cohort_count_adorn(consort_object, final_sample)) %>%
         ggconsort::consort_arrow_add(
             end = "exclusions",
             end_side = "left",
