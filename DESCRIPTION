@@ -34,10 +34,14 @@ Imports:
     fs,
     purrr,
     targets,
-    usethis
+    usethis,
+    ggconsort (>= 0.1.0),
+    cli,
+    skimr
 RoxygenNote: 7.1.1
 Remotes: 
-    NetCoupler/NetCoupler
+    NetCoupler/NetCoupler,
+    tgerke/ggconsort
 Depends: 
     R (>= 2.10),
     tidyverse
