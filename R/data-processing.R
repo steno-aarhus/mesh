@@ -905,11 +905,15 @@ ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
     }
 }
 
-
-# Prepare code for use in NetCoupler --------------------------------------
-
-prepare_data_for_netcoupler_analysis <- function(file_path) {
-    project_data <- ukb_import_project_data(file_path) %>%
+#' Wrangle and process the data for use in NetCoupler, plus split into training
+#' and testing sets.
+#'
+#' @param data The project data after removal of exclusions and general processing.
+#'
+#' @return Outputs an rsample split, with training and testing sets.
+#'
+ukb_wrangle_for_nc <- function(data) {
+    nc_project_data <- data %>%
         dplyr::rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
         dplyr::select(
             # More than 25% missing for these variables.
