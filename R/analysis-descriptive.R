@@ -1,4 +1,11 @@
 
+#' Descriptive statistics of the full dataset and by sex.
+#'
+#' @param data The final working sample.
+#'
+#' @return Outputs a list that is saved as an Rda file and returns a characters
+#'   string for targets to track.
+#'
 analysis_descriptive_statistics <- function(data) {
     descriptive_statistics <- list(
         full_study = skimr::skim(data),
