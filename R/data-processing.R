@@ -653,7 +653,7 @@ ukb_wrangle_and_save <- function(ukb_data_raw, .save = FALSE) {
     # Wrangle loaded ukb_data_raw.
     ukb_data_smaller <- ukb_data_raw %>%
         calc_leg_measures() %>%
-        calc_t2dm_status()
+        calc_dm_status()
 
     ukb_data_smallest <- ukb_data_smaller %>%
         # TODO: Replace with select(where(drop_empty_or_only_false_cols))?
@@ -742,6 +742,8 @@ ukb_import_project_data <- function(file_path) {
               triglycerides_f30870_0_0 = col_double(),
               leg_length_0_0 = col_double(),
               leg_height_ratio_0_0 = col_double(),
+              t1dm_status_0_0 = col_logical(),
+              age_of_t1dm_diagnosis_0_0 = col_double(),
               t2dm_status_0_0 = col_logical(),
               age_of_t2dm_diagnosis_0_0 = col_double(),
               diastolic_blood_pressure_automated_reading_f4079_0_1 = col_double(),
@@ -788,6 +790,8 @@ ukb_import_project_data <- function(file_path) {
             ldl_direct_f30780_0_0,
             lipoprotein_a_f30790_0_0,
             triglycerides_f30870_0_0,
+            t1dm_status_0_0,
+            age_of_t1dm_diagnosis_0_0,
             t2dm_status_0_0,
             age_of_t2dm_diagnosis_0_0,
             breastfed_as_a_baby_f1677_0_0,
@@ -823,6 +827,8 @@ ukb_import_project_data <- function(file_path) {
                 mtb_hip_circumference,
                 mtb_sex,
                 mtb_age,
+                mtb_t1dm_status,
+                mtb_age_of_t1dm_diagnosis,
                 mtb_t2dm_status,
                 mtb_age_of_t2dm_diagnosis,
                 contains("length"), contains("height")
@@ -833,8 +839,7 @@ ukb_import_project_data <- function(file_path) {
     return(ukb_project_data)
 }
 
-
-# Wrangling and filtering (also for CONSORT) ------------------------------
+# Wrangling, filtering, and preparing for other analyses ------------------
 
 #' Remove rows that fit exclusion criteria or for other reasons determined while
 #' exploring the data.
@@ -860,19 +865,17 @@ ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
             too_large_or_small_legs = dplyr::filter(too_small_bmi,
                                                     leg_length < 120,
                                                     leg_length > 60),
+            # Remove those with type 1 diabetes
+            remove_t1dm = dplyr::filter(too_large_or_small_legs, !t1dm_status | is.na(t1dm_status)),
+
             # Nothing to drop.
             # Drop missing sitting heights
             # no_missing_sitting_height = dplyr::filter(
             #     too_large_or_small_legs,
             #     !is.na(sitting_height)
             # ),
-            # # Filter out type 1 diabetes (code for t1dm = 1222)
-            # # I think this isn't necessary since we code for t2dm anyway, can't have both.
-            # remove_t1dm = no_missing_sitting_height %>%
-            #     filter(if_all(matches("^noncancer_illness_"),
-            #                   ~ .x != 1222 | is.na(.x)))
 
-            final_sample = too_large_or_small_legs,
+            final_sample = remove_t1dm,
 
             # To include in CONSORT diagram
             excluded = dplyr::anti_join(.full, final_sample, by = "eid"),
@@ -880,6 +883,7 @@ ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
             excluded_hip = dplyr::anti_join(too_small_height, too_small_hip, by = "eid"),
             excluded_bmi = dplyr::anti_join(too_small_hip, too_small_bmi, by = "eid"),
             excluded_legs = dplyr::anti_join(too_small_bmi, too_large_or_small_legs, by = "eid"),
+            excluded_t1dm = dplyr::anti_join(too_large_or_small_legs, remove_t1dm, by = "eid"),
             # excluded_sitting_height = anti_join(too_large_or_small_legs, no_missing_sitting_height)
 
         ) %>%
@@ -889,6 +893,7 @@ ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
             excluded_hip = "Hips < 20 cm",
             excluded_bmi = "BMI < 18.5",
             excluded_legs = "Legs > 120 cm or < 60 cm",
+            excluded_t1dm = "Drop T1DM cases",
             # excluded_sitting_height = "Missing sitting height",
             final_sample = "Project analysis sample"
         )
@@ -952,9 +957,9 @@ calc_leg_measures <- function(.tbl) {
         )
 }
 
-calc_t2dm_status <- function(.tbl) {
-    # Convert to long form to extract age of diagnosis and t2dm illness.
-    longer_data <- .tbl %>%
+calc_dm_status <- function(data) {
+    # Convert to long form to extract age of diagnosis and t1 and t2 dm illness.
+    longer_data <- data %>%
         select(eid,
                matches("^(noncancer_illness|interpolated_age).*_0_[0-9]+$")) %>%
         tidyr::pivot_longer(
@@ -969,16 +974,28 @@ calc_t2dm_status <- function(.tbl) {
     wider_data <- longer_data %>%
         tidyr::pivot_wider(names_from = Variables, values_from = Values) %>%
         rename(illness_code = noncancer_illness_code_selfreported,
-               age_of_t2dm_diagnosis_0_0 = interpolated_age_of_participant_when_noncancer_illness_first_diagnosed) %>%
-        # Convert illness variables to either with or without type 2 diabetes
-        # (code for t2dm = 1223)
-        mutate(t2dm_status_0_0 = illness_code == 1223) %>%
+               age_of_dm_diagnosis_0_0 = interpolated_age_of_participant_when_noncancer_illness_first_diagnosed)
+
+    # Convert illness variables to either with or without type 2 diabetes
+    # (code for t2dm = 1223, t1dm = 1222). Have to do it for both t1 and t2 separately,
+    # because of the way the data is structured.
+    t1dm <- wider_data %>%
+        mutate(t1dm_status_0_0 = illness_code == 1222,
+               age_of_t1dm_diagnosis_0_0 = age_of_dm_diagnosis_0_0) %>%
+        dplyr::filter(t1dm_status_0_0) %>%
+        # To confirm no duplicate eid
+        assertr::assert(assertr::is_uniq, eid) %>%
+        select(eid, t1dm_status_0_0, age_of_t1dm_diagnosis_0_0)
+
+    t2dm <- wider_data %>%
+        mutate(t2dm_status_0_0 = illness_code == 1223,
+               age_of_t2dm_diagnosis_0_0 = age_of_dm_diagnosis_0_0) %>%
         dplyr::filter(t2dm_status_0_0) %>%
         # To confirm no duplicate eid
         assertr::assert(assertr::is_uniq, eid) %>%
         select(eid, t2dm_status_0_0, age_of_t2dm_diagnosis_0_0)
 
-    left_join(.tbl, wider_data, by = "eid")
+    purrr::reduce(list(data, t1dm, t2dm), left_join, by = "eid")
 }
 
 tidy_up_column_names <- function(x) {

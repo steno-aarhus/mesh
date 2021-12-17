@@ -22,7 +22,8 @@ plot_consort_diagram <- function(consort_object, save_plot = FALSE) {
                    • {ggconsort::cohort_count_adorn(consort_object, excluded_height)}<br>
                    • {ggconsort::cohort_count_adorn(consort_object, excluded_hip)}<br>
                    • {ggconsort::cohort_count_adorn(consort_object, excluded_bmi)}<br>
-                   • {ggconsort::cohort_count_adorn(consort_object, excluded_legs)}'
+                   • {ggconsort::cohort_count_adorn(consort_object, excluded_legs)}<br>
+                   • {ggconsort::cohort_count_adorn(consort_object, excluded_t1dm)}'
             )
         ) %>%
         ggconsort::consort_box_add("final", 0, 0,
