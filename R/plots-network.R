@@ -1,6 +1,6 @@
 
-plot_network_graph <- function(.tbl) {
-    .tbl %>%
+plot_network_graph <- function(data) {
+    data %>%
         tidygraph::activate("edges") %>%
         tidygraph::mutate(edge_label = dplyr::if_else(abs(.data$weight) > 0.2,
                                                       as.character(round(.data$weight, 2)),
@@ -23,8 +23,8 @@ plot_network_graph <- function(.tbl) {
         ggraph::theme_graph(base_family = 'Helvetica')
 }
 
-summarise_estimate_means <- function(.tbl) {
-    .tbl %>%
+summarise_estimate_means <- function(data) {
+    data %>%
         group_by(external_variable, index_node) %>%
         summarize(
             effect = names(which.max(table(effect))),
@@ -33,8 +33,8 @@ summarise_estimate_means <- function(.tbl) {
         )
 }
 
-# convert_model_to_edges <- function(.tbl) {
-#     .tbl %>%
+# convert_model_to_edges <- function(data) {
+#     data %>%
 #         arrange(exposure, index_node) %>%
 #         mutate(
 #             to = as.numeric(fct_inorder(index_node)),

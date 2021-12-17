@@ -32,9 +32,9 @@ project_data_nc <- project_data %>%
 project_data <- project_data %>%
     sample_frac(0.1)
 
-analyze_data <- function(.tbl, .network, .exp_var) {
+analyze_data <- function(data, .network, .exp_var) {
     analyze_nc_exposure(
-        .tbl = .tbl,
+        data = data,
         .network = .network,
         .exp_var = .exp_var
     )

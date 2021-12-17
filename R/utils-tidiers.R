@@ -1,6 +1,6 @@
 
-tidy_nc_estimates <- function(.tbl) {
-    .tbl %>%
+tidy_nc_estimates <- function(data) {
+    data %>%
         dplyr::filter(index_node == term) %>%
         # select(outcome, index_node, estimate, conf.low, conf.high, p.value) %>%
         group_by(outcome, index_node) %>%
@@ -45,8 +45,8 @@ tidy_node_names <- function(x) {
         str_replace("Triglycerides", "TAG")
 }
 
-tidy_node_names_column <- function(.tbl) {
-    .tbl %>%
+tidy_node_names_column <- function(data) {
+    data %>%
         activate("nodes") %>%
         mutate(name = tidy_node_names(name))
 }

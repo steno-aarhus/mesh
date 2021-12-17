@@ -13,8 +13,8 @@ set.seed(4125612)
 
 ```{r make-network}
 # network_results[[1]]
-calc_network_weights <- function(.tbl, .graph) {
-    .tbl %>%
+calc_network_weights <- function(data, .graph) {
+    data %>%
         as.data.frame() %>%
         analyze_nc_standardize_mtb_vars() %>%
         na.omit() %>% 

@@ -9,13 +9,13 @@ analyze_nc_standardize_mtb_vars <- function(.tbl) {
         )
 }
 
-analyze_nc_network <- function(.tbl) {
-    .tbl %>%
+analyze_nc_network <- function(data) {
+    data %>%
         NetCoupler::nc_estimate_network(NetCoupler::starts_with("mtb_"))
 }
 
-analyze_nc_outcome <- function(.tbl, .network) {
-    .tbl %>%
+analyze_nc_outcome <- function(data, .network) {
+    data %>%
         NetCoupler::nc_estimate_outcome_links(
             NetCoupler::as_edge_tbl(.network),
             .outcome = "hba1c",
@@ -24,8 +24,8 @@ analyze_nc_outcome <- function(.tbl, .network) {
         )
 }
 
-analyze_nc_exposure <- function(.tbl, .network, .exp_var) {
-    .tbl %>%
+analyze_nc_exposure <- function(data, .network, .exp_var) {
+    data %>%
         NetCoupler::nc_exposure_estimates(
             NetCoupler::as_edge_tbl(.network),
             .exposure = .exp_var,

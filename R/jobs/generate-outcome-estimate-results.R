@@ -17,17 +17,17 @@ proj_data_cv <- proj_data %>%
     training() %>%
     create_cv_splits()
 
-process_data <- function(.tbl) {
-    .tbl %>%
+process_data <- function(data) {
+    data %>%
         as.data.frame() %>%
         NetCoupler::nc_standardize(NetCoupler::starts_with("mtb_"))
 }
 
-analyze_data <- function(.tbl, .network) {
+analyze_data <- function(data, .network) {
     # TODO: Test parallel again but move this code out.
     pb$tick()
     analyze_nc_outcome(
-        .tbl = .tbl,
+        data = data,
         .network = .network
     )
 }

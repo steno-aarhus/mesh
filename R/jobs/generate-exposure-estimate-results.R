@@ -24,16 +24,16 @@ proj_data_cv <- proj_data %>%
     training() %>%
     create_cv_splits()
 
-process_data <- function(.tbl) {
-    .tbl %>%
+process_data <- function(data) {
+    data %>%
         as.data.frame() %>%
         NetCoupler::nc_standardize(NetCoupler::starts_with("mtb_"))
 }
 
-analyze_data <- function(.tbl, .network, .exp_var) {
+analyze_data <- function(data, .network, .exp_var) {
     # pb$tick()
     analyze_nc_exposure(
-        .tbl = .tbl,
+        data = data,
         .network = .network,
         .exp_var = .exp_var
     )

@@ -953,8 +953,8 @@ drop_empty_or_only_false_cols <- function(x) {
     }
 }
 
-calc_leg_measures <- function(.tbl) {
-    .tbl %>%
+calc_leg_measures <- function(data) {
+    data %>%
         mutate(
             leg_length_0_0 = standing_height_f50_0_0 - sitting_height_f20015_0_0,
             leg_height_ratio_0_0 = leg_length_0_0 / standing_height_f50_0_0

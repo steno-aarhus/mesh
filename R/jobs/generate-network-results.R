@@ -13,9 +13,9 @@ proj_data_cv <- proj_data %>%
     training() %>%
     create_cv_splits()
 
-process_and_analyze <- function(.tbl) {
+process_and_analyze <- function(data) {
     pb$tick()
-    .tbl %>%
+    data %>%
         as.data.frame() %>%
         analyze_nc_standardize_mtb_vars() %>%
         analyze_nc_network()
