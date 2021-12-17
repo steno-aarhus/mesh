@@ -122,7 +122,8 @@ tar_target(
 )
 ```
 
-
+We'll run some descriptive statistics on the full data as well as by sex. This
+will be saved into the `data/` folder.
 
 ```{targets descriptive-statistics}
 tar_target(
