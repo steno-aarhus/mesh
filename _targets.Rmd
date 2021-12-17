@@ -123,11 +123,13 @@ tar_target(
 ```
 
 
-```{r}
-library(tidyverse)
-library(skimr)
 
-# project_data <- prepare_data_for_netcoupler_analysis(check_if_data_exists())
+```{targets descriptive-statistics}
+tar_target(
+    name = descriptive_statistics,
+    command = analysis_descriptive_statistics(project_data),
+    format = "file"
+)
 ```
 
 We also want to create some cross-validation splits to eventually check the
@@ -142,11 +144,17 @@ tar_target(
 )
 ```
 
+```{r}
+library(tidyverse)
+
+
+# project_data <- prepare_data_for_netcoupler_analysis(check_if_data_exists())
+```
+
 Next is to set up the 
 
 TODO:
 
-- Descriptive statistics, by sex/gender (including sample size) (skimr?)
 - Update confounders based on Christina's paper
     - Smoking? Physical activity? Ethnic background, education, income, anthropometrics?
     - Make DAG.
