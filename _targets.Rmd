@@ -58,6 +58,8 @@ here::here("R") %>%
 
 # Targets
 
+## Pre-processing outside of targets
+
 Initial processing of the UK Biobank to get into the necessary state needed for
 this project. The end goal is to save the dataset at the storage location.
 
@@ -78,6 +80,8 @@ this project. The end goal is to save the dataset at the storage location.
 # But really, this function is used to save the dataset to its location:
 # ukb_wrangle_and_save(ukb_data_raw, .save = TRUE)
 ```
+
+## Processing within targets
 
 Next we need to process the dataset for exact use in this project and load it into
 the environment. We don't want to save this dataset, since it is already in its
@@ -100,8 +104,22 @@ tar_target(
 )
 ```
 
+Now we can remove participants based on the exclusion criteria and other removals
+that we found during exploration.
+
+```{targets project-data}
+tar_target(
+    name = project_data,
+    command = ukb_remove_exclusions(project_data_pre_exclusions)
+)
+```
+
+## Basic descriptive characteristics
+
 Since we want to create a CONSORT diagram of who we removed from the original
 UK Biobank dataset, we send the consort data into the plot function.
+
+TODO: Exclude also those with T2DM and HbA1c above 48?
 
 ```{targets consort-diagram}
 tar_target(
@@ -110,16 +128,6 @@ tar_target(
         ukb_remove_exclusions(for_consort_diagram = TRUE) %>%
         plot_consort_diagram(save_plot = TRUE),
     format = "file"
-)
-```
-
-Now we can remove participants based on the exclusion criteria and other removals
-that we found during exploration.
-
-```{targets project-data}
-tar_target(
-    name = project_data,
-    command = ukb_remove_exclusions(project_data_pre_exclusions)
 )
 ```
 
