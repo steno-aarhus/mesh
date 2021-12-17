@@ -43,6 +43,7 @@ tar_unscript()
 We first define some global options/functions common to all targets.
 
 ```{targets target-globals, tar_globals = TRUE}
+set.seed(65)
 options(tidyverse.quiet = TRUE)
 library(tidyverse)
 pkgs_to_load <- desc::desc_get_deps() %>% 
