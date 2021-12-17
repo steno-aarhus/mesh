@@ -3,9 +3,12 @@
 
 check_if_data_exists <- function() {
     if (exists("project_data_filename")) {
+        if (!fs::file_exists(project_data_filename))
+            rlang::abort("You're not connected to where the data is stored. Establish connection first.")
         return(project_data_filename)
     } else {
-        rlang::abort("Data is not accessible. Are you connected to/on the server?")
+        # TODO: Add path to simulated data here, and give a message about using that.
+        rlang::abort("The variable with the file path to the data doesn't exist. Do you have the ignored file?")
     }
 }
 
@@ -665,7 +668,7 @@ ukb_wrangle_and_save <- function(ukb_data_raw, .save = FALSE) {
 
     if (.save) {
         if (!exists("project_data_filename"))
-            stop("Can't find the variable that contains the location to the data.")
+            rlang::abort("Can't find the variable that contains the location to the data.")
         vroom::vroom_write(ukb_data_smallest, project_data_filename, delim = ",")
     }
     ukb_data_smallest
