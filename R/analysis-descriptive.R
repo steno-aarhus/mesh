@@ -7,12 +7,12 @@ analysis_descriptive_statistics <- function(data) {
             skimr::skim() %>%
             dplyr::ungroup(),
         full_study_chr = data %>%
-            dplyr::select(dplyr::where(is.character)) %>%
+            dplyr::select(where(is.character)) %>%
             tidyr::pivot_longer(dplyr::everything()) %>%
-            dplyr::count(name, value)
+            dplyr::count(name, value),
         by_sex_chr = data %>%
             dplyr::group_by(sex) %>%
-            dplyr::select(dplyr::where(is.character)) %>%
+            dplyr::select(where(is.character)) %>%
             tidyr::pivot_longer(-sex) %>%
             dplyr::count(name, value) %>%
             dplyr::ungroup()
