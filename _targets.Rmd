@@ -142,49 +142,76 @@ tar_target(
 )
 ```
 
-We also want to create some cross-validation splits to eventually check the
-results against.
+TODO: Plot of all metabolic variables
 
-```{targets project-data-cv}
+## Processing for NetCoupler
+
+There are some things we need to process for NetCoupler to work effectively. Plus
+some data is largely missing, so we're removing those columns. Then we do an
+initial split to have a training set and an (eventual) testing set.
+
+```{targets project-data-for-nc}
 tar_target(
-    name = project_data_cv, 
-    command = project_data %>% 
+    name = project_data_for_nc, 
+    command = ukb_wrangle_for_nc(project_data)
+)
+```
+
+While we do an initial split of the dataset, we also want to create some
+cross-validation splits to 1) make it easier for NetCoupler to run on the full 
+dataset and 2) to aggregate the results across the splits to hopefully get a 
+better estimate of the network and modeling.
+
+```{targets project-data-for-nc-cv}
+tar_target(
+    name = project_data_for_nc_cv, 
+    command = project_data_for_nc %>% 
         rsample::training() %>% 
         create_cv_splits()
 )
 ```
 
-```{r}
+```{r playground}
 library(tidyverse)
 
+testing_sampling <- project_data_for_nc %>% 
+    rsample::training() %>% 
+    create_cv_splits()
+testing_network <- testing_sampling %>% 
+    generate_network_results()
+    str()
 
-# project_data <- prepare_data_for_netcoupler_analysis(check_if_data_exists())
 ```
 
 Next is to set up the 
 
-TODO:
+TODO: Make DAG of underlying causal relationships (in relation to confounders)
 
 - Update confounders based on Christina's paper
     - Smoking? Physical activity? Ethnic background, education, income, anthropometrics?
     - Make DAG.
-- Plot of all metabolic variables
-- Network results by sex/gender
-- (In manuscript Rmd instead of targets?) Plot of network results by sex/gender
-as well as total.
-- Exposure and outcome link results by sex/gender
-- (In manuscript Rmd instead of targets?) Plot of linkage results by sex/gender
-as well as total.
-- List of variables and their meta data (from UK Biobank)
+    
+## NetCoupler analysis
 
 ```{targets network-results}
-tar_targets(
+tar_target(
     name = network_results,
     # Generate network results as rda file in data/
-    command = generate_network_results(project_data_cv$splits),
+    command = generate_network_results(project_data_for_nc_cv$splits),
     format = "file"
 )
 ```
+
+
+TODO:
+
+- Network results by sex/gender
+- Exposure and outcome link results by sex/gender
+- (In manuscript Rmd instead of targets?) Plot of network results by sex/gender
+as well as total.
+- (In manuscript Rmd instead of targets?) Plot of linkage results by sex/gender
+as well as total.
+- List of variables and their meta data (from UK Biobank)
 
 And eventually make the manuscript:
 
