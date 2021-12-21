@@ -835,7 +835,7 @@ ukb_import_project_data <- function(file_path) {
             )
         )
 
-    if (interactive()) beepr::beep(4)
+    # if (interactive()) beepr::beep(4)
     return(ukb_project_data)
 }
 
