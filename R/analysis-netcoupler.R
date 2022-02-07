@@ -13,10 +13,14 @@ analyze_nc_standardize_mtb_vars <- function(data, group_by_sex = FALSE) {
             cols = dplyr::starts_with("mtb_"),
             # TODO: Compare with BMI
             regressed_on = confounders
-        )
+        ) %>%
+        {if (group_by_sex) dplyr::ungroup() else .}
 }
 
-analyze_nc_network <- function(data) {
+analyze_nc_network <- function(data, group_by_sex = FALSE) {
+
+    data %>%
+        {if (group_by_sex) dplyr::group_split(sex) else list(.)} %>%
     NetCoupler::nc_estimate_network(data, dplyr::starts_with("mtb_"))
 }
 
