@@ -7,6 +7,7 @@ check_if_data_exists <- function() {
             rlang::abort("You're not connected to where the data is stored. Establish connection first.")
         return(project_data_filename)
     } else {
+        if (fs::file_exists(here::here("data/fake_ukbiobank.rda")))
         # TODO: Add path to simulated data here, and give a message about using that.
         rlang::abort("The variable with the file path to the data doesn't exist. Do you have the ignored file?")
     }
