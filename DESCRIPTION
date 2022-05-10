@@ -18,7 +18,7 @@ Imports:
     dplyr,
     vroom,
     stringr,
-    NetCoupler (>= 0.0.4),
+    NetCoupler,
     tidyr,
     assertr,
     ggraph,
@@ -37,11 +37,12 @@ Imports:
     usethis,
     ggconsort (>= 0.1.0),
     cli,
-    skimr
+    skimr,
+    correlation (>= 0.8.0.1)
 RoxygenNote: 7.1.1
-Remotes: 
-    NetCoupler/NetCoupler,
-    tgerke/ggconsort
+Remotes:  
+    tgerke/ggconsort,
+    easystats/correlation
 Depends: 
     R (>= 2.10),
     tidyverse
