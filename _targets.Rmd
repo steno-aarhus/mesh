@@ -142,7 +142,120 @@ tar_target(
 )
 ```
 
-TODO: Plot of all metabolic variables
+TODO: Plots of exposures and outcomes, total and by gender
+
+```{r}
+plot_data_prep <- project_data %>% 
+    select(contains("height"), contains("leg"), sex, mtb_glycated_haemoglobin_hba1c) %>% 
+    mutate(leg_height_ratio = leg_height_ratio * 100) %>% 
+    pivot_longer(-sex) %>% 
+    filter(name == "leg_height_ratio")
+
+# Maybe use https://www.rdocumentation.org/packages/ggcorrplot/versions/0.1.1/topics/ggcorrplot
+
+ggplot(plot_data_prep, aes(x = value, y = ..count..)) +
+    geom_histogram(data = select(plot_data_prep, -sex), aes(x = value, fill = "all"), bins = 20) +
+    geom_histogram(data = plot_data_prep, aes(x = value, fill = sex), bins = 20) +
+  # ggridges::geom_density_line(
+  #   data = select(plot_data_prep, -sex), aes(fill = "all"),
+  #   color = "transparent", adjust = 1/2
+  # ) + 
+  # ggridges::geom_density_line(aes(fill = sex), bw = 2, adjust = 1/2, color = "transparent") +
+  # scale_x_continuous(limits = c(0, 75), name = "passenger age (years)", expand = c(0, 0)) +
+  # scale_y_continuous(limits = c(0, 26), name = "scaled density", expand = c(0, 0)) +
+  scale_fill_manual(
+    values = c("#b3b3b3a0", "#D55E00", "#0072B2"),
+    breaks = c("all", "Male", "Female"),
+    labels = c("all", "Male  ", "Female"),
+    name = NULL,
+    guide = guide_legend(direction = "horizontal")
+  ) +
+  coord_cartesian(clip = "off") +
+  facet_grid(cols = vars(sex)) +
+    theme_minimal() +
+  theme(
+    axis.line.x = element_blank(),
+    strip.text = element_text(size = 14, margin = margin(0, 0, 0.2, 0, "cm")),
+    legend.position = "bottom",
+    legend.justification = "right",
+    legend.margin = margin(4.5, 0, 1.5, 0, "pt"),
+    legend.spacing.x = grid::unit(4.5, "pt"),
+    legend.spacing.y = grid::unit(0, "pt"),
+    legend.box.spacing = grid::unit(0, "cm"),
+  )
+
+             labeller = labeller(sex = function(sex) paste(sex, "passengers")))
+
+```
+
+TODO: Plot of all metabolic variables (distributions?) (Use function from above)
+
+```{r}
+project_data %>% 
+    select(starts_with("mtb") -mtb_glycated_haemoglobin_hba1c)
+```
+
+TODO: Correlation heatmap of metabolic variables
+
+```{r}
+
+cors <- function(data) {
+    correlation_matrix <- Hmisc::rcorr(as.matrix(data))
+    Mdf <- map(M, ~ data.frame(.x)) return(Mdf)
+}
+
+
+
+
+formatted_cors <- function(df) {
+    cors(df) %>%
+        map( ~ rownames_to_column(.x, var = "measure1")) %>%
+        map( ~ pivot_longer(.x, -measure1, "measure2")) %>%
+        bind_rows(.id = "id") %>%
+        pivot_wider(names_from = id, values_from = value) %>%
+        mutate(
+            sig_p = ifelse(P < .05, T, F),
+            p_if_sig = ifelse(P < .05, P, NA),
+            r_if_sig = ifelse(P < .05, r, NA)
+        )
+}
+
+formatted_cors(mtcars) %>%
+    ggplot(aes(
+        measure1,
+        measure2,
+        fill = r,
+        label = round(r_if_sig, 2)
+    )) +
+    geom_tile() +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = "Pearson's\nCorrelation",
+        title = "Correlations in Mtcars",
+        subtitle = "Only significant Pearson's correlation coefficients shown"
+    ) +
+    scale_fill_gradient2(
+        mid = "#FBFEF9",
+        low = "#0C6291",
+        high = "#A63446",
+        limits = c(-1, 1)
+    ) +
+    geom_text() +
+    theme_classic() +
+    scale_x_discrete(expand = c(0, 0)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    theme(text = element_text(family = "Roboto"))
+
+corr_results <- project_data %>% 
+    select(starts_with("mtb"), -mtb_glycated_haemoglobin_hba1c) %>% 
+    correlation::correlation(redundant = TRUE, p_adjust = "fdr")
+
+corr_results %>% 
+    correlation::cor_lower() %>% 
+    
+```
+
 
 ## Processing for NetCoupler
 
