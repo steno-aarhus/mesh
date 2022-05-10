@@ -1,5 +1,8 @@
 ---
-output: html_document
+output: word_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +31,6 @@ network_weights <- map2(
 )
 usethis::use_data(network_weights, overwrite = TRUE)
 ```
-
 
 ```{r make-network-2}
 library(tidygraph)
@@ -98,161 +100,177 @@ ggsave(here::here("doc/images/netcoupler-results.svg"), estimation_plot,
 
 # Title page
 
-Title:
-The metabolic pathways between components of stature and HbA1c in the UK Biobank
+Title: The metabolic pathways between components of stature and HbA1c in
+the UK Biobank
 
 <!-- First, middle initial, last, highest academic degree -->
+
 Authors:
 
-Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C Dahm, Daniel R Witte
+Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C
+Dahm, Daniel R Witte
 
 <!-- During time of study. -->
+
 Affiliation:
 
 Corresponding author:
 
-- Name:
-- Current address:
-- Phone number:
-- Fax number:
-- Email:
+-   Name:
+-   Current address:
+-   Phone number:
+-   Fax number:
+-   Email:
 
 # Abstract
 
-**Background and aims**:
-Shorter relative adult leg length (LL), a marker of adverse growth conditions
-during early childhood, is associated with a higher risk for type 2 diabetes.
-How this link is mediated metabolically is not well known in humans. Our aim was
-to identify how the components of stature influence the metabolic profile in
-adults and the consequent risk for type 2 diabetes through higher HbA1c.
+**Background and aims**: Shorter relative adult leg length (LL), a
+marker of adverse growth conditions during early childhood, is
+associated with a higher risk for type 2 diabetes. How this link is
+mediated metabolically is not well known in humans. Our aim was to
+identify how the components of stature influence the metabolic profile
+in adults and the consequent risk for type 2 diabetes through higher
+HbA1c.
 
-**Materials and methods**:
-We used 367,838 participants (176,420 men, 191,418 women) from UK Biobank,
-excluding prevalent diabetes cases. We applied a causal structure learning
-algorithm (NetCoupler) to identify the most likely pathways between an exposure,
-a metabolic network, and an outcome. The algorithm: constructs an estimated
-network for the metabolic variables; iterates through each variable, linking it
-to either the exposure or outcome; and identifies links as potential direct
-effects that exist when independent of neighbouring variables in the network.
-For this study, we used height, LL, and leg-to-height ratio (LHR) as the
-individual exposures and HbA1c as the outcome. The metabolic variables chosen to
-form part of the network were: gamma-glutamyltransferase (GGT), alanine
-aminotransferase (ALT), aspartate aminotransferase (AST), TG, LDL, HDL, total
-cholesterol, C-reactive protein (CRP), apolipoprotein A and B, and albumin. Age,
-sex, and waist circumference adjustments were applied in the algorithm.
+**Materials and methods**: We used 367,838 participants (176,420 men,
+191,418 women) from UK Biobank, excluding prevalent diabetes cases. We
+applied a causal structure learning algorithm (NetCoupler) to identify
+the most likely pathways between an exposure, a metabolic network, and
+an outcome. The algorithm: constructs an estimated network for the
+metabolic variables; iterates through each variable, linking it to
+either the exposure or outcome; and identifies links as potential direct
+effects that exist when independent of neighbouring variables in the
+network. For this study, we used height, LL, and leg-to-height ratio
+(LHR) as the individual exposures and HbA1c as the outcome. The
+metabolic variables chosen to form part of the network were:
+gamma-glutamyltransferase (GGT), alanine aminotransferase (ALT),
+aspartate aminotransferase (AST), TG, LDL, HDL, total cholesterol,
+C-reactive protein (CRP), apolipoprotein A and B, and albumin. Age, sex,
+and waist circumference adjustments were applied in the algorithm.
 
-**Results**:
-The initial network generated from the metabolic variables identified links
-expected between metabolic variables (Figure), such as between
-HDL-LDL-Cholesterol-TG (serum lipid profile) and GGT-ALT-AST (liver function). A
-darker blue link indicates a positive relationship, while darker orange
-indicates a negative relationship. Between the metabolic network variables and
-HbA1c there were positive relationships between ALT, GGT, and CRP. For the
-stature components, there were negative relationships between: LHR, LL, and
-height on TG; LHR, LL on CRP and ALT; and, LL and height on GGT. There were
-positive relationships between: LL on HDL. Based on the NetCoupler algorithm, we
-found that LHR, LL, and height were likely causally linked with HbA1c through
-GGT, ALT, and CRP.
+**Results**: The initial network generated from the metabolic variables
+identified links expected between metabolic variables (Figure), such as
+between HDL-LDL-Cholesterol-TG (serum lipid profile) and GGT-ALT-AST
+(liver function). A darker blue link indicates a positive relationship,
+while darker orange indicates a negative relationship. Between the
+metabolic network variables and HbA1c there were positive relationships
+between ALT, GGT, and CRP. For the stature components, there were
+negative relationships between: LHR, LL, and height on TG; LHR, LL on
+CRP and ALT; and, LL and height on GGT. There were positive
+relationships between: LL on HDL. Based on the NetCoupler algorithm, we
+found that LHR, LL, and height were likely causally linked with HbA1c
+through GGT, ALT, and CRP.
 
-**Conclusion**:
-Our findings suggest that overall childhood growth conditions that result in
-relatively longer legs and a taller stature may confer some protection against
-dysregulation of glucose metabolism and possibly type 2 diabetes (from higher
-HbA1c) potentially through preserved liver function (through GGT and ALT) and
-through generally lower inflammation (via CRP).
+**Conclusion**: Our findings suggest that overall childhood growth
+conditions that result in relatively longer legs and a taller stature
+may confer some protection against dysregulation of glucose metabolism
+and possibly type 2 diabetes (from higher HbA1c) potentially through
+preserved liver function (through GGT and ALT) and through generally
+lower inflammation (via CRP).
 
-# Introduction 
+# Introduction
 
-- Short adult leg length (LL) is a marker of adverse early childhood conditions
-and is associated with higher risk for type 2 diabetes, but it's not known how
-this association is metabolically mediated.
-- *Aim*: Identify how components of stature influence metabolic profile
-and HbA1c.
+-   Short adult leg length (LL) is a marker of adverse early childhood
+    conditions and is associated with higher risk for type 2 diabetes,
+    but it's not known how this association is metabolically mediated.
+-   *Aim*: Identify how components of stature influence metabolic
+    profile and HbA1c.
 
-Hi everyone, thanks for listening in. I'll be presenting some results of using a
-causal structure learning algorithm to investigate potential metabolic pathways
-between the components of stature and HbA1c.
+Hi everyone, thanks for listening in. I'll be presenting some results of
+using a causal structure learning algorithm to investigate potential
+metabolic pathways between the components of stature and HbA1c.
 
-So, there is strong evidence of a relationship between adverse early life
-conditions and risk for type 2 diabetes, but it isn't well-studied in humans how
-this association may be mediated metabolically. So, using the UK Biobank
-Cohort, we studied how adult leg length, used as a marker of early childhood
-conditions, may influence type 2 diabetes risk with HbA1c through a standard
-metabolic variables.
+So, there is strong evidence of a relationship between adverse early
+life conditions and risk for type 2 diabetes, but it isn't well-studied
+in humans how this association may be mediated metabolically. So, using
+the UK Biobank Cohort, we studied how adult leg length, used as a marker
+of early childhood conditions, may influence type 2 diabetes risk with
+HbA1c through a standard metabolic variables.
 
 For this aim, my colleague Clemens developed a statistical method called
-NetCoupler that could identify pathways in a metabolic network and analyze how
-an exposure may influence this network and how this network may then influence
-an outcome. Both myself and Clemens are developing NetCoupler as an R package
-for wider use and more details about it are in the link shown on the poster.
-
+NetCoupler that could identify pathways in a metabolic network and
+analyze how an exposure may influence this network and how this network
+may then influence an outcome. Both myself and Clemens are developing
+NetCoupler as an R package for wider use and more details about it are
+in the link shown on the poster.
 
 # Research Design and Methods
 
-- Cross-sectional analysis of UK Biobank (Application ID 47673): n=367,838,
-without prevalent diabetes cases.
-- Applied causal structure learning algorithm NetCoupler
-(R package at [github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)),
-tested on 100 resamples of 10% of dataset.
-- Exposures: LL, leg-height ratio (LHR), and height; Outcome: HbA1c.
-- Metabolic profile: gamma-glutamyltransferase (GGT), alanine aminotransferase
-(ALT), aspartate aminotransferase (AST), TAG, LDL-C, HDL-C, total cholesterol,
-C-reactive protein (CRP), apolipoprotein A and B, and albumin.
-- Confounders: Age, sex, and waist circumference.
+-   Cross-sectional analysis of UK Biobank (Application ID 47673):
+    n=367,838, without prevalent diabetes cases.
+-   Applied causal structure learning algorithm NetCoupler (R package at
+    [github.com/NetCoupler](https://github.com/NetCoupler/NetCoupler)),
+    tested on 100 resamples of 10% of dataset.
+-   Exposures: LL, leg-height ratio (LHR), and height; Outcome: HbA1c.
+-   Metabolic profile: gamma-glutamyltransferase (GGT), alanine
+    aminotransferase (ALT), aspartate aminotransferase (AST), TAG,
+    LDL-C, HDL-C, total cholesterol, C-reactive protein (CRP),
+    apolipoprotein A and B, and albumin.
+-   Confounders: Age, sex, and waist circumference.
 
-So, briefly, NetCoupler works in four phases, as shown in Figure 1: First, it
-estimates connections between metabolic variables, called nodes, and constructs a
-network. Two, it extracts each node iteratively along with its linked
-neighbouring nodes. Three, it calculates all possible combinations of these
-neighbouring nodes with the index node and sets each as a model. So with
-3 neighbours, that is 8 models. It then runs each model with the exposure or
-outcome on the index node, adjusting for confounders like age, sex, and waist
-circumference. Finally, based on the model results, it classifies using some
-criteria whether the link is direct, ambiguous, or non-existent.
+So, briefly, NetCoupler works in four phases, as shown in Figure 1:
+First, it estimates connections between metabolic variables, called
+nodes, and constructs a network. Two, it extracts each node iteratively
+along with its linked neighbouring nodes. Three, it calculates all
+possible combinations of these neighbouring nodes with the index node
+and sets each as a model. So with 3 neighbours, that is 8 models. It
+then runs each model with the exposure or outcome on the index node,
+adjusting for confounders like age, sex, and waist circumference.
+Finally, based on the model results, it classifies using some criteria
+whether the link is direct, ambiguous, or non-existent.
 
 # Results
 
-- Metabolic network links: e.g. HDL-C-LDL-C-Cholesterol-TAG (serum lipid profile)
-and GGT-ALT-AST (liver function).
-- Network to HbA1c: Positive links with ALT, GGT, and CRP.
-- Stature to network: Negative links between: 
-    - LL and height on CRP, GGT, and TAG.
-    - LHR, LL on CRP and ALT.
-- NetCoupler algorithm identified GGT, ALT, and CRP as likely metabolic link
-between stature components and HbA1c.
+-   Metabolic network links: e.g. HDL-C-LDL-C-Cholesterol-TAG (serum
+    lipid profile) and GGT-ALT-AST (liver function).
 
-The nice thing about NetCoupler is that the results can be very nicely represented
-visually, as shown in figure 2. Each dot is a variable, the darker blue lines
-indicate a positive link between nodes, a darker red is a negative link, and the
-numbers are the weights between the network variables.
+```{r}
+# plot_network_results()
+knitr::include_graphics(here::here("doc/images/network-results.png"))
+```
 
-There's a lot going on, so I'll highlight the top portion, where the variables
-HDL, LDL, cholesterol, and TAG which is in the middle are all strongly linked
-together, which is as we would expect. Likewise, liver function variables,
-at the bottom and middle left, like ALT, AST, and GGT are all linked.
+-   Network to HbA1c: Positive links with ALT, GGT, and CRP.
+-   Stature to network: Negative links between:
+    -   LL and height on CRP, GGT, and TAG.
+    -   LHR, LL on CRP and ALT.
+-   NetCoupler algorithm identified GGT, ALT, and CRP as likely
+    metabolic link between stature components and HbA1c.
 
-On the left side are the stature components, including leg to height ratio,
-where we identified direct negative links with ALT, GGT, TAG, and CRP. On the
-right side with HbA1c, we found direct positive links with ALT, CRP, and GGT. So
-from these results, we can infer that lower stature components, including lower
-relative leg length, may contribute to higher HbA1c through higher ALT, CRP, and
-GGT.
+The nice thing about NetCoupler is that the results can be very nicely
+represented visually, as shown in figure 2. Each dot is a variable, the
+darker blue lines indicate a positive link between nodes, a darker red
+is a negative link, and the numbers are the weights between the network
+variables.
+
+There's a lot going on, so I'll highlight the top portion, where the
+variables HDL, LDL, cholesterol, and TAG which is in the middle are all
+strongly linked together, which is as we would expect. Likewise, liver
+function variables, at the bottom and middle left, like ALT, AST, and
+GGT are all linked.
+
+On the left side are the stature components, including leg to height
+ratio, where we identified direct negative links with ALT, GGT, TAG, and
+CRP. On the right side with HbA1c, we found direct positive links with
+ALT, CRP, and GGT. So from these results, we can infer that lower
+stature components, including lower relative leg length, may contribute
+to higher HbA1c through higher ALT, CRP, and GGT.
 
 # Discussion
 
 ## Strengths
+
 ## Limitations
 
 ## Conclusions
 
-- Adverse early childhood growth conditions (leading to shorter
-legs and shorter stature) may contribute to higher HbA1c through higher liver dysfunction (GGT and ALT) and higher inflammation
-(CRP).
+-   Adverse early childhood growth conditions (leading to shorter legs
+    and shorter stature) may contribute to higher HbA1c through higher
+    liver dysfunction (GGT and ALT) and higher inflammation (CRP).
 
-To conclude, these results suggest that adverse early childhood conditions may
-contribute to risk for type 2 diabetes through higher liver dysfunction and
-through higher systemic inflammation. Thank you for listening and I look forward
-to any questions.
+To conclude, these results suggest that adverse early childhood
+conditions may contribute to risk for type 2 diabetes through higher
+liver dysfunction and through higher systemic inflammation. Thank you
+for listening and I look forward to any questions.
 
 # Acknowledgements
 
