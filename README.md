@@ -3,6 +3,10 @@
 
 <!-- TODO: Give a brief description of what your project is about -->
 
+```r
+targets::tar_make()
+```
+
 # Explanation of project folders and files
 
 This part of the README details how this research directory is structured, how files should
