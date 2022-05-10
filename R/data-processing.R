@@ -2,14 +2,20 @@
 # Checking if connection to data exists -----------------------------------
 
 check_if_data_exists <- function() {
+    local_only_details_file <- here::here("R/ignore.R")
+    if (fs::file_exists(local_only_details_file))
+        source(local_only_details_file)
+
     if (exists("project_data_filename")) {
         if (!fs::file_exists(project_data_filename))
             rlang::abort("You're not connected to where the data is stored. Establish connection first.")
         return(project_data_filename)
-    } else {
-        if (fs::file_exists(here::here("data/fake_ukbiobank.rda")))
-        # TODO: Add path to simulated data here, and give a message about using that.
-        rlang::abort("The variable with the file path to the data doesn't exist. Do you have the ignored file?")
+    }
+
+    fake_data_file <- here::here("data/fake_ukbiobank.rda")
+    if (fs::file_exists(fake_data_file)) {
+        rlang::inform("Didn't find the real data, using the fake data.")
+        return(load(fake_data_file))
     }
 }
 
@@ -32,7 +38,7 @@ initial_import_to_copy_variable_specs <- function() {
 # Run this to get the dataset with the specific columns from UK Biobank.
 ukb_import_with_specific_columns <- function() {
     # TODO: Check that raw_data_filename object/file exists, otherwise use sim data
-    ukbiobank_df <- vroom(
+    ukbiobank_df <- vroom::vroom(
         raw_data_filename,
         # Obtained by using `initial_import_to_copy_variable_specs()` and types are edited.
         col_types = cols_only(
@@ -698,7 +704,7 @@ ukb_wrangle_and_save <- function(ukb_data_raw, .save = FALSE) {
 #' # Trim down variable list even more.
 #' names(checking)
 ukb_import_project_data <- function(file_path) {
-    ukb_project_data <- vroom(file_path,
+    ukb_project_data <- vroom::vroom(file_path,
           col_types = cols_only(
               eid = col_double(),
               sex_f31_0_0 = col_character(),
@@ -916,6 +922,21 @@ ukb_remove_exclusions <- function(data, for_consort_diagram = FALSE) {
 ukb_wrangle_for_nc <- function(data) {
     nc_project_data <- data %>%
         dplyr::rename(hba1c = mtb_glycated_haemoglobin_hba1c) %>%
+        variable_exclusions()
+
+    project_data_nc <- project_data %>%
+        dplyr::select(-age_of_t2dm_diagnosis) %>%
+        dplyr::mutate(t2dm_status = dplyr::if_else(is.na(t2dm_status), FALSE, t2dm_status))
+
+    rsample::initial_split(project_data_nc)
+}
+
+# Processing utilities ----------------------------------------------------
+
+# TODO: Decide where this function should go... in the wrangling section? After
+# row exclusions and other processing?
+variable_exclusions <- function(data) {
+    data %>%
         dplyr::select(
             # More than 25% missing for these variables.
             -mtb_microalbumin_in_urine,
@@ -931,15 +952,7 @@ ukb_wrangle_for_nc <- function(data) {
             -mtb_creatinine_enzymatic_in_urine
         ) %>%
         dplyr::mutate(leg_height_ratio = leg_height_ratio * 100)
-
-    project_data_nc <- project_data %>%
-        dplyr::select(-age_of_t2dm_diagnosis) %>%
-        dplyr::mutate(t2dm_status = dplyr::if_else(is.na(t2dm_status), FALSE, t2dm_status))
-
-    rsample::initial_split(project_data_nc)
 }
-
-# Processing utilities ----------------------------------------------------
 
 create_cv_splits <- function(.training_data) {
     .training_data %>%
