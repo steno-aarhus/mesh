@@ -1,48 +1,52 @@
+Type: Project
 Package: ecc.cmd.ukbiobank
-Title: Early Childhood Conditions And Cardmetabolic Disease in the UK Biobank.
+Title: Early Childhood Conditions And Cardmetabolic Disease in the UK
+    Biobank.
 Version: 0.0.1
 Authors@R: 
-    person(given = "Luke",
-           family = "Johnston",
-           role = c("aut", "cre"),
-           email = "lwjohnst@gmail.com")
-Description: Analysis and manuscript files for the project on early childhood and
-    cardiometabolic disease in the UK Biobank.
+    person("Luke", "Johnston", , "lwjohnst@gmail.com", role = c("aut", "cre"))
+Description: Analysis and manuscript files for the project on early
+    childhood and cardiometabolic disease in the UK Biobank.
+Depends: 
+    R (>= 4.2.0),
+    tidyverse
+Imports: 
+    assertr,
+    beepr,
+    cli,
+    clipr,
+    correlation,
+    desc,
+    devtools,
+    dplyr,
+    fs,
+    furrr,
+    gert,
+    ggconsort,
+    ggraph,
+    here,
+    knitr,
+    NetCoupler,
+    progress,
+    purrr,
+    remotes,
+    renv,
+    rmarkdown,
+    rsample,
+    rstudioapi,
+    skimr,
+    stringr,
+    targets,
+    tidygraph,
+    tidyr,
+    ukbAid,
+    usethis,
+    vroom
+Remotes: 
+    easystats/correlation,
+    steno-aarhus/ukbAid,
+    tgerke/ggconsort
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Imports: 
-    devtools,
-    knitr,
-    rmarkdown,
-    dplyr,
-    vroom,
-    stringr,
-    NetCoupler,
-    tidyr,
-    assertr,
-    ggraph,
-    tidygraph,
-    rstudioapi,
-    rsample,
-    furrr,
-    progress,
-    clipr,
-    beepr,
-    desc,
-    here,
-    fs,
-    purrr,
-    targets,
-    usethis,
-    ggconsort (>= 0.1.0),
-    cli,
-    skimr,
-    correlation (>= 0.8.0.1)
 RoxygenNote: 7.1.1
-Remotes:  
-    tgerke/ggconsort,
-    easystats/correlation
-Depends: 
-    R (>= 2.10),
-    tidyverse
