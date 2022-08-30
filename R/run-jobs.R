@@ -18,14 +18,6 @@ run_job_import_project_data <- function() {
     )
 }
 
-run_job_importing_raw <- function() {
-    run_generic_job(
-        "importing-raw.R",
-        "Importing original raw UK Biobank data",
-        "R_GlobalEnv"
-    )
-}
-
 run_job_network_results <- function() {
     run_generic_job(
         "generate-network-results.R",
