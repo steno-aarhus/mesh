@@ -3,3 +3,5 @@
 .Rproj.user
 R/ignore.R
 _ignore
+.Renviron
+data/data.csv
