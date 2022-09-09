@@ -7,28 +7,32 @@ output: html_document
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-Target Markdown is a powerful R Markdown interface for reproducible analysis
-pipelines, and the chapter at https://books.ropensci.org/targets/markdown.html
-walks through it in detail. 
+Target Markdown is a powerful R Markdown interface for reproducible
+analysis pipelines, and the chapter at
+<https://books.ropensci.org/targets/markdown.html> walks through it in
+detail.
 
 # Packages
 
-The example requires several R packages that can be installed using the remotes package:
+The example requires several R packages that can be installed using the
+remotes package:
 
 ```{r install-dependencies, eval=FALSE}
 install.packages("remotes")
-remotes::install_deps()
+install.packages("renv")
+install.packages("targets")
+renv::restore()
 ```
 
 # Setup
 
-If you are using old versions of `targets` (<= 0.7.0) and/or `knitr` (<= 1.33),
-you will need to load the `targets` package in the R Markdown document in order
-for Target Markdown code chunks to work.
+If you are using old versions of `targets` (\<= 0.7.0) and/or `knitr`
+(\<= 1.33), you will need to load the `targets` package in the R
+Markdown document in order for Target Markdown code chunks to work.
 
-Near the top of the document, you may also wish to remove the `_targets_r`
-directory previously written by non-interactive runs of the report. Otherwise,
-your pipeline may contain superfluous targets.
+Near the top of the document, you may also wish to remove the
+`_targets_r` directory previously written by non-interactive runs of the
+report. Otherwise, your pipeline may contain superfluous targets.
 
 ```{r}
 library(targets)
@@ -58,21 +62,29 @@ here::here("R") %>%
 
 # Targets
 
+## Project setup
+
+```{targets set_git_config_global}
+tar_target(
+    name = set_git_config_global,
+    command = ukbAid::setup_git_config("Luke W. Johnston", "lwjohnst@gmail.com")
+)
+```
+
+```{targets download_project_data}
+tar_target(
+    name = download_project_data,
+    command = source(here::here("data-raw/download-data.R"))
+)
+```
+
 ## Pre-processing outside of targets
 
-Initial processing of the UK Biobank to get into the necessary state needed for
-this project. The end goal is to save the dataset at the storage location.
+Initial processing of the UK Biobank to get into the necessary state
+needed for this project. The end goal is to save the dataset at the
+storage location.
 
 ```{r, eval=FALSE}
-# Use to copy variable list for the function to wrangle and pre-prepare the UK
-# Biobank dataset.:
-# column_specs <- initial_import_to_copy_variable_specs()
-
-# Run this to pre-prepare the datasets:
-# ukb_data_raw <- ukb_import_with_specific_columns()
-
-# But better to run as a job first:
-# run_job_importing_raw()
 
 # Then run the wrangling function:
 # wrangled_data <- ukb_wrangle_and_save(ukb_data_raw)
@@ -83,9 +95,9 @@ this project. The end goal is to save the dataset at the storage location.
 
 ## Processing within targets
 
-Next we need to process the dataset for exact use in this project and load it into
-the environment. We don't want to save this dataset, since it is already in its
-remote location.
+Next we need to process the dataset for exact use in this project and
+load it into the environment. We don't want to save this dataset, since
+it is already in its remote location.
 
 ```{targets data_file_path}
 tar_target(
@@ -95,7 +107,8 @@ tar_target(
 )
 ```
 
-Let's import the data from the storage location, without removing exclusions.
+Let's import the data from the storage location, without removing
+exclusions.
 
 ```{targets project-data-pre-exclusions}
 tar_target(
@@ -104,8 +117,8 @@ tar_target(
 )
 ```
 
-Now we can remove participants based on the exclusion criteria and other removals
-that we found during exploration.
+Now we can remove participants based on the exclusion criteria and other
+removals that we found during exploration.
 
 ```{targets project-data}
 tar_target(
@@ -116,8 +129,9 @@ tar_target(
 
 ## Basic descriptive characteristics
 
-Since we want to create a CONSORT diagram of who we removed from the original
-UK Biobank dataset, we send the consort data into the plot function.
+Since we want to create a CONSORT diagram of who we removed from the
+original UK Biobank dataset, we send the consort data into the plot
+function.
 
 TODO: Exclude also those with T2DM and HbA1c above 48?
 
@@ -131,8 +145,8 @@ tar_target(
 )
 ```
 
-We'll run some descriptive statistics on the full data as well as by sex. This
-will be saved into the `data/` folder.
+We'll run some descriptive statistics on the full data as well as by
+sex. This will be saved into the `data/` folder.
 
 ```{targets descriptive-statistics}
 tar_target(
@@ -184,11 +198,12 @@ ggplot(plot_data_prep, aes(x = value, y = ..count..)) +
     legend.box.spacing = grid::unit(0, "cm"),
   )
 
-             labeller = labeller(sex = function(sex) paste(sex, "passengers")))
+             # labeller = labeller(sex = function(sex) paste(sex, "passengers")))
 
 ```
 
-TODO: Plot of all metabolic variables (distributions?) (Use function from above)
+TODO: Plot of all metabolic variables (distributions?) (Use function
+from above)
 
 ```{r}
 project_data %>% 
@@ -201,7 +216,8 @@ TODO: Correlation heatmap of metabolic variables
 
 cors <- function(data) {
     correlation_matrix <- Hmisc::rcorr(as.matrix(data))
-    Mdf <- map(M, ~ data.frame(.x)) return(Mdf)
+    Mdf <- map(M, ~ data.frame(.x)) 
+    return(Mdf)
 }
 
 
@@ -251,17 +267,17 @@ corr_results <- project_data %>%
     select(starts_with("mtb"), -mtb_glycated_haemoglobin_hba1c) %>% 
     correlation::correlation(redundant = TRUE, p_adjust = "fdr")
 
-corr_results %>% 
-    correlation::cor_lower() %>% 
+# corr_results %>% 
+#     correlation::cor_lower() %>% 
     
 ```
 
-
 ## Processing for NetCoupler
 
-There are some things we need to process for NetCoupler to work effectively. Plus
-some data is largely missing, so we're removing those columns. Then we do an
-initial split to have a training set and an (eventual) testing set.
+There are some things we need to process for NetCoupler to work
+effectively. Plus some data is largely missing, so we're removing those
+columns. Then we do an initial split to have a training set and an
+(eventual) testing set.
 
 ```{targets project-data-for-nc}
 tar_target(
@@ -271,9 +287,9 @@ tar_target(
 ```
 
 While we do an initial split of the dataset, we also want to create some
-cross-validation splits to 1) make it easier for NetCoupler to run on the full 
-dataset and 2) to aggregate the results across the splits to hopefully get a 
-better estimate of the network and modeling.
+cross-validation splits to 1) make it easier for NetCoupler to run on
+the full dataset and 2) to aggregate the results across the splits to
+hopefully get a better estimate of the network and modeling.
 
 ```{targets project-data-for-nc-cv}
 tar_target(
@@ -296,14 +312,16 @@ testing_network <- testing_sampling %>%
 
 ```
 
-Next is to set up the 
+Next is to set up the
 
-TODO: Make DAG of underlying causal relationships (in relation to confounders)
+TODO: Make DAG of underlying causal relationships (in relation to
+confounders)
 
-- Update confounders based on Christina's paper
-    - Smoking? Physical activity? Ethnic background, education, income, anthropometrics?
-    - Make DAG.
-    
+-   Update confounders based on Christina's paper
+    -   Smoking? Physical activity? Ethnic background, education,
+        income, anthropometrics?
+    -   Make DAG.
+
 ## NetCoupler analysis
 
 ```{targets network-results}
@@ -315,16 +333,15 @@ tar_target(
 )
 ```
 
-
 TODO:
 
-- Network results by sex/gender
-- Exposure and outcome link results by sex/gender
-- (In manuscript Rmd instead of targets?) Plot of network results by sex/gender
-as well as total.
-- (In manuscript Rmd instead of targets?) Plot of linkage results by sex/gender
-as well as total.
-- List of variables and their meta data (from UK Biobank)
+-   Network results by sex/gender
+-   Exposure and outcome link results by sex/gender
+-   (In manuscript Rmd instead of targets?) Plot of network results by
+    sex/gender as well as total.
+-   (In manuscript Rmd instead of targets?) Plot of linkage results by
+    sex/gender as well as total.
+-   List of variables and their meta data (from UK Biobank)
 
 And eventually make the manuscript:
 
@@ -334,7 +351,8 @@ And eventually make the manuscript:
 
 # Pipeline
 
-If you ran all the `{targets}` chunks in non-interactive mode, then your R scripts are set up to run the pipeline.
+If you ran all the `{targets}` chunks in non-interactive mode, then your
+R scripts are set up to run the pipeline.
 
 ```{r}
 tar_make()
@@ -344,7 +362,8 @@ tar_delete(starts_with("project_data"))
 
 # Output
 
-You can retrieve results from the `_targets/` data store using `tar_read()` or `tar_load()`.
+You can retrieve results from the `_targets/` data store using
+`tar_read()` or `tar_load()`.
 
 ```{r, message = FALSE}
 library(biglm)
@@ -355,10 +374,13 @@ tar_read(fit)
 tar_read(hist)
 ```
 
-The `targets` dependency graph helps your readers understand the steps of your pipeline at a high level.
+The `targets` dependency graph helps your readers understand the steps
+of your pipeline at a high level.
 
 ```{r}
 tar_visnetwork()
 ```
 
-At this point, you can go back and run `{targets}` chunks in interactive mode without interfering with the code or data of the non-interactive pipeline.
+At this point, you can go back and run `{targets}` chunks in interactive
+mode without interfering with the code or data of the non-interactive
+pipeline.
