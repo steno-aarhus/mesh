@@ -3,8 +3,8 @@
     "Version": "4.2.1",
     "Repositories": [
       {
-        "Name": "CRAN",
-        "URL": "https://cran.rstudio.com"
+        "Name": "RSPM",
+        "URL": "https://packagemanager.rstudio.com/all/latest"
       }
     ]
   },
@@ -106,12 +106,14 @@
     "RBGL": {
       "Package": "RBGL",
       "Version": "1.72.0",
-      "Source": "Bioconductor",
-      "git_url": "https://git.bioconductor.org/packages/RBGL",
-      "git_branch": "RELEASE_3_15",
-      "git_last_commit": "a86f310",
-      "git_last_commit_date": "2022-04-26",
-      "Hash": "7977db911751ce0f30305135f6d37f83",
+      "Source": "bioc_xgit",
+      "RemoteType": "bioc_xgit",
+      "RemoteMirror": "https://git.bioconductor.org/packages",
+      "RemoteRepo": "RBGL",
+      "RemoteRelease": "release",
+      "RemoteSha": "a86f3102f2795e1ffb530bb061247e3a42ca22f7",
+      "RemoteBranch": "RELEASE_3_15",
+      "Hash": "d84bd05df735f0eeae6581dc717d7c8f",
       "Requirements": [
         "BH",
         "graph"
@@ -124,6 +126,16 @@
       "Repository": "CRAN",
       "Hash": "45f0398006e83a5b10b72a90663d8d8c",
       "Requirements": []
+    },
+    "RCurl": {
+      "Package": "RCurl",
+      "Version": "1.98-1.8",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "19448e3b7f646a99d42660dc025e8f8c",
+      "Requirements": [
+        "bitops"
+      ]
     },
     "Rcpp": {
       "Package": "Rcpp",
@@ -273,6 +285,14 @@
       "Requirements": [
         "bit"
       ]
+    },
+    "bitops": {
+      "Package": "bitops",
+      "Version": "1.0-7",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "b7d8d8ee39869c18d8846a184dd8a1af",
+      "Requirements": []
     },
     "blob": {
       "Package": "blob",
@@ -448,10 +468,15 @@
     },
     "correlation": {
       "Package": "correlation",
-      "Version": "0.8.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "9b2e93c935be32e2694380953dd81e82",
+      "Version": "0.8.2.4",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "correlation",
+      "RemoteUsername": "easystats",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "0cb1f52e141159aac8f7cf3b71fbe946f2d11fff",
+      "Hash": "44ef16e1e60ad5656dbd06c8f65bce90",
       "Requirements": [
         "bayestestR",
         "datawizard",
@@ -799,10 +824,10 @@
     },
     "gert": {
       "Package": "gert",
-      "Version": "1.8.0",
+      "Version": "1.9.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "4bdd6588a3cbde071c7de6d07b66f1d3",
+      "Hash": "56dc795889978f759ea0b0de06dcd5b4",
       "Requirements": [
         "askpass",
         "credentials",
@@ -810,6 +835,28 @@
         "rstudioapi",
         "sys",
         "zip"
+      ]
+    },
+    "ggconsort": {
+      "Package": "ggconsort",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ggconsort",
+      "RemoteUsername": "tgerke",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "b0a879afa9ef5c9b3648bda11f5cb1763cffab4e",
+      "Hash": "b0a196efd49cc9953733505a03cbb8ef",
+      "Requirements": [
+        "dplyr",
+        "ggplot2",
+        "ggtext",
+        "glue",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "tidyselect"
       ]
     },
     "ggforce": {
@@ -896,6 +943,19 @@
       "Requirements": [
         "Rcpp",
         "ggplot2",
+        "rlang",
+        "scales"
+      ]
+    },
+    "ggtext": {
+      "Package": "ggtext",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "03d8caec959ac70e2d13bad1ac40667c",
+      "Requirements": [
+        "ggplot2",
+        "gridtext",
         "rlang",
         "scales"
       ]
@@ -989,12 +1049,14 @@
     "graph": {
       "Package": "graph",
       "Version": "1.74.0",
-      "Source": "Bioconductor",
-      "git_url": "https://git.bioconductor.org/packages/graph",
-      "git_branch": "RELEASE_3_15",
-      "git_last_commit": "4af608a",
-      "git_last_commit_date": "2022-04-26",
-      "Hash": "08e64017b9fc86340df1a13eb89573cc",
+      "Source": "bioc_xgit",
+      "RemoteType": "bioc_xgit",
+      "RemoteMirror": "https://git.bioconductor.org/packages",
+      "RemoteRepo": "graph",
+      "RemoteRelease": "release",
+      "RemoteSha": "4af608a5d9e1de33fda6ae28fb73bff9272ee296",
+      "RemoteBranch": "RELEASE_3_15",
+      "Hash": "ada2d31a60e85baee48e2af0b2356383",
       "Requirements": [
         "BiocGenerics"
       ]
@@ -1019,6 +1081,23 @@
       "Hash": "7d7f283939f563670a697165b2cf5560",
       "Requirements": [
         "gtable"
+      ]
+    },
+    "gridtext": {
+      "Package": "gridtext",
+      "Version": "0.1.4",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "5ae1f617531ca2ae244647d9b21b5e74",
+      "Requirements": [
+        "RCurl",
+        "Rcpp",
+        "jpeg",
+        "markdown",
+        "png",
+        "rlang",
+        "stringr",
+        "xml2"
       ]
     },
     "gtable": {
@@ -1182,6 +1261,14 @@
       "Hash": "7ab57a6de7f48a8dc84910d1eca42883",
       "Requirements": []
     },
+    "jpeg": {
+      "Package": "jpeg",
+      "Version": "0.1-9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "441ee36360a57b363f4fa3df0c364630",
+      "Requirements": []
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -1288,6 +1375,17 @@
       "Repository": "CRAN",
       "Hash": "7ce2733a9826b3aeb1775d56fd305472",
       "Requirements": []
+    },
+    "markdown": {
+      "Package": "markdown",
+      "Version": "1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "61e4a10781dd00d7d81dd06ca9b94e95",
+      "Requirements": [
+        "mime",
+        "xfun"
+      ]
     },
     "memoise": {
       "Package": "memoise",
@@ -1507,6 +1605,14 @@
         "rprojroot",
         "withr"
       ]
+    },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "03b7076c234cb3331288919983326c55",
+      "Requirements": []
     },
     "polyclip": {
       "Package": "polyclip",
@@ -2288,8 +2394,8 @@
       "RemoteRepo": "ukbAid",
       "RemoteUsername": "steno-aarhus",
       "RemoteRef": "HEAD",
-      "RemoteSha": "3850b261b97a77b384dd7990d54d628bdea68de4",
-      "Hash": "cbc3746120df5458d415ecc25f8c87f5",
+      "RemoteSha": "aa7dc293fa25a8ed94262c9cc159dc4497457d20",
+      "Hash": "1f85931a9ae23058787049d0db8cfb3c",
       "Requirements": [
         "cli",
         "desc",
@@ -2304,6 +2410,7 @@
         "readr",
         "renv",
         "rjson",
+        "rstudioapi",
         "tibble",
         "usethis",
         "withr"
