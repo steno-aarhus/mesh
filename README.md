@@ -1,6 +1,27 @@
-# ecc-cmd-ukb: Early childhood conditions and cardiometabolic disease in the UK Biobank
+# mesh: The metabolic pathways between components of stature and HbA1c: An exploratory cross-sectional analysis in the UK Biobank
 
-<!-- TODO: Give a brief description of what your project is about -->
+<!-- TODO: Add OSF Protocol DOI here.-->
+
+Shorter relative adult leg length (LL), a marker of adverse growth
+conditions during early childhood, is associated with a higher risk for
+type 2 diabetes. How this link is mediated metabolically is not well
+known in humans. Our aim was to explore how the components of stature
+influence the metabolic profile in adults and the consequent risk for
+type 2 diabetes through higher HbA1c.
+
+Further project details can be found in the `doc/protocol.Rmd` file.
+However, here are some brief details:
+
+-   **Population:** Those without diabetes and who have had their
+    stature measured in the UK Biobank.
+
+-   **Exposures:** Height, sitting height, and leg length.
+
+-   **Comparisons:** The exposure measures are used as continuous
+    variables, so comparisons will be done on a continuum of
+    increasing/decreasing exposure.
+
+-   **Outcome:** HbA1c
 
 ## Explanation of workflow
 
@@ -9,23 +30,10 @@ structured, how files should be run, and what the different files do.
 The layout and setup of this project was designed for using
 [RStudio](https://www.rstudio.com/) and
 [devtools](https://github.com/hadley/devtools). It is set up this way to
-make it easy for others to run your code and analyses for themselves and
-to skaffold onto devtools (used for R package development) because it is
-well documented and actively maintained. See the excellent [R for Data
-Science](http://r4ds.had.co.nz/) online book for more details on how to
-work with this directory format.
-
-Typical commands used in this workflow include:
-
--   *Ctrl-Shift-L* (`devtools::load_all()`)
--   *Ctrl-Shift-K* (`rmarkdown::render('file.Rmd')`)
-
+make it easy for others to run the code and analyses for themselves and
+to scaffold onto the devtools workflow (used for R package development).
 For more detail on using this project workflow, see
-[prodigenr](https://lwjohnst86.github.io/prodigenr).
-
-To install all the packages necessary for this project (only if
-`usethis::use_package("packagename")` has been used often), run this
-command while in the project:
+[prodigenr](https://rostools.github.io/prodigenr).
 
 ## Installing project R package dependencies
 
@@ -36,9 +44,6 @@ and running this command in the console:
 
 ``` r
 renv::restore()
-```
-
-``` r
 targets::tar_make()
 ```
 
@@ -79,4 +84,3 @@ These files are for:
 
 All subsequent folders have their own README inside. See them for more
 details.
-
