@@ -16,9 +16,7 @@ options(renv.config.repos.override = getOption("repos"))
 if (interactive()) {
     suppressMessages(require(devtools))
     suppressMessages(require(usethis))
-}
-
-if (interactive()) {
     source("renv/activate.R")
     options(Ncpus = 3)
+    try(rspm::enable(), silent = TRUE)
 }
