@@ -45,7 +45,9 @@ Imports:
 Remotes: 
     easystats/correlation,
     steno-aarhus/ukbAid,
-    tgerke/ggconsort
+    tgerke/ggconsort,
+    bioc::release/RBGL,
+    bioc::release/graph
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
