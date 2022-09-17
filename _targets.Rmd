@@ -18,17 +18,18 @@ The example requires several R packages that can be installed using the
 remotes package:
 
 ```{r install-dependencies, eval=FALSE}
-install.packages("remotes")
-install.packages("renv")
-install.packages("targets")
+# These only need to be run outside of the UKBRAP
+# install.packages("remotes")
+# install.packages("renv")
+# install.packages("targets")
+# remotes::install_github("steno-aarhus/ukbAid")
+
+# Everything should have been setup in the UKBRAP if ukbAid 
+# instructions were followed.
 renv::restore()
 ```
 
 # Setup
-
-If you are using old versions of `targets` (\<= 0.7.0) and/or `knitr`
-(\<= 1.33), you will need to load the `targets` package in the R
-Markdown document in order for Target Markdown code chunks to work.
 
 Near the top of the document, you may also wish to remove the
 `_targets_r` directory previously written by non-interactive runs of the
