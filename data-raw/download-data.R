@@ -23,7 +23,7 @@ ukbAid::rap_variables %>%
     readr::write_csv(here::here("data-raw/rap-variables.csv"))
 
 ukbAid::project_variables %>%
-    dplyr::right_join(original_variables) %>%
+    dplyr::semi_join(original_variables) %>%
     readr::write_csv(here::here("data-raw/project-variables.csv"))
 
 ukbAid::subset_rap_variables(instances = 0)
@@ -32,18 +32,9 @@ ukbAid::subset_rap_variables(instances = 0)
 
 # Uncomment and run the below lines **ONLY AFTER** running the above function.
 # After running this code and creating the csv file in the main RAP project
-# folder, comment it out again so you don't run it anymore.
+# folder, comment it out again so you don't accidentally run it anymore (unless
+# you need to re-create the dataset).
 
 # readr::read_csv(here::here("data-raw/rap-variables.csv")) %>%
 #     dplyr::pull(rap_variable_name) %>%
 #     ukbAid::create_csv_from_database()
-
-# Download the project data from RAP into the session ---------------------
-
-# Uncomment (and keep uncommented) and run after running the code above and
-# letting it create your csv file of the data you want. This code below will
-# download your project data and save it into the `data/data.csv` file.
-# *This file should NOT be saved in the Git history.*
-
-# ukbAid::download_project_data()
-
