@@ -65,17 +65,11 @@ here::here("R") %>%
 
 ## Project setup
 
-```{targets set_git_config_global}
-tar_target(
-    name = set_git_config_global,
-    command = ukbAid::setup_git_config("Luke W. Johnston", "lwjohnst@gmail.com")
-)
-```
-
 ```{targets download_project_data}
 tar_target(
     name = download_project_data,
-    command = source(here::here("data-raw/download-data.R"))
+    command = ukbAid::download_project_data(),
+    format = "file"
 )
 ```
 
