@@ -42,7 +42,8 @@ Imports:
     ukbAid,
     yaml,
     usethis,
-    vroom
+    vroom,
+    rspm
 Remotes: 
     easystats/correlation,
     steno-aarhus/ukbAid,

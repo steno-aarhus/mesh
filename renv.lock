@@ -1507,6 +1507,15 @@
         "vctrs"
       ]
     },
+    "rspm": {
+      "Package": "rspm",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "OS_type": "unix",
+      "Hash": "67759dde0bf6f38316d0106bf84b1de2",
+      "Requirements": []
+    },
     "rstudioapi": {
       "Package": "rstudioapi",
       "Version": "0.14",
@@ -1858,14 +1867,14 @@
       "Package": "ukbAid",
       "Version": "0.0.0.9000",
       "Source": "GitHub",
-      "Remotes": "crsh/prereg",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "ukbAid",
       "RemoteUsername": "steno-aarhus",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "aa7dc293fa25a8ed94262c9cc159dc4497457d20",
-      "Hash": "1f85931a9ae23058787049d0db8cfb3c",
+      "RemoteRepo": "ukbAid",
+      "RemoteRef": "main",
+      "RemoteSha": "d2f94850a4d8bafe3e2f6e91bc2fe0fae46b7599",
+      "Remotes": "crsh/prereg",
+      "Hash": "e6c27b1476f2f4b3f27dfc43fd173326",
       "Requirements": [
         "cli",
         "desc",
