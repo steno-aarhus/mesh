@@ -8,9 +8,6 @@
       }
     ]
   },
-  "Bioconductor": {
-    "Version": "3.15"
-  },
   "Packages": {
     "BH": {
       "Package": "BH",
@@ -456,9 +453,9 @@
       "RemoteUsername": "easystats",
       "RemoteRepo": "correlation",
       "RemoteRef": "HEAD",
-      "RemoteSha": "fe6bd03dee7ef725b8d71724aeeb5841852cfdfb",
+      "RemoteSha": "5fba271498e43da98491ed96bcc26b6eea38d81e",
       "RemoteHost": "api.github.com",
-      "Hash": "6e8d07c4a92649c3ca4113fa5ec10842",
+      "Hash": "e97b3940bb4a2e86302eb60fd97fff84",
       "Requirements": [
         "bayestestR",
         "datawizard",
@@ -2375,16 +2372,16 @@
     },
     "ukbAid": {
       "Package": "ukbAid",
-      "Version": "0.0.1.9000",
+      "Version": "0.0.3",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "steno-aarhus",
       "RemoteRepo": "ukbAid",
       "RemoteRef": "HEAD",
-      "RemoteSha": "8ef0e887ab3bed95acb2025cd8d5c24c44fb2631",
+      "RemoteSha": "48cdfcf39d377d57a43b6107bcf62ab9ad5aa3d6",
       "RemoteHost": "api.github.com",
       "Remotes": "crsh/prereg",
-      "Hash": "ab42ded0e047ba41a2c7b761331690d1",
+      "Hash": "994ab8ac31c58fb87802a6460ae261e2",
       "Requirements": [
         "cli",
         "desc",
