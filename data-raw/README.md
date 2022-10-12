@@ -9,5 +9,5 @@ This contains largely the variables needed for the analysis.
     `original-variables.csv` file).
 -   `rap-variables.csv` is the variable list that is formatted the way
     that RAP needs it to be in order to create the dataset.
--   `download-data.R` is the script to create and later download the
+-   `create-data.R` is the script to create and later download the
     dataset from the RAP database.
