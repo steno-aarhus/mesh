@@ -43,6 +43,9 @@ installing dependencies is as easy as opening the `mesh.Rproj` file and
 running this command in the console:
 
 ``` r
+# Might need to re-set these if `restore()` complains about PAT.
+# gitcreds::gitcreds_set()
+# credentials::set_github_pat(TRUE)
 renv::restore()
 targets::tar_make()
 ```
