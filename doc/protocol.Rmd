@@ -1,6 +1,10 @@
 ---
 title: "Protocol: TITLE"
-author: "YOUR NAME"
+author: 
+    - Luke W. Johnston
+    - Daniel Ibsen
+    - Daniel Witte
+    - Alisa Kjærgaard
 date: "Last updated: `r Sys.Date()`"
 output: ukbAid::protocol_document
 # bibliography: "PATH"
@@ -11,43 +15,50 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 *This is a template for writing your protocol in a format that is easily
-transferable to the [Open Science Framework registry](https://osf.io/) for all
-types of studies. Because this database is not for observational studies per se,
-there are fields that are not relevant for you to fill in. These fields have not
-been included in this template. Also, all fields where you have to check a list
-of items or similar, have also been excluded from this template.*
+transferable to the [Open Science Framework registry](https://osf.io/)
+for all types of studies. Because this database is not for observational
+studies per se, there are fields that are not relevant for you to fill
+in. These fields have not been included in this template. Also, all
+fields where you have to check a list of items or similar, have also
+been excluded from this template.*
 
 *Please also refer to a relevant reporting checklist (e.g. STROBE) when
-describing the study. Find checklists [here](https://www.equator-network.org/)*
+describing the study. Find checklists
+[here](https://www.equator-network.org/)*
 
 # Metadata
 
 ## Title
 
-*Put in the title of your study. Remember to include your study design in the title.*
+*Put in the title of your study. Remember to include your study design
+in the title.*
 
 ## Description
 
-*Overall description of your project. Think of this as what you would reply if a colleague asked you what your project was about.*
+*Overall description of your project. Think of this as what you would
+reply if a colleague asked you what your project was about.*
 
 <!-- NOTE: Keep the inline R code below. This inserts the standard UKB statement. -->
+
 `r ukbAid::uk_protocol_statement`
 
 # Study Information
 
-## Objectives and hypotheses 
+## Objectives and hypotheses
 
-- *Put in a very brief introduction to the topic. Explain the scientific background and rationale*
+-   *Put in a very brief introduction to the topic. Explain the
+    scientific background and rationale*
 
-- *Put in the research aim/objective*
+-   *Put in the research aim/objective*
 
-- *If relevant, list your specific hypotheses*
+-   *If relevant, list your specific hypotheses*
 
 # Design plan
 
 ## Study design
 
-*put in overall information about the study design. Key elements of the study design, the location, relevant dates, periods of recruitment etc.*
+*put in overall information about the study design. Key elements of the
+study design, the location, relevant dates, periods of recruitment etc.*
 
 # Sampling plan
 
@@ -61,11 +72,24 @@ describing the study. Find checklists [here](https://www.equator-network.org/)*
 
 ## Sample size
 
-*describe the participants. Describe eligibility criteria and sources of selection of participants. At this point it may not be possible to know your sample size*
+*describe the participants. Describe eligibility criteria and sources of
+selection of participants. At this point it may not be possible to know
+your sample size*
 
 # Variables
 
-## Measures variables
+## Measured variables
+
+-   **Population:** Those without diabetes and who have had their
+    stature measured in the UK Biobank.
+
+-   **Exposures:** Height, sitting height, and leg length.
+
+-   **Comparisons:** The exposure measures are used as continuous
+    variables, so comparisons will be done on a continuum of
+    increasing/decreasing exposure.
+
+-   **Outcome:** HbA1c
 
 *list the exposure(s)*
 
@@ -77,9 +101,13 @@ describing the study. Find checklists [here](https://www.equator-network.org/)*
 
 ## Statistical models
 
-*describe your statistical analysis. This is essentially your statistical analysis plan*
+*describe your statistical analysis. This is essentially your
+statistical analysis plan*
 
-*Remember to mention statistical software to be used, analysis of baseline characteristics, adjustment for confounding, selection of potential confounders, examined subgroups, how missing data was handled, how loss to follow-up was addressed and sensitivity analyses* 
+*Remember to mention statistical software to be used, analysis of
+baseline characteristics, adjustment for confounding, selection of
+potential confounders, examined subgroups, how missing data was handled,
+how loss to follow-up was addressed and sensitivity analyses*
 
 # Other
 
