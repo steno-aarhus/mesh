@@ -18,6 +18,7 @@ prep_data <- project_data %>%
 # Use this to check characteristics of the data before synthesizing it.
 # synthpop::codebook.syn(prep_data)
 
+# TODO: Switch to faux?
 fake_ukbiobank_object <- synthpop::syn(prep_data)
 fake_ukbiobank <- as_tibble(fake_ukbiobank_object$syn)
 
