@@ -39,8 +39,8 @@ For more detail on using this project workflow, see
 
 If dependencies have been managed by using
 `usethis::use_package("packagename")` through the `DESCRIPTION` file,
-installing dependencies is as easy as opening the `testproj3.Rproj` file
-and running this command in the console:
+installing dependencies is as easy as opening the `mesh.Rproj` file and
+running this command in the console:
 
 ``` r
 renv::restore()
