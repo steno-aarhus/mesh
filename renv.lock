@@ -450,12 +450,12 @@
       "Version": "0.8.3",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "easystats",
       "RemoteRepo": "correlation",
-      "RemoteRef": "HEAD",
+      "RemoteRef": "main",
       "RemoteSha": "5fba271498e43da98491ed96bcc26b6eea38d81e",
-      "RemoteHost": "api.github.com",
-      "Hash": "e97b3940bb4a2e86302eb60fd97fff84",
+      "Hash": "bb85b7c65e720129196dae63e9a78353",
       "Requirements": [
         "bayestestR",
         "datawizard",
@@ -822,11 +822,11 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "ggconsort",
       "RemoteUsername": "tgerke",
-      "RemoteRef": "HEAD",
+      "RemoteRepo": "ggconsort",
+      "RemoteRef": "main",
       "RemoteSha": "b0a879afa9ef5c9b3648bda11f5cb1763cffab4e",
-      "Hash": "b0a196efd49cc9953733505a03cbb8ef",
+      "Hash": "7a98d5ccbad67f6061f3fefdab5ef13b",
       "Requirements": [
         "dplyr",
         "ggplot2",
@@ -1957,6 +1957,15 @@
         "vctrs"
       ]
     },
+    "rspm": {
+      "Package": "rspm",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "OS_type": "unix",
+      "Hash": "67759dde0bf6f38316d0106bf84b1de2",
+      "Requirements": []
+    },
     "rstudioapi": {
       "Package": "rstudioapi",
       "Version": "0.14",
@@ -2375,13 +2384,13 @@
       "Version": "0.0.3",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "steno-aarhus",
       "RemoteRepo": "ukbAid",
-      "RemoteRef": "HEAD",
+      "RemoteRef": "main",
       "RemoteSha": "48cdfcf39d377d57a43b6107bcf62ab9ad5aa3d6",
-      "RemoteHost": "api.github.com",
       "Remotes": "crsh/prereg",
-      "Hash": "994ab8ac31c58fb87802a6460ae261e2",
+      "Hash": "1f2e92af7cac947b4f271b7c663d52c9",
       "Requirements": [
         "cli",
         "desc",
