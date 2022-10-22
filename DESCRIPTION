@@ -1,12 +1,8 @@
 Type: Project
-Package: ecc.cmd.ukbiobank
-Title: Early Childhood Conditions And Cardmetabolic Disease in the UK
-    Biobank.
-Version: 0.0.1
+Package: mesh
+Version: 1
 Authors@R: 
     person("Luke", "Johnston", , "lwjohnst@gmail.com", role = c("aut", "cre"))
-Description: Analysis and manuscript files for the project on early
-    childhood and cardiometabolic disease in the UK Biobank.
 Depends: 
     R (>= 4.2.0),
     tidyverse
@@ -55,4 +51,5 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    askpass
+    askpass,
+    prereg
