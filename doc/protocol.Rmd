@@ -1,12 +1,30 @@
 ---
-title: "Protocol: TITLE"
+title: "The metabolic pathways between components of stature and HbA1c: Protocol for an exploratory cross-sectional analysis in the UK Biobank"
+shorttitle: 
 author: 
     - Luke W. Johnston
     - Daniel Ibsen
     - Daniel Witte
     - Alisa Kjærgaard
-date: "Last updated: `r Sys.Date()`"
-output: ukbAid::protocol_document
+date: "`r Sys.Date()`"
+author: 
+  - name: Luke W. Johnston
+    affiliation: "1,2"
+  - name: Daniel Ibsen
+    affiliation: 1
+  - name: Daniel Witte
+    affiliation: "1,2"
+  - name: Alisa Kjærgaard
+    affiliation: "1,2"
+affiliation:
+  - id: 1
+    institution: Steno Diabetes Center Aarhus, Denmark
+  - id: 2
+    institution: Aarhus University, Denmark
+output: 
+    ukbAid::protocol_document: default
+    prereg::prereg_pdf: default
+    md_document: default
 # bibliography: "PATH"
 ---
 
@@ -14,57 +32,65 @@ output: ukbAid::protocol_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-*This is a template for writing your protocol in a format that is easily
-transferable to the [Open Science Framework registry](https://osf.io/)
-for all types of studies. Because this database is not for observational
-studies per se, there are fields that are not relevant for you to fill
-in. These fields have not been included in this template. Also, all
-fields where you have to check a list of items or similar, have also
-been excluded from this template.*
-
 *Please also refer to a relevant reporting checklist (e.g. STROBE) when
 describing the study. Find checklists
 [here](https://www.equator-network.org/)*
 
-# Metadata
+# Study information
 
 ## Title
 
-*Put in the title of your study. Remember to include your study design
-in the title.*
+`r rmarkdown::metadata$title`
 
 ## Description
 
-*Overall description of your project. Think of this as what you would
-reply if a colleague asked you what your project was about.*
+There is strong evidence of a relationship between adverse early life
+conditions and risk for type 2 diabetes, but it isn't well-studied in
+humans how this association may be mediated metabolically. For instance,
+does an adverse growth condition lead to a lower metabolic capacity to
+handle nutrients like lipids, translating to higher LDL, lower HDL, and
+higher glucose? Does it lead to lower capacity to resolve inflammation,
+leading to slightly higher CRP? And does this lower metabolic capacity
+translate to a higher risk for diabetes?
 
-<!-- NOTE: Keep the inline R code below. This inserts the standard UKB statement. -->
+Directly studying the role of early childhood conditions on diabetes
+risk is extremely difficult, if not at least practically impossible
+considering we need data from an adult's childhood. However, adult leg
+length is a useful biomarker of early childhood conditions, as growth
+conditions can influence how much the legs grow relative to the rest of
+the body.
 
+We will use the UK Biobank Cohort to study how adult leg length mediates
+risk for type 2 diabetes through standard clinical metabolic variables.
 `r ukbAid::uk_protocol_statement`
-
-# Study Information
 
 ## Objectives and hypotheses
 
--   *Put in a very brief introduction to the topic. Explain the
-    scientific background and rationale*
+Our *exporatory* aim is to identify how the components of stature
+influence the metabolic profile in adults and the consequent risk for
+type 2 diabetes through higher HbA1c by:
 
--   *Put in the research aim/objective*
-
--   *If relevant, list your specific hypotheses*
+-   Exploring how components of stature relate to aspects of the
+    metabolic profile
 
 # Design plan
 
 ## Study design
 
-*put in overall information about the study design. Key elements of the
-study design, the location, relevant dates, periods of recruitment etc.*
+This is a cross-sectional analysis of a large cohort dataset.
 
 # Sampling plan
 
 ## Data collection procedures
 
 *describe how the exposure was assessed*
+
+```{r}
+library(tidyverse)
+read_csv(here::here("data-raw/project-variables.csv")) %>% 
+    select(ukb_variable_description, link) %>% 
+    filter(str_detect(ukb_variable_description, "height|leg|sitting"))
+```
 
 *describe how the outcome was assessed*
 
@@ -114,3 +140,4 @@ how loss to follow-up was addressed and sensitivity analyses*
 *add the references here*
 
 # References
+
