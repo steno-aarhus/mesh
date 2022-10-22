@@ -1,8 +1,7 @@
 ---
-output: word_document
-editor_options: 
-  markdown: 
-    wrap: 72
+output: 
+    - word_document: default
+    - md_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -107,8 +106,7 @@ the UK Biobank
 
 Authors:
 
-Luke W Johnston, Clemens Wittenbecher, Helene T Vistisen, Christina C
-Dahm, Daniel R Witte
+Luke W Johnston, Clemens Wittenbecher, Christina C Dahm, Daniel R Witte
 
 <!-- During time of study. -->
 
@@ -176,7 +174,6 @@ lower inflammation (via CRP).
 -   *Aim*: Identify how components of stature influence metabolic
     profile and HbA1c.
 
-Hi everyone, thanks for listening in. I'll be presenting some results of
 using a causal structure learning algorithm to investigate potential
 metabolic pathways between the components of stature and HbA1c.
 
@@ -278,6 +275,9 @@ for listening and I look forward to any questions.
 
 # Tables
 
+TODO: Use cached chunks to switch between using in-text figures/tables
+vs at the end like journals usually require
+
 # Figures
 
 ## Figure 1: NetCoupler algorithm (R package at [github.com/NetCoupler](https://github.com/NetCoupler)) process, identifies potential pathways between exposure (E), metabolic network (N), and outcome (O) `r row_height(375)`
@@ -297,3 +297,5 @@ knitr::include_graphics("images/netcoupler-results.png")
 ```
 
 # Supplemental Material
+
+TODO: Maybe not include?
