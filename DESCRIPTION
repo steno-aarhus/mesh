@@ -22,6 +22,7 @@ Imports:
     ggraph,
     here,
     knitr,
+    magrittr,
     NetCoupler,
     progress,
     purrr,
@@ -29,6 +30,7 @@ Imports:
     renv,
     rmarkdown,
     rsample,
+    rspm,
     rstudioapi,
     skimr,
     stringr,
@@ -36,20 +38,18 @@ Imports:
     tidygraph,
     tidyr,
     ukbAid,
-    yaml,
     usethis,
     vroom,
-    rspm
+    yaml
+Suggests: 
+    askpass,
+    prereg
 Remotes: 
-    easystats/correlation,
-    steno-aarhus/ukbAid,
-    tgerke/ggconsort,
+    bioc::graph,
     bioc::RBGL,
-    bioc::graph
+    github::steno-aarhus/ukbAid,
+    github::tgerke/ggconsort
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Suggests: 
-    askpass,
-    prereg
