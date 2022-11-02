@@ -12,40 +12,7 @@ p4079_i0_a0,"Diastolic blood pressure, automated reading | Instance 0 | Array 0"
 p4079_i0_a1,"Diastolic blood pressure, automated reading | Instance 0 | Array 1",p4079
 p4080_i0_a0,"Systolic blood pressure, automated reading | Instance 0 | Array 0",p4080
 p4080_i0_a1,"Systolic blood pressure, automated reading | Instance 0 | Array 1",p4080
-p20002_i0_a0,"Non-cancer illness code, self-reported | Instance 0 | Array 0",p20002
-p20002_i0_a1,"Non-cancer illness code, self-reported | Instance 0 | Array 1",p20002
-p20002_i0_a2,"Non-cancer illness code, self-reported | Instance 0 | Array 2",p20002
-p20002_i0_a3,"Non-cancer illness code, self-reported | Instance 0 | Array 3",p20002
-p20002_i0_a4,"Non-cancer illness code, self-reported | Instance 0 | Array 4",p20002
-p20002_i0_a5,"Non-cancer illness code, self-reported | Instance 0 | Array 5",p20002
-p20002_i0_a6,"Non-cancer illness code, self-reported | Instance 0 | Array 6",p20002
-p20002_i0_a7,"Non-cancer illness code, self-reported | Instance 0 | Array 7",p20002
-p20002_i0_a8,"Non-cancer illness code, self-reported | Instance 0 | Array 8",p20002
-p20002_i0_a9,"Non-cancer illness code, self-reported | Instance 0 | Array 9",p20002
-p20002_i0_a10,"Non-cancer illness code, self-reported | Instance 0 | Array 10",p20002
-p20002_i0_a11,"Non-cancer illness code, self-reported | Instance 0 | Array 11",p20002
-p20002_i0_a12,"Non-cancer illness code, self-reported | Instance 0 | Array 12",p20002
-p20002_i0_a13,"Non-cancer illness code, self-reported | Instance 0 | Array 13",p20002
-p20002_i0_a14,"Non-cancer illness code, self-reported | Instance 0 | Array 14",p20002
-p20002_i0_a15,"Non-cancer illness code, self-reported | Instance 0 | Array 15",p20002
-p20002_i0_a16,"Non-cancer illness code, self-reported | Instance 0 | Array 16",p20002
-p20002_i0_a17,"Non-cancer illness code, self-reported | Instance 0 | Array 17",p20002
-p20002_i0_a18,"Non-cancer illness code, self-reported | Instance 0 | Array 18",p20002
-p20002_i0_a19,"Non-cancer illness code, self-reported | Instance 0 | Array 19",p20002
-p20002_i0_a20,"Non-cancer illness code, self-reported | Instance 0 | Array 20",p20002
-p20002_i0_a21,"Non-cancer illness code, self-reported | Instance 0 | Array 21",p20002
-p20002_i0_a22,"Non-cancer illness code, self-reported | Instance 0 | Array 22",p20002
-p20002_i0_a23,"Non-cancer illness code, self-reported | Instance 0 | Array 23",p20002
-p20002_i0_a24,"Non-cancer illness code, self-reported | Instance 0 | Array 24",p20002
-p20002_i0_a25,"Non-cancer illness code, self-reported | Instance 0 | Array 25",p20002
-p20002_i0_a26,"Non-cancer illness code, self-reported | Instance 0 | Array 26",p20002
-p20002_i0_a27,"Non-cancer illness code, self-reported | Instance 0 | Array 27",p20002
-p20002_i0_a28,"Non-cancer illness code, self-reported | Instance 0 | Array 28",p20002
-p20002_i0_a29,"Non-cancer illness code, self-reported | Instance 0 | Array 29",p20002
-p20002_i0_a30,"Non-cancer illness code, self-reported | Instance 0 | Array 30",p20002
-p20002_i0_a31,"Non-cancer illness code, self-reported | Instance 0 | Array 31",p20002
-p20002_i0_a32,"Non-cancer illness code, self-reported | Instance 0 | Array 32",p20002
-p20002_i0_a33,"Non-cancer illness code, self-reported | Instance 0 | Array 33",p20002
+p20002_i0,"Non-cancer illness code, self-reported | Instance 0",p20002
 p20009_i0_a0,Interpolated Age of participant when non-cancer illness first diagnosed | Instance 0 | Array 0,p20009
 p20009_i0_a1,Interpolated Age of participant when non-cancer illness first diagnosed | Instance 0 | Array 1,p20009
 p20009_i0_a2,Interpolated Age of participant when non-cancer illness first diagnosed | Instance 0 | Array 2,p20009
