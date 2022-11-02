@@ -46,6 +46,8 @@ running this command in the console:
 # Might need to re-set these if `restore()` complains about PAT.
 # gitcreds::gitcreds_set()
 # credentials::set_github_pat(TRUE)
+# Or more directly (readline to paste token in):
+# Sys.setenv(GITHUB_PAT = readline())
 renv::restore()
 targets::tar_make()
 ```
