@@ -83,18 +83,30 @@ This is a cross-sectional analysis of a large cohort dataset.
 
 ## Data collection procedures
 
-*describe how the exposure was assessed*
-
 ```{r}
 library(tidyverse)
-read_csv(here::here("data-raw/project-variables.csv")) %>% 
-    select(ukb_variable_description, link) %>% 
-    filter(str_detect(ukb_variable_description, "height|leg|sitting"))
+collection_procedures <- read_csv(here::here("data-raw/project-variables.csv"),
+         col_select = c(ukb_variable_description, link),
+         col_types = "c")
+
+variables_as_md_linked_text <- function(data, regexp_pattern) {
+    data %>%
+        filter(str_detect(ukb_variable_description, regexp_pattern)) %>%
+        glue::glue_data("[{ukb_variable_description}]({link})") %>%
+        str_c(collapse = ", ")
+}
+
+exposure_assessed <- variables_as_md_linked_text(collection_procedures, "height|leg|sitting")
+outcome_assessed <- variables_as_md_linked_text(collection_procedures, "HbA1c")
 ```
 
-*describe how the outcome was assessed*
+The assessment of the two measured exposures (`r exposure_assessed`),
+the outcome (`r outcome_assessed`), and covariates
+(`r covariates_assessed`) are described in detail on the UK Biobank
+showcase (links provided for each variable).
 
-*describe how the covariates were assessed*
+Leg length was calculated by subtracting sitting height from height.
+Relative leg length was calculated by dividing leg length by height.
 
 ## Sample size
 
@@ -140,4 +152,3 @@ how loss to follow-up was addressed and sensitivity analyses*
 *add the references here*
 
 # References
-
