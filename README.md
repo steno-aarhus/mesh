@@ -1,3 +1,9 @@
+NOTE: This was one of the original projects when we first got access to UK 
+Biobank and was mainly intended to be used as a demo for other researchers.
+Since then, most of the templating and instructions have moved into the 
+ukbAid package (https://github.com/steno-aarhus/ukbAid). Hence why this
+is archived.
+
 # mesh: The metabolic pathways between components of stature and HbA1c: An exploratory cross-sectional analysis in the UK Biobank
 
 <!-- TODO: Add OSF Protocol DOI here.-->
